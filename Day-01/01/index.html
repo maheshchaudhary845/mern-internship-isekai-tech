@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(245 246 251);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .container {
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .first-cont {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            width: 45%;
+        }
+
+        .point {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: rgb(95, 194, 234);
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        li {
+            list-style-position: inside;
+            font-weight: 500;
+            list-style: none;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 45px;
+        }
+
+        h1 img {
+            margin-bottom: -7px;
+        }
+
+        .s-buttons-cont {
+            margin-top: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .s-buttons {
+            padding: 4px;
+            padding-inline: 10px;
+            background-color: rgb(255 255 255);
+            border-radius: 15px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .connection-tab {
+            background-color: rgb(255 255 255);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        .connection-tab h3 {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+
+        .sport-tab h3 {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+        .second-container {
+            background-color: white;
+            padding: 45px;
+            border-radius: 15px;
+            min-height: max-content;
+            width: 55%;
+        }
+
+        .second-container>div {
+            height: 100%;
+        }
+
+        .first-col {
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .first-col h4 {
+            align-items: center;
+            gap: 5px;
+        }
+
+        .first-col p {
+            margin-top: 20px;
+            width: 60%;
+            text-wrap: pretty;
+        }
+
+        .first-col h2 {
+            font-size: 30px;
+            width: 50%;
+        }
+
+        .first-col button {
+            width: 50%;
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .first-col button:hover {
+            background-color: rgb(52, 52, 52);
+        }
+
+        .second-col {
+            width: 40%;
+            background-image: url("tennis.jpg");
+            background-position: bottom 0% left 25%;
+            border-radius: 15px;
+            padding: 10px;
+        }
+
+        .second-col>div {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .second-col h4 {
+            padding: 5px;
+            padding-inline: 10px;
+            background-color: white;
+            width: fit-content;
+            border-radius: 15px;
+        }
+
+        .feb-sale {
+            display: flex;
+            justify-content: end;
+        }
+        .feb-sale h4{
+            align-items: center;
+            gap: 5px;
+        }
+
+        .outdoor-cont {
+            flex-direction: column;
+            background-color: white;
+            width: 50%;
+            border-radius: 15px;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .outdoor-cont>p {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h6 {
+            padding-top: 10px;
+        }
+
+        .outdoor-cont span:nth-child(1) {
+            padding-left: 10px;
+        }
+
+        .outdoor-cont span:nth-child(2) {
+            margin-right: 10px;
+        }
+
+        .gray {
+            color: rgb(90, 90, 90);
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .large {
+            font-size: 25px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .rounded {
+            padding: 2px;
+            padding-inline: 5px;
+            border-radius: 10px;
+            font-size: 10px;
+            background-color: rgb(231, 231, 231);
+        }
+
+        .boost-box {
+            background-color: rgba(0, 0, 0, 0.09);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            overflow: hidden;
+        }
+
+        .boost-wrapper {
+            background-color: rgb(27, 137, 184);
+            position: relative;
+            width: 86%;
+        }
+
+        .boost-box p {
+            padding: 8px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container flex">
+        <div class="first-cont">
+            <ul>
+                <li class="flex"><span class="point"></span>THE BENEFIT</li>
+            </ul>
+            <h1>Explore <span><img src="./span.png" alt="mini ball image" width="70"></span> our flexible of activity.
+            </h1>
+            <div class="s-buttons-cont">
+                <span class="s-buttons">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#ffffff"
+                        fill="none">
+                        <path
+                            d="M3.91145 12H18.0886C19.6914 12 20.2786 12.3707 19.8787 13.9821C19.1733 16.8246 17.1759 17.5306 15.3304 19.3859C14.8819 19.8369 15.5798 20.5032 15.5802 20.9992C15.5809 21.933 14.6928 22 13.9854 22H8.0146C7.30717 22 6.41908 21.933 6.41982 20.9992C6.4202 20.5137 7.0972 19.8159 6.66957 19.3859C4.82407 17.5306 2.82674 16.8246 2.12128 13.9821C1.72136 12.3707 2.30857 12 3.91145 12Z"
+                            stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
+                        <path
+                            d="M18.5 12C18.5 10.2089 16.6001 8.98823 15 9.69218M3.5 12C3.5 10.7067 4.46855 9.64127 5.7151 9.49889C4.90104 7.65834 6.62631 5.59405 8.53891 6.01716M16.292 9.48272C17.0733 7.68217 15.4185 5.58415 13.4611 6.01716C12.9848 3.32761 9.01516 3.32761 8.53891 6.01716M8.53891 6.01716C9.13252 6.14848 9.64708 6.49221 10 6.96519"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M17 9L22 3" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 6L18 2" stroke="#000000" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>Eating After the Game</span>
+                <span class="s-buttons"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16"
+                        height="16" color="#000000" fill="none">
+                        <path
+                            d="M6 9V16.6841C6 18.4952 6 19.4008 6.58579 19.9635C7.89989 21.2257 15.8558 21.4604 17.4142 19.9635C18 19.4008 18 18.4952 18 16.6841V9"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                        <path
+                            d="M5.74073 12L3.04321 9.38915C2.34774 8.71602 2 8.37946 2 7.96123C2 7.543 2.34774 7.20644 3.04321 6.53331L5.04418 4.59664C5.39088 4.26107 5.56423 4.09329 5.77088 3.96968C5.97753 3.84607 6.21011 3.77103 6.67526 3.62096L8.32112 3.08997C8.56177 3.01233 8.68209 2.97351 8.76391 3.02018C8.84573 3.06686 8.87157 3.2013 8.92324 3.47018C9.19358 4.87684 10.4683 5.94185 12 5.94185C13.5317 5.94185 14.8064 4.87684 15.0768 3.47018C15.1284 3.2013 15.1543 3.06686 15.2361 3.02018C15.3179 2.97351 15.4382 3.01233 15.6789 3.08997L17.3247 3.62096C17.7899 3.77103 18.0225 3.84607 18.2291 3.96968C18.4358 4.09329 18.6091 4.26107 18.9558 4.59664L20.9568 6.53331C21.6523 7.20644 22 7.543 22 7.96123C22 8.37946 21.6523 8.71602 20.9568 9.38915L18.2593 12"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        </path>
+                    </svg>Game Jersey</span>
+            </div>
+            <div class="connection-tab">
+                <h3><span>Connections</span> <span>-</span></h3>
+                <p class="gray">Built to connect - with people, purpose and the momentum that moves you forward.</p>
+            </div>
+            <div class="sport-tab">
+                <h3><span>Sport Package</span> <span>+</span></h3>
+            </div>
+        </div>
+        <div class="second-container">
+            <div class="flex">
+                <div class="flex first-col">
+                    <div>
+                        <h4 class="flex"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16"
+                                height="16" color="#ff8105" fill="none">
+                                <path
+                                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                                    stroke="#ff8105" stroke-width="2"></path>
+                                <path
+                                    d="M6.5 15.9897C6.89898 16.5649 7.38193 17.0746 7.93053 17.5M16.0261 6.5C16.5947 6.94079 17.0928 7.47217 17.5 8.07321"
+                                    stroke="#ff8105" stroke-width="2" stroke-linecap="round"></path>
+                                <path
+                                    d="M14.5 12C14.5 10.6193 13.3807 9.5 12 9.5C10.6193 9.5 9.5 10.6193 9.5 12C9.5 13.3807 10.6193 14.5 12 14.5C13.3807 14.5 14.5 13.3807 14.5 12Z"
+                                    stroke="#ff8105" stroke-width="2"></path>
+                            </svg>EST - 1997</h4>
+                        <p class="gray">Smart features designed to move with you - fast, flexible, and built for
+                            everyday action.</p>
+                    </div>
+                    <div>
+                        <h2>Visionary Precision Play</h2>
+                        <button>
+                            <span>Join Now!</span>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                                    color="#ffffff" fill="none">
+                                    <path d="M18.5 12L4.99997 12" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="second-col">
+                    <div class="flex">
+                        <div class="flex feb-sale">
+                            <h4 class="flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                                        color="#000000" fill="none">
+                                        <path
+                                            d="M4 11V15C4 18.2998 4 19.9497 5.02513 20.9749C6.05025 22 7.70017 22 11 22H13C16.2998 22 17.9497 22 18.9749 20.9749C20 19.9497 20 18.2998 20 15V11"
+                                            stroke="#141B34" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path
+                                            d="M3 9C3 8.25231 3 7.87846 3.20096 7.6C3.33261 7.41758 3.52197 7.26609 3.75 7.16077C4.09808 7 4.56538 7 5.5 7H18.5C19.4346 7 19.9019 7 20.25 7.16077C20.478 7.26609 20.6674 7.41758 20.799 7.6C21 7.87846 21 8.25231 21 9C21 9.74769 21 10.1215 20.799 10.4C20.6674 10.5824 20.478 10.7339 20.25 10.8392C19.9019 11 19.4346 11 18.5 11H5.5C4.56538 11 4.09808 11 3.75 10.8392C3.52197 10.7339 3.33261 10.5824 3.20096 10.4C3 10.1215 3 9.74769 3 9Z"
+                                            stroke="#141B34" stroke-width="1.5" stroke-linejoin="round" />
+                                        <path
+                                            d="M6 3.78571C6 2.79949 6.79949 2 7.78571 2H8.14286C10.2731 2 12 3.7269 12 5.85714V7H9.21429C7.43908 7 6 5.56091 6 3.78571Z"
+                                            stroke="#141B34" stroke-width="1.5" stroke-linejoin="round" />
+                                        <path
+                                            d="M18 3.78571C18 2.79949 17.2005 2 16.2143 2H15.8571C13.7269 2 12 3.7269 12 5.85714V7H14.7857C16.5609 7 18 5.56091 18 3.78571Z"
+                                            stroke="#141B34" stroke-width="1.5" stroke-linejoin="round" />
+                                        <path d="M12 11L12 22" stroke="#141B34" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                <span>Febuary Sale</span>
+                            </h4>
+                        </div>
+                        <div class="flex outdoor-cont">
+                            <h6 class="gray text-center">Tenis Outdoor</h6>
+                            <p class="flex">
+                                <span class="bold large">86%</span>
+                                <span class="rounded">Member</span>
+                            </p>
+                            <div class="boost-box">
+                                <div class="boost-wrapper">
+                                    <p>Boost</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

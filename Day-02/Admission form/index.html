@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <center>
+        <h1>Admission Form</h1>
+    </center>
+    <hr>
+    <br>
+    <br>
+    <!-- <section>
+        <form action="">
+            <center>
+                <table width="500">
+                    <tr>
+                        <td>
+                            <label for="firstName">First Name</label>
+                        </td>
+                        <td>
+                            <input id="firstName" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="lastName">Last Name</label>
+                        </td>
+                        <td>
+                            <input id="lastName" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="fatherName">Father's Name</label>
+                        </td>
+                        <td>
+                            <input id="fatherName" type="text">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="email">Email</label>
+                        </td>
+                        <td>
+                            <input id="email" type="email">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="contact">Contact Number</label>
+                        </td>
+                        <td>
+                            <input id="contact" type="phone">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="address">Address</label>
+                        </td>
+                        <td>
+                            <textarea name="" id="address"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">Gender</label>
+                        </td>
+                        <td>
+                            <input id="male" name="gender" type="radio" value="male">
+                            <label for="male">Male</label>
+                            <input id="female" name="gender" type="radio" value="female">
+                            <label for="female">Female</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="course">Course</label>
+                        </td>
+                        <td>
+                            <select name="courses" id="course">
+                                <option value="cse">Btech in CSE</option>
+                                <option value="mechanical">Btech in Mechanical</option>
+                                <option value="civil">Btech in Civil Engineering</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="">Hobbies</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="hobbies" id="playingCricket">
+                            <label for="playingCricket">Playing Cricket</label>
+                            <input type="checkbox" name="hobbies" id="listeningMusic">
+                            <label for="listeningMusic">Listening to Music</label>
+                            <input type="checkbox" name="hobbies" id="readingBooks">
+                            <label for="readingBooks">readingBooks</label>
+                            <input type="checkbox" name="hobbies" id="coding">
+                            <label for="coding">Coding</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="photo">Photo</label>
+                        </td>
+                        <td>
+                            <input type="file" name="" id="">
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <center>
+                                <button type="submit">Submit</button>
+                                <button type="reset">Reset</button>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </form>
+    </section> -->
+
+
+
+    <form action="">
+        <center>
+            <table width="900" cellspacing="10">
+                <tr>
+                    <td>
+                        <input type="text" placeholder="First Name">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Last Name">
+                    </td>
+                    <td rowspan="2">
+                        <label for="photo">
+                            <img src="./assets/media/avatar.png" alt="avatar" width="140">
+                        </label>
+                        <input type="file" name="avatar" id="photo" hidden>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <textarea placeholder="Bio"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="email" placeholder="Email">
+                    </td>
+                    <td>
+                        <input type="phone" placeholder="Contact Number">
+                    </td>
+                    <td>
+                        <input type="radio" name="gender" id="male">
+                        <label for="male">Male</label>
+                        <input type="radio" name="gender" id="female">
+                        <label for="female">Female</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Address">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" placeholder="City">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="state">State</label>
+                    </td>
+                    <td colspan="2">
+                        <select name="state" id="state">
+                            <option>Andhra Pradesh</option>
+                            <option>Arunachal Pradesh</option>
+                            <option>Assam</option>
+                            <option>Bihar</option>
+                            <option>Chattisgarh</option>
+                            <option>Goa</option>
+                            <option>Gujarat</option>
+                            <option>Haryana</option>
+                            <option>Himachal Pradesh</option>
+                            <option>Jharkhand</option>
+                            <option>Karnataka</option>
+                            <option>Kerala</option>
+                            <option>Madhya Pradesh</option>
+                            <option>Maharashtra</option>
+                            <option>Manipur</option>
+                            <option>Meghalaya</option>
+                            <option>Mizoram</option>
+                            <option>Nagaland</option>
+                            <option>Odisha</option>
+                            <option>Punjab</option>
+                            <option>Rajasthan</option>
+                            <option>Sikkim</option>
+                            <option>Tamil Nadu</option>
+                            <option>Telangana</option>
+                            <option>Tripura</option>
+                            <option>Uttar Pradesh</option>
+                            <option>Uttarakhand</option>
+                            <option>West Bengal</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="">Hobbies</label>
+                    </td>
+                    <td colspan="2">
+                        <input type="checkbox" name="hobbies" id="cricket">
+                        <label for="cricket">Cricket</label>
+                        <input type="checkbox" name="hobbies" id="music">
+                        <label for="music">Music</label>
+                        <input type="checkbox" name="hobbies" id="coding">
+                        <label for="coding">Coding</label>
+                    </td>
+                </tr>
+
+                <tr>
+                        <td>
+                            <label for="course">Course</label>
+                        </td>
+                        <td colspan="2">
+                            <select name="courses" id="course">
+                                <option value="cse">Btech in CSE</option>
+                                <option value="mechanical">Btech in Mechanical</option>
+                                <option value="civil">Btech in Civil Engineering</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td colspan="3" align="center">
+                        <button type="reset">Reset</button>
+                        <button type="submit">Sumit</button>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</body>
+
+</html>
