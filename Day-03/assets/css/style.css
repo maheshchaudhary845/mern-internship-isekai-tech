@@ -1,0 +1,143 @@
+/* span .a{
+    color: red;
+} */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #940c00;
+}
+
+nav {
+    position: relative;
+    margin-inline: 40px;
+    margin-block: 10px;
+    height: 90px;
+    box-sizing: border-box;
+}
+.logo-wrapper{
+    display: inline-block;
+}
+div.logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #b72120;
+    border: 2px solid white;
+}
+
+div.inner-circle {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border-radius: 50%;
+    /* margin-left: auto;  will move circle to the right according to overall width of the parent and in margin-right: auto; it is vice versa */
+    margin: auto;
+    /* align to the center */
+    margin-top: 10px;
+}
+
+.nav-pill {
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    background-color: white;
+    width: 480px;
+    height: 76px;
+    margin-bottom: 7px;
+    margin-left: 20px;
+    border-radius: 50px;
+}
+ul{
+    list-style-type: none;
+    width: fit-content;
+    margin: auto;
+}
+ul li{
+    display: inline-block;
+    padding-inline: 10px;
+    margin-top: 28.8px;
+}
+li a{
+    color: inherit; /* inherits the property from its parent like in this case the list has black color of text by default(or if specified any other color then it will inherit that specified color. */
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Times New Roman', Courier, monospace;
+}
+
+.horizontal-pipe{
+    height: 5px;
+    width: 600px;
+    background-color: white;
+    display: inline-block;
+    position:absolute;
+    left: 593.2px;
+    top: 42.5px;
+}
+.left-side-pipe{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    /* border: none; */
+    /* border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px; */
+    background-color: white;
+    top: -7px; 
+    left: -17px;
+    rotate: 45deg;
+    z-index: -1;
+}
+.right-side-pipe{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    top: -7px; 
+    right: -18px;
+    rotate: 45deg;
+    z-index: -1;
+}
+.search-box{
+    display: inline-block;
+    position: absolute;
+    left: 1193.2px;
+    top: 20px;
+    width: 45px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50px;
+}
+.search-box span{
+    position: absolute;
+    top: 17px;
+    left: 14.5px
+}
+button[class="call-button"]{
+    display: inline-block;
+    position: absolute;
+    left: 1238.2px;
+    top: 26px;
+    margin-left: 24px;
+    width: 166px;
+    height: 38px;
+    background-color: #de9f00;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.box{
+    width: 500px;
+    height: 500px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    border-color: black;
+    border-width: 10px;
+    border-style: groove;
+    padding: 20px;
+    box-sizing: content-box ;
+}
