@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 500px;
+            /* background-color: aqua; */
+            margin: auto;
+            border: 2px solid black;
+            box-shadow: 10px 10px 10px 1px black, 20px 20px 10px red, inset 10px 10px 10px blue;
+            /* background: linear-gradient(to right, red 20%, green 90%); */
+            /* background: linear-gradient(45deg, red 20%, green 90%); */
+            background: radial-gradient(circle at left, red 20%, yellow 20%);
+        }
+
+        h1 {
+            text-align: center;
+            text-shadow: 10px 10px 10px black, 20px 20px 10px red;
+        }
+
+        .img-box {
+            width: 90vw;
+            height: 100vh;
+            margin: auto;
+            border: 2px solid black;
+            background-image: url('https://images.pexels.com/photos/20654069/pexels-photo-20654069.jpeg');
+            /* background-size: 50% 50%; */
+            /* background-size: cover; */
+            background-position: 0 50%;
+            /* background-position: right 60px top 20px; */
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            overflow: auto;
+        }
+
+        body{
+            /* height: 5000px; */
+            /* background-color: white; */
+            overflow-x: hidden;
+        }
+        video{
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            z-index: -1;
+        }
+
+
+        /* .container{
+            margin-top: 20px;
+            position: absolute;
+        } */
+        .box1{
+            /* position: absolute; */
+            width: 500px;
+            height: 500px;
+            background-color: aqua;
+            margin: auto;
+            border: 2px solid;
+            margin-top: 10px;
+        }
+        .child-box{
+            width: 300px;
+            height: 300px;
+            background-color: blueviolet;
+            margin: auto;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <h1>Hello there!</h1>
+        <div class="img-box"></div>
+        
+        <video src="https://www.pexels.com/download/video/34597896/" autoplay loop muted></video>
+    </div>
+
+    <!-- <h1>Hello Everyone</h1>
+    <h2>hi here</h2>
+    <span>hihi</span>
+    <span class="box"></span> -->
+
+    <!-- <div class="container">
+        <div class="box1">
+            <div class="child-box"></div>
+        </div>
+        <div class="box2"></div>
+    </div> -->
+</body>
+
+</html>
