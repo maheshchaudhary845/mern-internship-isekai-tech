@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day-05 21-11-25 CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+        }
+
+        .box1 {
+            margin: 5px;
+            position: relative;
+            padding-top: 140px;
+            box-sizing: border-box;
+        }
+
+        /* pseudo element ::before - It behaves like it is adding an element before the content where we are using it. In this case is box1 */
+        .box1::before {
+            content: "";
+            /* content is necessary in order to use this */
+            border: 2px solid aqua;
+            width: 100px;
+            height: 100px;
+            background-color: rgb(140, 89, 217);
+            display: inline-block;
+            position: absolute;
+            top: 0;
+        }
+
+        /* pseudo element ::after - It behaves like it is adding an element after the content where we are using it. In this case is box1*/
+        .box1::after {
+            content: "after";
+            border: 2px solid orange;
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            background-color: bisque;
+            position: absolute;
+            top: 0;
+            left: 0%;
+            transition: left 0.3s cubic-bezier(0.06, 0.74, 0.1, 0.89);
+            z-index: -1;
+        }
+
+        .box1:hover::after {
+            left: 50%;
+        }
+
+        .box1:hover::before {
+            content: "Opened!!"
+        }
+
+
+        .box2 {
+            margin: 10px;
+            transform: translate(100%, 50%) rotate(90deg) scale(2);
+            /* transform: translateX(100%);
+            transform: translateY(50%); */
+            /* transform: scale3d(2.5, 1.2, 0.3); */
+            /* transform: scale(2, 2); */
+        }
+
+        .container {
+            perspective: 600px;
+        }
+
+        .card {
+            width: 200px;
+            height: 150px;
+            background: lightblue;
+            transform: translateX(50%) rotateY(20deg);
+            transition: transform 0.3s ease;
+        }
+        .card:hover{
+            transform: rotateY(0deg) translateX(50%);
+        }
+        a:active{
+            color: aliceblue;
+        }
+        a:visited{
+            color: brown
+        }
+
+        .chk{
+            width: 15px;
+            height: 15px;
+            border: 2px solid orange;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        #chk:checked~.chk{
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="box">
+        <div class="box box1">
+            <h1>Hello World!</h1>
+        </div>
+        <div class="box box2">
+            <h2>Hello!</h2>
+        </div>
+    </section>
+    <div class="container">
+        <div class="card">3D Card</div>
+    </div>
+    <br><br><br>
+    <div>
+        <a href="">Google</a>
+        <a href="">Instagram</a>
+        <a href="">Facebook</a>
+    </div>
+    <input id="chk" type="checkbox" hidden>
+    <label class="chk" for="chk"></label>
+</body>
+
+</html>
