@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24-11 CSS Animation</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .img-box {
+            position: absolute;
+            z-index: -1;
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            /* margin: auto; */
+            overflow: hidden;
+            animation: boxMove 5s ease infinite;
+        }
+
+        .img-container{
+            animation: imgSlider 7s ease-in-out infinite alternate;
+            position: relative;
+            width: 500px;
+            height: 2500px;
+            line-height: 0;
+        }
+
+        .img-box:hover{
+            animation-play-state: paused;
+        }
+
+        /* .img-box:hover .img-container {
+            animation-play-state: paused;
+        } */
+        
+        .img-box img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode play-state; */
+        }
+
+        @keyframes imgSlider {
+            /* from {
+                bottom: 0%;
+            }
+            to{
+                bottom: 100%;
+            } */
+
+            0%{
+                bottom: 0;
+            }
+            25%{
+                bottom: 500px;
+            }
+            50%{
+                bottom: 1000px;
+            }
+            75%{
+                bottom: 1500px
+            }
+            100%{
+                bottom: 2000px;
+            }
+
+        }
+
+        @keyframes boxMove{
+            0%{
+                left: 0;
+                top: 0;
+            }
+            25%{
+                left: 100%;
+                top: 0;
+                transform: translateX(-100%)
+            }
+            50%{
+                left: 100%;
+                top: 100%;
+                transform: translate(-100%, -100%);
+                height: 250px;
+            }
+            75%{
+                left: 0;
+                top: 100%;
+                transform: translateY(-100%)
+            }
+            100%{
+                left: 0;
+                top: 0;
+            }
+        }
+
+
+
+
+
+        .img-box2{
+            width: 700px;
+            height: 500px;
+            border: 2px solid black;
+            overflow: hidden;
+            /* margin: auto; */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .img-container2{
+            width: calc(700px * 10);
+            height: 100%;
+            font-size: 0px;
+            animation: horizontalScroll 10s linear infinite;
+        }
+        .img-container2 img{
+            width: 700px;
+            height: 500px;
+            object-fit: cover;
+            display: inline-block;
+        }
+        @keyframes horizontalScroll{
+            /* 0%{
+                transform: translateX(0);
+            }
+            2%{
+                transform: translateX(0);
+            }
+            25%{
+                transform: translateX(-700px);
+            }
+            50%{
+                transform: translateX(-1400px);
+            }
+            75%{
+                transform: translateX(-2100px);
+            }
+            98%{
+                transform: translateX(-2800px)
+            }
+            100%{
+                transform: translateX(-2800px);
+            } */
+
+            from{
+                transform: translateX(0);
+            }
+            to{
+                transform: translateX(-3500px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img-box">
+        <div class="img-container">
+            <img src="https://images.pexels.com/photos/10458875/pexels-photo-10458875.jpeg" alt="coffee, glasses and sweater on table">
+            <img src="https://images.pexels.com/photos/34646379/pexels-photo-34646379.jpeg" alt="cats">
+            <img src="https://images.pexels.com/photos/34018724/pexels-photo-34018724.jpeg" alt="urban street">
+            <img src="https://images.pexels.com/photos/34364451/pexels-photo-34364451.jpeg" alt="donuts">
+            <img src="https://images.pexels.com/photos/29296533/pexels-photo-29296533.jpeg" alt="dog looking up">
+        </div>
+    </div>
+    
+    <div class="img-box2">
+        <div class="img-container2">
+            <img src="https://images.pexels.com/photos/10458875/pexels-photo-10458875.jpeg" alt="coffee, glasses and sweater on table">
+            <img src="https://images.pexels.com/photos/34646379/pexels-photo-34646379.jpeg" alt="cats">
+            <img src="https://images.pexels.com/photos/34018724/pexels-photo-34018724.jpeg" alt="urban street">
+            <img src="https://images.pexels.com/photos/34364451/pexels-photo-34364451.jpeg" alt="donuts">
+            <img src="https://images.pexels.com/photos/29296533/pexels-photo-29296533.jpeg" alt="dog looking up">
+            <!-- Duplicate -->
+            <img src="https://images.pexels.com/photos/10458875/pexels-photo-10458875.jpeg" alt="coffee, glasses and sweater on table">
+            <img src="https://images.pexels.com/photos/34646379/pexels-photo-34646379.jpeg" alt="cats">
+            <img src="https://images.pexels.com/photos/34018724/pexels-photo-34018724.jpeg" alt="urban street">
+            <img src="https://images.pexels.com/photos/34364451/pexels-photo-34364451.jpeg" alt="donuts">
+            <img src="https://images.pexels.com/photos/29296533/pexels-photo-29296533.jpeg" alt="dog looking up">
+        </div>
+    </div>
+</body>
+
+</html>
