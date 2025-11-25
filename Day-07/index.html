@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25-11 CSS Flexbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-size: 16px;
+
+    }
+
+    body {
+        font-family: "Inter Tight", "sans-serif";
+        font-optical-sizing: auto;
+        /* font-weight: 500; */
+        font-style: normal;
+        background-color: #f9f7f3;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        margin-inline: 45px;
+        margin-top: 20px;
+        height: 78px;
+        padding-inline: 60px;
+        align-items: center;
+        border-radius: 50px;
+        background-color: white;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.211);
+    }
+
+    .links>ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .links>ul>li>a {
+        text-decoration: none;
+        color: rgb(38, 38, 38);
+        font-size: 15px;
+    }
+
+    .btn {
+        border: none;
+        background-color: #9b795b;
+        color: white;
+        font-size: 1rem;
+        padding: 15px 27px;
+        border-radius: 8px;
+        width: fit-content;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+    .btn:hover{
+        background-color: white;
+        color: #9b795b;
+        border: 1px solid #9b795b;
+    }
+
+    .hero {
+        display: flex;
+        align-items: flex-end;
+        margin-inline: 30px;
+        background-image: url(https://compatto.gr/wp-content/uploads/2024/04/compatto-slider-1-1.jpg);
+        background-color: rgba(0, 0, 0, 0.319);
+        background-blend-mode: darken;
+        height: 800px;
+        border-radius: 42px;
+        position: relative;
+        top: -30px;
+    }
+
+    .hero-layout {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px;
+    }
+
+    .left-hero {
+        display: flex;
+        flex-basis: auto;
+        width: 70%;
+    }
+
+    .left-hero>h1 {
+        font-size: 62px;
+        font-weight: 500;
+        line-height: 74px;
+        color: white;
+        text-shadow: 0px 0px 50px black;
+    }
+
+    .left-hero>h1>span {
+        color: #e0d8c8;
+    }
+
+    .right-hero {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        gap: 20px;
+    }
+
+    .right-hero>h3 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 30px;
+        color: white;
+        text-shadow: 0px 0px 50px black;
+    }
+
+    .right-hero>.hero-button {
+        border: none;
+        background-color: #ece7dd;
+        border: 1px solid #ece7dd;
+        color: #6a5142;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 15px 25px;
+        width: fit-content;
+        border-radius: 8px;
+        transition: color 0.5s ease-out;
+        cursor: pointer;
+        box-shadow: 0px 0px 50px black;
+    }
+    .right-hero>.hero-button:hover{
+        background-color: transparent;
+        color: white;
+    }
+
+
+    .about-company {
+        height: 385px;
+        margin-inline: 30px;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        padding: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .left-about {
+        width: 35%;
+        height: 100%;
+        padding: 20px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: linear-gradient(-45deg, #6a5142, #a88a67);
+    }
+
+    .left-about-upper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .left-about-upper>h3 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        color: #efebe2;
+    }
+
+    .left-about-upper>img {
+        width: 100px;
+        opacity: 0.5;
+    }
+
+    .right-about {
+        width: 65%;
+    }
+
+    .left-about-bottom {
+        display: flex;
+        gap: 10px;
+    }
+
+    .left-about-bottom>h3 {
+        width: 50%;
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 48px;
+        color: white;
+    }
+
+    .left-about-bottom>h3>span {
+        font-size: 69px;
+        font-weight: 400;
+        line-height: 69px;
+        color: #f9f7f3;
+    }
+
+    .left-about-bottom>h4 {
+        width: 50%;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        color: white;
+        align-self: center;
+        justify-self: flex-start;
+    }
+
+    .left-about-bottom>h4>span {
+        font-size: 32px;
+        line-height: 32px;
+        font-weight: 400;
+        color: #f9f7f3;
+    }
+
+    .right-about {
+        display: flex;
+        gap: 10px;
+        background-color: #efebe2;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    .right-about-left {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        padding-left: 45px;
+        padding-top: 50px;
+    }
+
+    .right-about-left>h2 {
+        font-size: 40px;
+        font-weight: 500;
+        color: #2e221c;
+    }
+
+    .right-about-left>h2>span {
+        color: #a88a67;
+    }
+
+    .right-about-left>p {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 300;
+        color: #2e221c;
+    }
+
+    .right-about-left>p:nth-child(3) {
+        margin-top: 10px;
+    }
+
+
+    .furnishing-experience {
+        margin-inline: 30px;
+    }
+
+    .furnishing-experience>h2 {
+        font-size: 50px;
+        font-weight: 500;
+        color: #2e221c;
+    }
+
+    .furnishing-experience>h2>span {
+        color: #a88a67;
+    }
+
+    .furnishing-experience-card {
+        display: flex;
+        border: 2px solid rgba(97, 45, 15, 0.056);
+        border-radius: 30px;
+        height: 550px;
+    }
+
+    .furnishing-experience-card>.left-fe-card {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding: 70px;
+        padding-top: 30px;
+        gap: 20px;
+    }
+
+    .furnishing-experience-card>.left-fe-card>p:nth-child(1) {
+        font-size: 90px;
+        font-weight: 400;
+        color: #e7dfd0;
+        margin-bottom: 40px;
+    }
+
+    .furnishing-experience-card>.left-fe-card>h2 {
+        font-size: 42px;
+        font-weight: 500;
+        line-height: 42px;
+        color: #2e221c;
+    }
+
+    .furnishing-experience-card>.left-fe-card>h2>span {
+        color: #a88a67;
+    }
+
+    .furnishing-experience-card>.left-fe-card>p:nth-child(3) {
+        font-size: 19px;
+        font-weight: 300;
+        line-height: 29px;
+        color: #2e221c;
+    }
+
+    .furnishing-experience-card>.right-fe-card {
+        width: 50%;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+
+    .choose-us {
+        margin-block: 100px;
+        margin-inline: 30px;
+    }
+
+    .choose-us>h2 {
+        font-size: 50px;
+        font-weight: 500;
+        color: #2e221c;
+    }
+
+    .choose-us>h2>span {
+        color: #a88a67;
+    }
+
+    .choose-card-container {
+        display: flex;
+        height: 576px;
+        margin-top: 50px;
+        gap: 10px;
+    }
+
+    .left-choose {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        gap: 10px;
+    }
+
+    .left-choose-top {
+        display: flex;
+        gap: 10px;
+    }
+
+    .left-choose-top>.top-first {
+        width: 50%;
+        background-color: #e1daca;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        border-radius: 30px;
+        padding-top: 40px;
+    }
+
+    .left-choose-top>.top-first>h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #564338;
+    }
+
+    .left-choose-top>.top-first>p {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 24px;
+        color: #2e221c;
+        text-align: center;
+    }
+
+    .left-choose-top>.top-second {
+        width: 50%;
+        background-color: #e1daca;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        border-radius: 30px;
+        position: relative;
+        z-index: 0;
+        overflow: hidden;
+        /* padding-top: 40px; */
+    }
+
+    .brown-blur {
+        width: 100px;
+        height: 100px;
+        background-color: #311609;
+        border-radius: 50%;
+        filter: blur(30px);
+        position: absolute;
+        z-index: -1;
+        box-shadow: 0px 0px 50px 10px #6b5242;
+    }
+
+    .top-second>img {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 40px;
+    }
+
+    .left-choose-top>.top-second>h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #564338;
+    }
+
+    .left-choose-top>.top-second>p {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 24px;
+        color: #2e221c;
+        text-align: center;
+    }
+
+    .left-choose-bottom{
+        background-image: url(https://images.pexels.com/photos/91484/pexels-photo-91484.jpeg);
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 30px;
+        background-color: rgba(0, 0, 0, 0.514);
+        background-blend-mode: darken;
+    }
+    .left-choose-bottom>h3{
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 38px;
+        color: white;
+    }
+    .left-choose-bottom>p{
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 27px;
+        color: white;
+        width: 600px;
+        text-align: center;
+    }
+
+
+    .right-choose{
+        width: 30%;
+        background-image: url(https://compatto.gr/wp-content/uploads/2024/04/zero-bg.svg);
+        background-color: #2e221c;
+        border-radius: 30px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 40px;
+    }
+    .right-choose>.upper-choose{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        width: 70%;
+    }
+    .upper-choose>h3{
+        font-size: 34px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+    }
+    .upper-choose>p{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #e0d8c8;
+        text-align: center;
+    }
+    .lower-choose>h3{
+        font-size: 21px;
+        font-weight: 500;
+        color: white;
+    }
+    .lower-choose>p{
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 24px;
+        color: #f9f7f3;
+    }
+    .right-choose>.lower-choose{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        width: 70%;
+    }
+
+
+
+
+    .container{
+        display: flex;
+        /* flex-wrap: wrap; */
+    }
+    .box{
+        width: 300px;
+        height: 300px;
+        background-color: yellow;
+        border: 2px solid black;
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
+</style>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="https://compatto.gr/wp-content/uploads/2024/04/compatto-logo.svg" alt="compatto logo">
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="">Who we are</a></li>
+                    <li><a href="">Our services</a></li>
+                    <li><a href="">Why choose us</a></li>
+                </ul>
+            </div>
+            <button class="btn">Contact us</button>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-layout">
+            <div class="left-hero">
+                <h1>Bringing <span>Simplicity</span> <br> In The Furnishing Market</h1>
+            </div>
+            <div class="right-hero">
+                <h3>Compatto simplifies the complex process of furnishing all-inclusive, boutique & high-end hostels,
+                    and luxury residences in Greece.</h3>
+                <button class="hero-button">Start Your Furnishing Journey</button>
+            </div>
+        </div>
+    </section>
+    <section class="about-company">
+        <div class="left-about">
+            <div class="left-about-upper">
+                <h3>OUR COMPANY <br> IN NUMBERS</h3>
+                <img src="https://compatto.gr/wp-content/uploads/2024/04/compatto-icon.svg" alt="round circle design">
+            </div>
+            <div class="left-about-bottom">
+                <h3><span>150+</span><br>Furniture Suppliers</h3>
+                <h4><span>15+</span><br>Years of Industry <br> Experience</h4>
+            </div>
+        </div>
+        <div class="right-about">
+            <div class="right-about-left">
+                <h2>Who <span>We</span> Are</h2>
+                <p>At Compatto, we understand the challenges of creating exceptional spaces that blend elegance,
+                    quality, and functionality.</p>
+                <p>As Greece's premier furniture solution provider, we've made it our mission to simplify the furnishing
+                    process, ensuring that every project is executed flawlessly from initial consultation to final
+                    installation.</p>
+            </div>
+            <div class="right-about-right">
+                <img src="https://compatto.gr/wp-content/uploads/2024/04/who-we-are.jpg" alt="" width="448">
+            </div>
+        </div>
+    </section>
+    <section class="furnishing-experience">
+        <h2>How We <span>Simplify</span> <br> Your Furnishing Experience</h2>
+        <div class="furnishing-experience-card">
+            <div class="left-fe-card">
+                <p>5</p>
+                <h2>After-Sales <span>Support</span><br>and <span>Maintenance</span></h2>
+                <p>Our commitment to your satisfaction extends beyond the final installation. We conduct a thorough
+                    final walkthrough to ensure your satisfaction, and also offer comprehensive after sales support for
+                    warranty claims, maintenance, and care instructions.</p>
+                <button class="btn">Learn more</button>
+            </div>
+            <div class="right-fe-card">
+                <img src="https://compatto.gr/wp-content/uploads/2024/04/transformed-space.jpg" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="choose-us">
+        <h2>Why <span>Choose</span> Compatto</h2>
+        <div class="choose-card-container">
+            <div class="left-choose">
+                <div class="left-choose-top">
+                    <div class="top-first">
+                        <h3>End-to-End Solutions</h3>
+                        <p>We manage every aspect of your furnishing project, <br> saving you time and resources.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="144" height="101" viewBox="0 0 144 101"
+                            fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M137.677 90.1763C137.677 90.6255 137.179 91.0747 137.179 91.9732C122.248 114.435 106.82 128.811 68.9956 129.71C66.0095 129.71 63.521 129.26 61.0326 128.811H64.5164C65.5118 127.913 67.0049 127.014 68.0003 125.666C71.9818 122.072 117.272 100.06 137.677 90.1763ZM141.161 78.9452C140.663 80.7422 140.663 82.0899 140.165 83.8869C140.165 84.3361 139.668 84.7853 139.668 84.7853C131.207 89.2778 116.774 93.3209 113.29 95.1179C88.9032 107.697 83.9263 108.595 59.0418 118.478C55.0603 119.377 50.5811 122.971 46.5996 125.666C46.1019 125.666 46.1019 125.217 45.6042 125.217C45.1065 124.768 43.6134 124.768 43.1158 124.319C53.0696 119.377 67.0049 113.986 67.5026 113.537C83.4286 109.943 106.322 94.6687 118.267 91.0747C123.742 87.93 134.691 82.5391 141.161 78.9452ZM142.654 59.6278L143.151 65.9172V67.7142H142.654C142.156 67.7142 141.658 67.7142 141.658 68.1634C126.23 74.0035 106.322 80.7422 92.8848 87.4808C72.9772 97.8134 47.0973 105.45 26.1943 113.986C25.1989 113.537 23.7058 112.189 23.2082 111.291C32.1666 108.146 39.1342 103.654 47.595 102.755C68.0003 99.1611 85.9171 86.5823 101.346 81.1914C112.295 77.5975 133.198 64.1202 143.151 60.0771V59.6278H142.654ZM109.806 10.6604C110.304 11.5589 111.797 11.5589 112.792 12.9067L113.788 13.8051C114.783 14.2544 116.276 14.7036 117.272 16.0513C111.299 20.993 105.825 25.0362 99.8524 29.0794C91.8894 34.4703 82.931 38.9627 72.9772 45.2521C58.0465 55.5846 43.6135 67.2649 49.088 74.0035C56.0557 82.0899 108.811 58.2801 113.788 57.3816C116.774 56.4831 129.216 51.0922 139.668 46.1506C139.668 46.5998 139.668 46.5998 139.668 46.5998C140.663 48.3968 140.663 50.1937 141.658 51.9907C141.658 52.4399 142.156 52.4399 142.156 52.8892C123.244 60.9755 90.3963 72.2066 75.9633 77.5975C67.0049 80.7422 40.1296 91.0747 30.6735 91.9732C26.692 92.4225 24.2035 91.524 23.7058 90.1763C21.2174 85.2346 26.692 82.0899 27.1897 77.5975C27.6874 72.2066 20.7197 71.3081 30.1758 63.2217C44.1111 51.0922 86.9125 25.9347 109.806 10.6604ZM92.3871 3.47257C93.3824 3.92181 94.8755 4.37105 96.3686 5.26954C96.8663 5.26954 97.364 5.71878 98.3594 5.71878C91.3917 11.1097 80.9402 17.3991 79.4471 18.7468C58.5441 29.0794 37.1435 43.9043 16.7382 55.5846C9.77053 60.0771 1.30979 65.9172 1.30979 74.0035C1.30979 74.0035 1.30979 74.0035 1.30979 73.5543C0.812101 69.0619 0.812101 63.671 1.30979 59.6278C1.30979 59.1786 1.30979 57.8308 1.30979 57.3816C7.77976 52.4399 18.7289 47.4983 22.2128 46.1506C39.1342 37.615 52.5719 27.2824 68.9956 19.196C68.498 18.7468 83.4286 9.31271 92.3871 3.47257ZM83.4286 1.6756C83.9263 1.6756 84.424 1.6756 85.4194 2.12484C64.5164 2.12484 62.028 12.0082 44.1111 19.196C38.6366 21.8915 17.7336 34.4703 5.29132 41.6581C5.29132 41.2089 5.29132 41.2089 5.78901 40.7596C6.2867 39.8612 6.28669 38.5134 6.78438 37.615C15.7428 18.2976 43.1158 -0.121365 71.9818 0.327877C75.4656 0.777119 79.9448 1.22636 83.4286 1.6756ZM113.29 25.0362C110.304 27.2824 107.815 29.5286 105.327 30.8763C94.3778 38.5134 86.4148 42.1074 75.4656 48.846C72.4795 51.0922 55.0603 61.4248 58.0465 65.9172C63.0234 74.4528 107.815 52.4399 112.792 50.1937C116.276 47.9475 134.193 44.3536 122.248 43.9043C113.29 43.9043 91.8894 55.5846 78.4517 59.6278C72.9771 61.4248 68.9956 62.7725 67.5026 60.5263C67.0049 58.7293 70.9864 56.9324 75.4656 53.3384C84.9217 46.1506 97.364 39.4119 106.322 32.6733C107.318 31.7748 109.806 29.9778 111.299 29.0794C113.29 27.7316 113.29 26.8331 113.29 25.0362Z"
+                                fill="url(#paint0_linear_198_3090)"></path>
+                            <defs>
+                                <linearGradient id="paint0_linear_198_3090" x1="72.044" y1="0.319824" x2="72.044"
+                                    y2="129.71" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#A88A67"></stop>
+                                    <stop offset="1" stop-color="#362821"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="top-second">
+                        <div class="brown-blur"></div>
+                        <img src="https://compatto.gr/wp-content/uploads/2024/04/eclipse.svg" alt="round ball">
+                        <h3>After-Sales Support</h3>
+                        <p>We are commited to providing ongoing <br> support & after-sales service to address any <br>
+                            future needs or concerns.</p>
+                    </div>
+                </div>
+                <div class="left-choose-bottom">
+                    <h3>Superior Quality</h3>
+                    <p>Our partnerships with the best suppliers grant us access to the finest materials, craftsmanship, and quality control processes.</p>
+                </div>
+            </div>
+            <div class="right-choose">
+                <div class="upper-choose">
+                    <h3>No Variety Restrictions</h3>
+                    <p>We partner with any vendor meeting our quality standards, providing the broadest selection of furniture solutions to suit your needs and preferences.</p>
+                </div>
+                <div class="lower-choose">
+                    <h3>Bespoke Furniture</h3>
+                    <p>We specialize in sourcing custom-made furniture pieces that perfectly match your unique vision and requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section>
+        <div class="container">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+    </section> -->
+</body>
+
+</html>
