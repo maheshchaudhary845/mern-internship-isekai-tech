@@ -25,7 +25,6 @@
     body {
         font-family: "Inter Tight", "sans-serif";
         font-optical-sizing: auto;
-        /* font-weight: 500; */
         font-style: normal;
         background-color: #f9f7f3;
     }
@@ -33,7 +32,7 @@
     .navbar {
         display: flex;
         justify-content: space-between;
-        margin-inline: 45px;
+        margin-inline: auto;
         margin-top: 20px;
         height: 78px;
         padding-inline: 60px;
@@ -43,6 +42,15 @@
         position: relative;
         z-index: 1;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.211);
+        max-width: 1440px;
+    }
+
+    .hamburger{
+        display: none;
+    }
+
+    .logo>img{
+        width: 100%;
     }
 
     .links>ul {
@@ -68,7 +76,8 @@
         transition: background-color 0.3s ease;
         cursor: pointer;
     }
-    .btn:hover{
+
+    .btn:hover {
         background-color: white;
         color: #9b795b;
         border: 1px solid #9b795b;
@@ -138,9 +147,10 @@
         border-radius: 8px;
         transition: color 0.5s ease-out;
         cursor: pointer;
-        box-shadow: 0px 0px 50px black;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.103), 0px 2px 4px rgba(0, 0, 0, 0.218);
     }
-    .right-hero>.hero-button:hover{
+
+    .right-hero>.hero-button:hover {
         background-color: transparent;
         color: white;
     }
@@ -197,14 +207,13 @@
         width: 50%;
         font-size: 19px;
         font-weight: 400;
-        line-height: 48px;
         color: white;
     }
 
     .left-about-bottom>h3>span {
         font-size: 69px;
         font-weight: 400;
-        line-height: 69px;
+        /* line-height: 69px; */
         color: #f9f7f3;
     }
 
@@ -239,7 +248,8 @@
         gap: 15px;
         padding: 20px;
         padding-left: 45px;
-        padding-top: 50px;
+        width: 50%;
+        /* padding-top: 50px; */
     }
 
     .right-about-left>h2 {
@@ -263,6 +273,10 @@
         margin-top: 10px;
     }
 
+    .right-about-right {
+        width: 50%;
+    }
+
 
     .furnishing-experience {
         margin-inline: 30px;
@@ -283,6 +297,8 @@
         border: 2px solid rgba(97, 45, 15, 0.056);
         border-radius: 30px;
         height: 550px;
+        /* margin-inline: 10px; */
+        margin-top: 30px;
     }
 
     .furnishing-experience-card>.left-fe-card {
@@ -304,7 +320,7 @@
     .furnishing-experience-card>.left-fe-card>h2 {
         font-size: 42px;
         font-weight: 500;
-        line-height: 42px;
+        /* line-height: 42px; */
         color: #2e221c;
     }
 
@@ -324,11 +340,18 @@
         border-radius: 30px;
         overflow: hidden;
     }
+    .right-fe-card>img{
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
 
 
     .choose-us {
         margin-block: 100px;
-        margin-inline: 30px;
+        /* margin-inline: 30px; */
     }
 
     .choose-us>h2 {
@@ -346,6 +369,7 @@
         height: 576px;
         margin-top: 50px;
         gap: 10px;
+        margin-inline: 10px;
     }
 
     .left-choose {
@@ -430,7 +454,7 @@
         text-align: center;
     }
 
-    .left-choose-bottom{
+    .left-choose-bottom {
         background-image: url(https://images.pexels.com/photos/91484/pexels-photo-91484.jpeg);
         background-size: cover;
         background-position: center;
@@ -446,23 +470,25 @@
         background-color: rgba(0, 0, 0, 0.514);
         background-blend-mode: darken;
     }
-    .left-choose-bottom>h3{
+
+    .left-choose-bottom>h3 {
         font-size: 32px;
         font-weight: 500;
         line-height: 38px;
         color: white;
     }
-    .left-choose-bottom>p{
+
+    .left-choose-bottom>p {
         font-size: 18px;
         font-weight: 300;
         line-height: 27px;
         color: white;
-        width: 600px;
+        max-width: 600px;
         text-align: center;
     }
 
 
-    .right-choose{
+    .right-choose {
         width: 30%;
         background-image: url(https://compatto.gr/wp-content/uploads/2024/04/zero-bg.svg);
         background-color: #2e221c;
@@ -474,38 +500,44 @@
         align-items: center;
         padding-block: 40px;
     }
-    .right-choose>.upper-choose{
+
+    .right-choose>.upper-choose {
         display: flex;
         flex-direction: column;
         gap: 10px;
         align-items: center;
         width: 70%;
     }
-    .upper-choose>h3{
+
+    .upper-choose>h3 {
         font-size: 34px;
         font-weight: 500;
         color: white;
         text-align: center;
     }
-    .upper-choose>p{
+
+    .upper-choose>p {
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
         color: #e0d8c8;
         text-align: center;
     }
-    .lower-choose>h3{
+
+    .lower-choose>h3 {
         font-size: 21px;
         font-weight: 500;
         color: white;
     }
-    .lower-choose>p{
+
+    .lower-choose>p {
         font-size: 16px;
         font-weight: 300;
         line-height: 24px;
         color: #f9f7f3;
     }
-    .right-choose>.lower-choose{
+
+    .right-choose>.lower-choose {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -514,13 +546,43 @@
     }
 
 
+    /* Responsiveness */
+    section:not(:first-of-type) {
+        max-width: 1440px;
+        margin-inline: auto;
+    }
+    section{
+        margin-inline: auto;
+    }
 
 
-    .container{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .container2 {
         display: flex;
         /* flex-wrap: wrap; */
     }
-    .box{
+
+    .box {
         width: 300px;
         height: 300px;
         background-color: yellow;
@@ -529,6 +591,7 @@
         flex-grow: 1;
     }
 </style>
+<link rel="stylesheet" href="./responsive.css">
 
 <body>
     <header>
@@ -544,6 +607,14 @@
                 </ul>
             </div>
             <button class="btn">Contact us</button>
+            <div class="hamburger">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#000000"
+                    fill="none" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 5L20 5" />
+                    <path d="M4 12L20 12" />
+                    <path d="M4 19L20 19" />
+                </svg>
+            </div>
         </nav>
     </header>
     <section class="hero">
@@ -584,7 +655,7 @@
         </div>
     </section>
     <section class="furnishing-experience">
-        <h2>How We <span>Simplify</span> <br> Your Furnishing Experience</h2>
+        <h2 class="title-heading">How We <span>Simplify</span> <br> Your Furnishing Experience</h2>
         <div class="furnishing-experience-card">
             <div class="left-fe-card">
                 <p>5</p>
@@ -595,12 +666,12 @@
                 <button class="btn">Learn more</button>
             </div>
             <div class="right-fe-card">
-                <img src="https://compatto.gr/wp-content/uploads/2024/04/transformed-space.jpg" alt="">
+                <img src="https://compatto.gr/wp-content/uploads/2024/04/transformed-space.jpg" alt="furniture hall">
             </div>
         </div>
     </section>
     <section class="choose-us">
-        <h2>Why <span>Choose</span> Compatto</h2>
+        <h2 class="title-heading">Why <span>Choose</span> Compatto</h2>
         <div class="choose-card-container">
             <div class="left-choose">
                 <div class="left-choose-top">
@@ -631,23 +702,26 @@
                 </div>
                 <div class="left-choose-bottom">
                     <h3>Superior Quality</h3>
-                    <p>Our partnerships with the best suppliers grant us access to the finest materials, craftsmanship, and quality control processes.</p>
+                    <p>Our partnerships with the best suppliers grant us access to the finest materials, craftsmanship,
+                        and quality control processes.</p>
                 </div>
             </div>
             <div class="right-choose">
                 <div class="upper-choose">
                     <h3>No Variety Restrictions</h3>
-                    <p>We partner with any vendor meeting our quality standards, providing the broadest selection of furniture solutions to suit your needs and preferences.</p>
+                    <p>We partner with any vendor meeting our quality standards, providing the broadest selection of
+                        furniture solutions to suit your needs and preferences.</p>
                 </div>
                 <div class="lower-choose">
                     <h3>Bespoke Furniture</h3>
-                    <p>We specialize in sourcing custom-made furniture pieces that perfectly match your unique vision and requirements.</p>
+                    <p>We specialize in sourcing custom-made furniture pieces that perfectly match your unique vision
+                        and requirements.</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- <section>
-        <div class="container">
+        <div class="container2">
             <div class="box"></div>
             <div class="box"></div>
             <div class="box"></div>

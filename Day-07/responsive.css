@@ -1,0 +1,133 @@
+@media screen and (min-width: 780px){
+    .left-hero{
+        width: 60%;
+    }
+    .right-hero {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1080px){
+    .hero-layout{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .left-hero, .right-hero{
+        width: 100%
+    }
+
+    .about-company{
+        flex-direction: column;
+        height: 100%;
+    }
+    .left-about, .right-about{
+        width: 100%;
+        height: 100%;
+    }
+    .right-about{
+        flex-direction: column;
+    }
+    .right-about-left{
+        width: 100%;
+    }
+
+
+    .furnishing-experience-card{
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+    .furnishing-experience-card>.left-fe-card{
+        width: 100%;
+    }
+    .furnishing-experience-card>.right-fe-card{
+        width: 100%;
+    }
+
+
+    .choose-card-container{
+        flex-direction: column;
+        height: 100%;
+    }
+    .left-choose{
+        width: 100%;
+        height: 100%;
+    }
+    .left-choose-top{
+        flex-direction: column;
+        width: 100%;
+    }
+    .left-choose-top>.top-first{
+        width: 100%;
+    }
+    .left-choose-top>.top-second{
+        width: 100%;
+    }
+    .left-choose-bottom{
+        padding-top: 120px;
+    }
+    .right-choose{
+        width: 100%;
+        gap: 100px;
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .links, .navbar>button{
+        display: none;
+    }
+    .hamburger{
+        display: block;
+    }
+
+    .left-hero>h1{
+        font-size: 50px;
+        line-height: normal;
+    }
+    .hero{
+        margin-inline: 2px;
+        height: 700px;
+    }
+
+    .left-about-bottom>h3>span{
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .logo>img{
+        width: 70%;
+    }
+
+    .left-hero>h1{
+        font-size: 30px;
+    }
+    .right-hero>h3{
+        font-size: 16px;
+    }
+    .right-hero>.hero-button{
+        font-size: 14px;
+    }
+
+    .title-heading{
+        font-size: 28px !important;
+        padding-left: 10px;
+    }
+
+    .furnishing-experience-card>.left-fe-card>h2{
+        font-size: 24px;
+    }
+    .furnishing-experience-card>.left-fe-card>p:nth-child(1){
+        margin-bottom: 10px;
+    }
+
+    .hero{
+        height: 400px
+    }
+
+    .right-about-left>h2{
+        font-size: 24px;
+    }
+}
