@@ -1,0 +1,141 @@
+@media screen and (max-width: 1360px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .left-hero {
+        width: 100%;
+    }
+
+    .right-hero {
+        grid-template-rows: repeat(2, 300px);
+        grid-template-columns: 500px 300px;
+        justify-content: center;
+    }
+
+    .stories-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .left-stories>.card {
+        margin: auto;
+    }
+
+    .right-stories {
+        width: 500px;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .right-hero {
+        grid-template-rows: repeat(2, 150px);
+        grid-template-columns: repeat(2, 40%);
+        align-items: center;
+        gap: 15px;
+    }
+
+    .right-hero>img:nth-child(1) {
+        height: 200px;
+    }
+
+    .right-hero>img:nth-child(2) {
+        width: 150px;
+        height: 100%;
+    }
+
+    .right-hero>img:nth-child(3) {
+        width: 150px;
+        height: 100%;
+    }
+
+    .highlights-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .highlights-container>.card>.upper {
+        width: 400px;
+    }
+
+    .upper-destination>.links {
+        display: none;
+    }
+
+    .upper-destination>.links2 {
+        display: block;
+    }
+
+    .subscribe-box {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    ul {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .left-stories>.card {
+        width: 100%;
+    }
+
+    .left-stories>.card>img {
+        width: 100%;
+    }
+
+    .right-stories {
+        width: 100%;
+    }
+
+    .right-stories>.card>img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .right-stories>.card>.about {
+        gap: 5px;
+    }
+
+    .about>h3 {
+        font-size: 14px;
+    }
+
+    .about>p {
+        font-size: 12px;
+    }
+
+    .subscribe-box>h2 {
+        font-size: 30px;
+    }
+
+    .inputs {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .subscribe-box>p {
+        margin-inline: 10px;
+    }
+
+    .highlights-container>.card>.upper {
+        width: 300px;
+        gap: 10px;
+    }
+
+    .highlights-container>.card {
+        gap: 10px;
+    }
+
+    .highlights-container>img {
+        width: 300px;
+    }
+
+    .highlights-container>.review-box {
+        width: 100%;
+    }
+}

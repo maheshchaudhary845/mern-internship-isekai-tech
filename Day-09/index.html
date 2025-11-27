@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27-11 CSS responsiveness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            height: 50px;
+            justify-content: space-between;
+            align-items: center;
+            padding-inline: 40px;
+        }
+
+        .logo {
+            font-size: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        li>a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .buttons>button:nth-child(1) {
+            border: 1px solid black;
+            border-radius: 50px;
+            padding-inline: 10px;
+            padding-block: 5px;
+        }
+
+        .buttons>button:nth-last-child(1) {
+            border: 1px solid black;
+            color: white;
+            background-color: black;
+            padding-inline: 10px;
+            padding-block: 5px;
+            border-radius: 50px;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            background-image: url(https://i.pinimg.com/736x/cf/6d/18/cf6d18f8cd218a05d1c2c40cf958fa5b.jpg);
+            background-size: cover;
+            background-position: top;
+            background-color: rgba(255, 255, 255, 0.681);
+            background-blend-mode: lighten;
+            padding: 20px;
+            object-position: center;
+        }
+
+        .left-hero {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            padding-top: 40px;
+            gap: 30px;
+        }
+
+        .left-hero>h1 {
+            font-size: 79px;
+            text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.097);
+        }
+
+        .left-hero>h1>span {
+            color: rgb(255, 132, 0);
+        }
+
+        .left-hero>p {
+            width: 70%;
+            font-size: 18px;
+        }
+
+        .left-hero>button {
+            background-color: rgb(255, 132, 0);
+            border: none;
+            border-radius: 50px;
+            padding-inline: 30px;
+            padding-block: 10px;
+            width: fit-content;
+            color: white;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.11), 0px 1px 2px rgba(0, 0, 0, 0.203);
+        }
+
+        .right-hero {
+            display: grid;
+            grid-template-rows: repeat(2, 300px);
+            grid-template-columns: repeat(2, 300px);
+            overflow: hidden;
+            gap: 30px;
+        }
+
+        .right-hero>img:nth-child(1) {
+            width: 100%;
+            height: 500px;
+            border-radius: 30px;
+            object-fit: cover;
+            object-position: center;
+            grid-area: 1 / 1 / span 2 / 2;
+            margin-top: 20px;
+        }
+
+        .right-hero>img:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            border-radius: 30px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .right-hero>img:nth-child(3) {
+            width: 300px;
+            height: 270px;
+            border-radius: 30px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+
+        .top-destination {
+            margin-top: 30px;
+            padding: 20px;
+            object-position: center;
+        }
+
+        .top-destination>h2 {
+            margin-bottom: 10px;
+        }
+
+        .upper-destination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-block: 5px;
+        }
+
+        .upper-destination>.links {
+            display: flex;
+            gap: 20px;
+        }
+        .upper-destination>.links2{
+            display: none;
+        }
+
+        .upper-destination>button {
+            padding-inline: 20px;
+            padding-block: 5px;
+            border-radius: 50px;
+        }
+
+        .image-destination>.images {
+            display: flex;
+            gap: 20px;
+            overflow-x: scroll;
+        }
+
+        .image-destination>.images>.card>img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 30px;
+        }
+
+
+        .stories {
+            margin-top: 30px;
+            padding: 20px;
+            object-position: center;
+        }
+
+        .stories-top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stories-top>button {
+            padding-inline: 20px;
+            padding-block: 5px;
+            border-radius: 50px;
+        }
+
+        .stories-container {
+            display: flex;
+            gap: 200px;
+        }
+
+        .left-stories>.card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 500px;
+        }
+
+        .left-stories>.card>img {
+            width: 500px;
+            border-radius: 30px;
+        }
+
+        .right-stories {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .right-stories>.card {
+            display: flex;
+            gap: 10px;
+        }
+
+        .right-stories>.card>img {
+            width: 150px;
+            border-radius: 30px;
+        }
+
+        .right-stories>.card>.about {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .right-stories>.card>.about>a {
+            text-decoration: none;
+        }
+
+
+        .highlights {
+            margin-top: 30px;
+            padding: 20px;
+            object-position: center;
+        }
+
+        .highlights>h2 {
+            margin-bottom: 20px;
+        }
+
+        .highlights-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .highlights-container>.review-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 50%;
+        }
+
+        .review-box>.about-people {
+            display: flex;
+            gap: 10px;
+        }
+
+        .review-box>.about-people>img {
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .about-people>.name-box>p {
+            font-size: 13px;
+            color: rgb(52, 52, 52);
+        }
+
+        .highlights-container>img {
+            width: 400px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .highlights-container>.card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .highlights-container>.card>.upper>img {
+            width: 300px;
+            border-radius: 30px;
+        }
+
+        .highlights-container>.card>.lower {
+            align-self: flex-end;
+        }
+
+        .highlights-container>.card>.lower>button {
+            padding-inline: 20px;
+            padding-block: 5px;
+            border-radius: 50px;
+        }
+
+        .subscribe {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 500px;
+        }
+
+        .subscribe>video {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+        }
+
+        .subscribe-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 50%;
+        }
+
+        .subscribe-box>h2 {
+            color: white;
+            font-size: 40px;
+            text-align: center;
+        }
+        .inputs{
+            display: flex;
+            gap: 10px;
+        }
+        .subscribe-box>.inputs>input {
+            width: 250px;
+            padding-block: 10px;
+            border-radius: 50px;
+            border: none;
+            padding-left: 10px;
+        }
+
+        .subscribe-box>.inputs>button {
+            background-color: rgb(255, 132, 0);
+            border: none;
+            border-radius: 50px;
+            padding-inline: 30px;
+            padding-block: 10px;
+            width: fit-content;
+            color: white;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.11), 0px 1px 2px rgba(0, 0, 0, 0.203);
+        }
+        .subscribe-box>p{
+            color: white;
+            font-size: 13px;
+        }
+    </style>
+    <link rel="stylesheet" href="responsiveness.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Globe Trekker</div>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Destination</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+            <div class="buttons">
+                <button>Log in</button>
+                <button>Sign up</button>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <div class="left-hero">
+                <h1>Discover the World's <span>Hidden</span> Wonders</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, iste at. Iure libero perspiciatis
+                    illo optio fugiat ea, quam minima eaque quos velit quas nihil accusamus praesentium maiores incidunt
+                    qui!</p>
+                <button>Explore Now</button>
+            </div>
+            <div class="right-hero">
+                <img src="https://images.pexels.com/photos/27333990/pexels-photo-27333990.jpeg" alt="tower image">
+                <img src="https://images.pexels.com/photos/2749500/pexels-photo-2749500.jpeg" alt="kayak">
+                <img src="https://images.pexels.com/photos/2387876/pexels-photo-2387876.jpeg" alt="lake">
+            </div>
+        </section>
+
+        <section class="top-destination">
+            <h2>Top Destinations</h2>
+            <div class="upper-destination">
+                <div class="links">
+                    <span>Paris</span>
+                    <span>Tokyo</span>
+                    <span>Swiss Alps</span>
+                    <span>Bora Bora</span>
+                    <span>Goa</span>
+                    <span>Bali</span>
+                    <span>Rome</span>
+                    <span>Cape Town</span>
+                    <span>Santorini</span>
+                    <span>Kyoto</span>
+                </div>
+                <div class="links2">
+                    Popular
+                </div>
+                <button>Explore Destination</button>
+            </div>
+            <div class="image-destination">
+                <div class="images">
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/2265876/pexels-photo-2265876.jpeg"
+                            alt="boats in river">
+                        <div class="title">Lorem, ipsum dolor.</div>
+                        <div class="location">Paris</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/586687/pexels-photo-586687.jpeg"
+                            alt="boat travelling">
+                        <div class="title">Lorem, ipsum dolor.</div>
+                        <div class="location">Tokyo</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg" alt="canoe">
+                        <div class="title">Lorem, ipsum dolor.</div>
+                        <div class="location">Bali</div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/1658967/pexels-photo-1658967.jpeg" alt="railway">
+                        <div class="title">Lorem, ipsum dolor.</div>
+                        <div class="location">Kyoto</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stories">
+            <div class="stories-top">
+                <h2>Latest Stories</h2>
+                <button>Explore Stories</button>
+            </div>
+            <div class="stories-container">
+                <div class="left-stories">
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/1861784/pexels-photo-1861784.jpeg"
+                            alt="two people eating">
+                        <a href="">Lorem, ipsum</a>
+                        <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur quae cum fuga.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam consequuntur adipisci
+                            harum, vero eum dolores error quasi. Illo expedita nam, molestiae odio veniam doloribus
+                            natus.</p>
+                    </div>
+                </div>
+                <div class="right-stories">
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/2181230/pexels-photo-2181230.jpeg" alt="los-angles">
+                        <div class="about">
+                            <a href="">Lorem</a>
+                            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque tempore aut veniam.
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/2285902/pexels-photo-2285902.jpeg"
+                            alt="panda on wall">
+                        <div class="about">
+                            <a href="">Lorem</a>
+                            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque tempore aut veniam.
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.pexels.com/photos/10967785/pexels-photo-10967785.jpeg"
+                            alt="street food">
+                        <div class="about">
+                            <a href="">Lorem</a>
+                            <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque tempore aut veniam.
+                            </h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights">
+            <h2>Trekker&apos;s Highlights</h2>
+            <div class="highlights-container">
+                <div class="review-box">
+                    <div class="about-people">
+                        <img src="https://i.pinimg.com/736x/c4/ea/8b/c4ea8bf28dd46e81339c825ff8248533.jpg" alt="avatar">
+                        <div class="name-box">
+                            <h4>Maria lorem</h4>
+                            <p>Lorem, ipsum</p>
+                        </div>
+                    </div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="review">
+                        <h3>Lorem ipsum dolor sit.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores aliquam tempore excepturi,
+                            quam id voluptates dignissimos est repellat minima, autem dolore ipsum, earum nulla vero
+                            deleniti nostrum fugiat. Provident, esse.</p>
+                    </div>
+                </div>
+                <img src="https://images.pexels.com/photos/13010283/pexels-photo-13010283.jpeg" alt="hot air balloon">
+                <div class="card">
+                    <div class="upper">
+                        <img src="https://images.pexels.com/photos/1054417/pexels-photo-1054417.jpeg"
+                            alt="buildings image">
+                        <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, magni.</h4>
+                    </div>
+                    <div class="lower">
+                        <button>Explore Highlights</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="subscribe">
+            <video src="https://www.pexels.com/download/video/2812062/" muted loop autoplay></video>
+            <div class="subscribe-box">
+                <h2>Get Your Travel Inspiration Straight to Your Inbox</h2>
+                <div class="inputs">
+                    <input type="email" name="subscribe" placeholder="Enter Your Email">
+                    <button>Subscribe</button>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, perspiciatis!</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
