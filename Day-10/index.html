@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foody</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: sans-serif;
+            background-color: #FEF1E1;
+        }
+
+        section {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        nav.navbar {
+            display: flex;
+            justify-content: space-between;
+            margin-inline: 30px;
+            margin-top: 20px;
+        }
+
+        .logo {
+            background-color: rgb(227, 76, 0);
+            padding: 5px;
+            padding-inline: 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo>span {
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+        }
+
+        .navbar>ul {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            gap: 20px;
+        }
+
+        ul>li>a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 1rem;
+        }
+
+        .right-nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* .search {
+            width: 16px;
+            height: 16px;
+            border: 2px solid black;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .search::after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 2px;
+            background-color: black;
+            transform: rotate(45deg);
+            position: absolute;
+            bottom: -3px;
+            right: -8px;
+        } */
+
+        .right-nav button {
+            background-color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.11), 0px 1px 2px rgba(0, 0, 0, 0.204);
+        }
+
+
+        .hero {
+            display: flex;
+            margin-top: 50px;
+        }
+
+        .left-hero,
+        .right-hero {
+            flex: 1;
+        }
+
+        .left-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .left-hero>h1 {
+            font-size: 4.4rem;
+        }
+
+        .left-hero>h1>span:nth-child(1) {
+            color: rgb(180, 9, 9)
+        }
+
+        .left-hero>h1>span:nth-child(2) {
+            color: rgb(214, 175, 2)
+        }
+
+        .left-hero>p {
+            font-size: 1rem;
+            color: rgb(50, 50, 50);
+        }
+
+        .left-hero>button {
+            width: fit-content;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: none;
+            background-color: rgb(227, 76, 0);
+            color: white;
+            margin-top: 20px;
+        }
+
+        .right-hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-hero>img {
+            object-fit: cover;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            max-height: 500px;
+            border-radius: 20px;
+            /* aspect-ratio: 1/1; */
+        }
+
+
+        .salad-list {
+            height: 270px;
+            background-color: white;
+            border-radius: 50px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .salad-list>.left-arrow-background {
+            position: absolute;
+            background-color: #FEF1E1;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .salad-list .left-arrow-white-bg {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border: none;
+            cursor: pointer;
+        }
+
+        .salad-list .left-arrow-white-bg::before {
+            content: "";
+            width: 40px;
+            height: 40px;
+            background-color: #FEF1E1;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            transform: translateY(-100%)
+        }
+
+        .salad-list>.left-arrow-background::before {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            position: absolute;
+            top: -69px;
+            border-radius: 50%;
+            z-index: 1;
+            transform: translateX(50%)
+        }
+
+        .salad-list .left-arrow-white-bg::after {
+            content: "";
+            width: 40px;
+            height: 40px;
+            background-color: #FEF1E1;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(100%)
+        }
+
+        .salad-list .left-arrow-background::after {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(50%, 87%)
+        }
+
+        .salad-list>.right-arrow-background {
+            position: absolute;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background-color: #FEF1E1;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .salad-list .right-arrow-white-bg {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .salad-list .right-arrow-white-bg::before {
+            content: "";
+            width: 40px;
+            height: 40px;
+            background-color: #FEF1E1;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            transform: translateY(-100%);
+        }
+
+        .salad-list .right-arrow-background::before {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -87%);
+            /* z-index: 1; */
+        }
+
+        .salad-list .right-arrow-white-bg::after {
+            content: "";
+            width: 40px;
+            height: 40px;
+            background-color: #FEF1E1;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(100%);
+            z-index: -1;
+        }
+
+        .salad-list .right-arrow-background::after {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            transform: translate(-50%, 87%);
+        }
+
+        .items {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            height: 100%;
+            margin: 0 70px;
+            overflow-x: auto;
+        }
+        .items>.item{
+            background-color: rgb(255, 118, 141);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.108), 0px 4px 6px rgba(0, 0, 0, 0.207);
+        }
+        .items>.item2{
+            background-color: rgb(255, 153, 0);
+        }
+        .items>.item3{
+            background-color: rgb(39, 209, 17);
+        }
+        .items>.item4{
+            background-color: rgb(122, 110, 255);
+        }
+        .item>.plate{
+            width: 80px;
+            height: 80px;
+            background-color: #fcf5ec;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+            overflow: hidden;
+            outline: 3px solid rgb(255, 165, 180);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.105), 0px 8px 12px rgba(0, 0, 0, 0.221);
+        }
+        .item>.plate>img{
+            width: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transform: scale(1.07);
+        }
+        .item>.info{
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            
+        }
+        .item .info>h3{
+            font-size: 0.8rem;
+            color: white;
+            text-align: center;
+        }
+        .info>.price-box{
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price-box>.price{
+            font-weight: 600;
+        }
+        .price-box>.wishlist{
+            background-color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+        }
+        .order-box{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-box>button{
+            border: none;
+            padding: 2px 5px;
+            border-radius: 50px;
+            font-size: 0.6rem;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.104), 0px 8px 16px rgba(0, 0, 0, 0.208);
+            cursor: pointer;
+        }
+        .order-box>.rating{
+            font-size: 0.7rem;
+            color: white;
+        }
+        .rating>span{
+            font-size: 0.5rem;
+        }
+
+
+
+
+
+
+
+
+        .categories {
+            display: flex;
+            gap: 20px;
+        }
+
+        .left-category {
+            flex: 2;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: repeat(2, 200px);
+            gap: 10px;
+            padding-top: 40px;
+        }
+
+        .left-category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .left-category img:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .right-category {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-category>div:nth-child(1) {
+            width: fit-content;
+        }
+
+        .right-category .red-line {
+            width: 70%;
+            height: 3px;
+            background-color: red;
+            margin-top: 10px;
+        }
+
+        .category-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .category-box>img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .category-box>.info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .category-box>.info>p {
+            color: rgb(50, 50, 50);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img fill src="https://cdn-icons-png.flaticon.com/512/5787/5787016.png" alt="burger icon" width="19">
+                <span>Foody</span>
+            </div>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Menu</a></li>
+                <li><a href="">Offers</a></li>
+                <li><a href="">Foods</a></li>
+                <li><a href="">Services</a></li>
+                <li><a href="">Restaurants</a></li>
+            </ul>
+            <div class="right-nav">
+                <div class="search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#000000"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17 17L21 21" />
+                        <path
+                            d="M19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19C15.4183 19 19 15.4183 19 11Z" />
+                    </svg>
+                </div>
+                <div class="cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#000000"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6" />
+                        <path d="M6 6H22" />
+                        <circle cx="6" cy="20" r="2" />
+                        <circle cx="17" cy="20" r="2" />
+                        <path d="M8 20L15 20" />
+                        <path
+                            d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18" />
+                    </svg>
+                </div>
+                <div class="button">
+                    <button>Sign in</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="left-hero">
+                <h1>Healthy <span>Eating is an</span> <span>Important</span> Part of Lifestyle</h1>
+                <p>We prepare delicious Food <br> For you we are always</p>
+                <button>Explore New</button>
+            </div>
+            <div class="right-hero">
+                <img src="https://i.pinimg.com/1200x/a9/2d/a8/a92da8d6b1f9964f6bb90d4899d42c84.jpg" alt="">
+            </div>
+        </section>
+
+        <section class="salad-list">
+            <div class="left-arrow-background">
+                <button class="left-arrow-white-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                        fill="none" stroke="#141B34" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 6C15 6 9.00001 10.4189 9 12C8.99999 13.5812 15 18 15 18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="items">
+                <div class="item">
+                    <div class="plate">
+                        <img src="https://i.pinimg.com/1200x/48/14/09/4814092bd897ee4b4025381610e33343.jpg" alt="food plate">
+                    </div>
+                    <div class="info">
+                        <h3>Berries Salad</h3>
+                        <div class="price-box">
+                            <div class="price">$5.00</div>
+                            <div class="wishlist">❤️</div>
+                        </div>
+                        <div class="order-box">
+                            <button>Order Now</button>
+                            <div class="rating"><span>⭐5.0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item item2">
+                    <div class="plate">
+                        <img src="https://i.pinimg.com/1200x/48/14/09/4814092bd897ee4b4025381610e33343.jpg" alt="food plate">
+                    </div>
+                    <div class="info">
+                        <h3>Helathy Salad</h3>
+                        <div class="price-box">
+                            <div class="price">$3.00</div>
+                            <div class="wishlist">❤️</div>
+                        </div>
+                        <div class="order-box">
+                            <button>Order Now</button>
+                            <div class="rating"><span>⭐5.0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item item3">
+                    <div class="plate">
+                        <img src="https://i.pinimg.com/1200x/48/14/09/4814092bd897ee4b4025381610e33343.jpg" alt="food plate">
+                    </div>
+                    <div class="info">
+                        <h3>Berries Salad</h3>
+                        <div class="price-box">
+                            <div class="price">$4.00</div>
+                            <div class="wishlist">❤️</div>
+                        </div>
+                        <div class="order-box">
+                            <button>Order Now</button>
+                            <div class="rating"><span>⭐5.0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item item4">
+                    <div class="plate">
+                        <img src="https://i.pinimg.com/1200x/48/14/09/4814092bd897ee4b4025381610e33343.jpg" alt="food plate">
+                    </div>
+                    <div class="info">
+                        <h3>Healthy Salad</h3>
+                        <div class="price-box">
+                            <div class="price">$5.00</div>
+                            <div class="wishlist">❤️</div>
+                        </div>
+                        <div class="order-box">
+                            <button>Order Now</button>
+                            <div class="rating"><span>⭐5.0</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-arrow-background">
+                <button class="right-arrow-white-bg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9.00005 6C9.00005 6 15 10.4189 15 12C15 13.5812 9 18 9 18" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="left-category">
+                <img src="https://images.pexels.com/photos/2955820/pexels-photo-2955820.jpeg" alt="donuts">
+                <img src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg" alt="burrito">
+                <img src="https://images.pexels.com/photos/9201333/pexels-photo-9201333.jpeg" alt="burger">
+            </div>
+            <div class="right-category">
+                <div>
+                    <h2>Our Categories</h2>
+                    <div class="red-line"></div>
+                </div>
+                <div class="category-box">
+                    <img src="https://images.pexels.com/photos/33212315/pexels-photo-33212315.jpeg" alt="food">
+                    <div class="info">
+                        <h3>Grab your Delicious Food</h3>
+                        <p>We prepare delicious Food <br> For you we are always</p>
+                    </div>
+                </div>
+                <div class="category-box">
+                    <img src="https://i.pinimg.com/736x/de/37/57/de3757fcb63f6e201dde0cdafe0e74c9.jpg" alt="delivery">
+                    <div class="info">
+                        <h3>Grab your Delicious Food</h3>
+                        <p>We prepare delicious Food <br> For you we are always</p>
+                    </div>
+                </div>
+                <div class="category-box">
+                    <img src="https://i.pinimg.com/736x/23/63/e3/2363e3b8f988bf0e38090dfcf0aa6109.jpg" alt="time">
+                    <div class="info">
+                        <h3>Grab your Delicious Food</h3>
+                        <p>We prepare delicious Food <br> For you we are always</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
