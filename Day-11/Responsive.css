@@ -1,0 +1,50 @@
+@media screen and (max-width: 500px) {
+    section{
+        padding: 0 10px;
+    }
+}
+@media screen and (max-width: 580px){
+    nav ul{
+        display: none;
+    }
+    .hero-text>h1{
+        font-size: 1.5rem;
+        max-width: 250px;
+    }
+    .hero-text>p{
+        font-size: 0.8rem;
+        max-width: 300px;
+    }
+}
+@media screen and (min-width: 581px) {
+    nav>.hamburger{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .about-company{
+        flex-direction: column;
+        gap: 40px;
+    }
+    .left-about>.top{
+        max-width: max-content;
+    }
+    .left-about>.logos{
+        flex-direction: column;
+        align-items: center;
+    }
+    .right-about{
+        justify-content: center;
+    }
+
+    .portfolio{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .portfolio{
+        grid-template-rows: auto;
+    }
+}
