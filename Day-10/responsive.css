@@ -19,6 +19,9 @@
     .categories {
         flex-direction: column;
     }
+    .salad-list{
+        width: 85vw;
+    }
 }
 
 @media screen and (max-width: 500px){
@@ -41,5 +44,18 @@
 
     .left-category{
         grid-template-rows: repeat(2, auto);
+    }
+
+    .salad-list{
+        border-radius: 20px;
+    }
+    .salad-list>.left-arrow-background{
+        display: none;
+    }
+    .salad-list>.right-arrow-background{
+        display: none;
+    }
+    .items{
+        margin: 0;
     }
 }
