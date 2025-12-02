@@ -22,7 +22,7 @@
 
         section {
             max-width: 1440px;
-            margin: 40px auto;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
@@ -58,10 +58,11 @@
             background-size: cover;
             background-position: 100% 70%;
             background-repeat: no-repeat;
-            padding: 10rem 0 5rem 0;
+            padding: 14rem 0 5rem 0;
             color: white;
             border-radius: 20px;
             position: relative;
+            margin-top: 20px;
         }
 
         .hero-text {
@@ -92,7 +93,7 @@
         .hero-button-box>button {
             color: white;
             background-color: black;
-            padding: 10px 50px;
+            padding: 15px 80px;
             border-radius: 50px;
             border: none;
         }
@@ -210,6 +211,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            position: relative;
         }
 
         .card>img {
@@ -220,6 +222,14 @@
             aspect-ratio: 1/1;
         }
 
+        .card>.numbering{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+        }
         .card>p {
             font-size: 0.7rem;
             max-width: 180px;
@@ -251,9 +261,11 @@
             border-radius: 20px;
         }
 
-        .portfolio>.third>img {
+        .portfolio>.third>.image {
             height: 90%;
             border-radius: 20px;
+            overflow: hidden;
+            position: relative;
         }
 
         .portfolio>.first {
@@ -294,6 +306,20 @@
             border: 1.5px solid black;
             align-self: flex-end;
             background-color: white;
+        }
+
+        .portfolio h4{
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            color: white;
+            text-decoration: underline;
+            font-size: 0.8rem;
+            /* font-weight: 500; */
+        }
+
+        .black{
+            color: black !important;
         }
     </style>
     <link rel="stylesheet" href="./Responsive.css">
@@ -389,24 +415,28 @@
                 <div class="card">
                     <img src="https://i.pinimg.com/736x/96/9e/29/969e29466c4040aa181f7d80e6cac331.jpg"
                         alt="architecture design">
+                    <p class="numbering">01</p>
                     <h3>Arch Design</h3>
                     <p>From initial concept development and schematic design</p>
                 </div>
                 <div class="card">
                     <img src="https://i.pinimg.com/1200x/77/b8/97/77b897abb35a4b0058bb40265fc52866.jpg"
-                        alt="interior design">
+                    alt="interior design">
+                    <p class="numbering">02</p>
                     <h3>Interior Design</h3>
                     <p>Creating cohesive interior spaces that reflect your style</p>
                 </div>
                 <div class="card">
                     <img src="https://i.pinimg.com/1200x/11/a8/3c/11a83cbca75a785e7e23fe18b42f30eb.jpg"
-                        alt="urban planning">
+                    alt="urban planning">
+                    <p class="numbering">03</p>
                     <h3>Urban Planning</h3>
                     <p>Designing the spaces between buildings &amp; outdoors</p>
                 </div>
                 <div class="card">
                     <img src="https://i.pinimg.com/1200x/ea/ce/c0/eacec0244bfec4f3e7b829baa547b406.jpg"
-                        alt="project manage">
+                    alt="project manage">
+                    <p class="numbering black">04</p>
                     <h3>Project Manage</h3>
                     <p>Overseeing &amp; control the entire construction process
                 </div>
@@ -419,16 +449,22 @@
                 <p>Explore our selected works that demonstrate our commitment to design excellence, innovation, and
                     client satisfaction</p>
                 <img src="https://i.pinimg.com/736x/6b/42/3a/6b423a75c5551bfeb7da527317e73411.jpg" alt="first img">
+                <h4>New York Office</h4>
             </div>
             <div class="second">
                 <img src="https://i.pinimg.com/736x/6b/42/3a/6b423a75c5551bfeb7da527317e73411.jpg" alt="second img">
+                <h4>Commercial Restaurant</h4>
             </div>
             <div class="third">
-                <img src="https://i.pinimg.com/736x/cb/46/0e/cb460e85258b1e74ce3b48d9d8d7c46f.jpg" alt="third img">
+                <div class="image">
+                    <img src="https://i.pinimg.com/736x/cb/46/0e/cb460e85258b1e74ce3b48d9d8d7c46f.jpg" alt="third img">
+                    <h4>Private House</h4>
+                </div>
                 <button>See More Projects</button>
             </div>
             <div class="fourth">
                 <img src="https://i.pinimg.com/736x/ec/e9/8d/ece98dab22c9619186464c20a2fe3a85.jpg" alt="fourth img">
+                <h4>Hotel Rooms</h4>
             </div>
         </section>
     </main>
