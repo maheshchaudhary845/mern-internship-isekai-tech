@@ -27,18 +27,11 @@ let b2 = "2";
 
 
 // Operators in JS:
-// 
-let a1 = 5;
-let b1 = 10;
-console.log(a1 && b1); // 0
-console.log(a1 || b1); // 10
-
-
-
-
-
-
-
+let a1 = 23;
+let b1 = 22;
+let c1 = 0;
+console.log(a1 || b1 && c1); 
+console.log(a1 || b1 || c1);
 
 
 
