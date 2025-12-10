@@ -32,6 +32,12 @@
 // })();
 
 
+// // Rest Parameter(...args):- In JavaScript, rest parameters allow a function to accept an indefinite number of arguments as an array. They are written with three dots (...) before the parameter name and must be the last parameter in the function definition.
+// function sum(...numbers){
+//     return numbers.reduce((total, num)=> total + num, 0);
+// }
+// console.log(sum(1, 2, 3));
+
 
 // // Callback Function
 // // A function that takes another function as a parameter
