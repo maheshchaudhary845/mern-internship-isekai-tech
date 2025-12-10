@@ -1,8 +1,10 @@
-function addition(...arr){
-    for(let i=0; i<arr.length; i++){
-        
+function addition(arr, counter=0, result=0){
+    if(arr.length == counter){
+        return result;
     }
-    return addition(arr);
+    result += arr[counter];
+    counter++;
+    return addition(arr, counter, result);
 }
-
-console.log(addition(1, 3, 4, 5))
+let arr = [1, 3, 5, 2, 4, 10];
+console.log(addition(arr));
