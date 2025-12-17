@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+</head>
+
+<body>
+    <header>
+        <nav class="other-nav">
+            <h2><a href="./">Shop Easy</a></h2>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./addProduct.html">Add Product</a></li>
+                <li><a href="./cart.html">Cart</a></li>
+                <li><a href="./wishlist.html">Wishlist</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="add-product-form">
+        <form method="post" onsubmit="getProduct(event)">
+            <input class="input-field name" name="name" type="text" placeholder="Enter name of the product">
+            <textarea class="input-field description" name="description" type="text"
+                placeholder="Enter description of the product"></textarea>
+            <input class="input-field price" name="price" type="number" placeholder="Enter price of the product">
+            <input type="text" class="input-field image" name="image" placeholder="Enter image src of the product">
+            <button class="btn" type="submit">Add Product</button>
+        </form>
+    </section>
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

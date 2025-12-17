@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-nav {
+    background-color: transparent;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+}
+
+.home-nav>h2{
+    font-size: 1.5rem;
+    color: rgb(251, 235, 255);
+}
+.home-nav>h2>a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.home-nav>ul {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+}
+
+.home-nav>ul>li>a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+}
+
+section {
+    max-width: 1440px;
+    margin: 20px auto;
+}
+
+
+.hero{
+    height: 100vh;
+    margin: 0;
+    max-width: 100%;
+    background-image: url(https://images.pexels.com/photos/5632371/pexels-photo-5632371.jpeg);
+    background-size: cover;
+    background-position: center bottom;
+    background-blend-mode: darken;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero>.hero-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    max-width: 500px;
+}
+.hero-content>h1{
+    font-size: 4rem;
+}
+.hero-content>p{
+    font-size: 0.8rem;
+    font-weight: 100;
+    color: rgb(219, 219, 219);
+}
+
+
+
+
+
+
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cards>.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid gray;
+    max-width: 300px;
+    min-width: 300px;
+}
+.card>.img-container{
+    overflow: hidden;
+    width: 100%;
+}
+.card>.img-container>img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+
+.btn-buy{
+    background-color: rgb(62, 163, 49);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+}
+.btn-buy:hover{
+    background-color: rgb(71, 180, 56);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.116), 0px 2px 6px rgba(0, 0, 0, 0.193);
+}
+
+
+
+
+
+/* addProduct.html */
+
+.other-nav {
+    background-color: rgb(123, 71, 123);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.other-nav>h2{
+    font-size: 1.5rem;
+    color: rgb(251, 235, 255);
+}
+.other-nav>h2>a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.other-nav>ul {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+}
+
+.other-nav>ul>li>a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+}
+
+
+
+.add-product-form>form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: aliceblue;
+    width: fit-content;
+    margin: auto;
+    padding: 50px;
+    width: 400px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+form textarea{
+    min-height: 1lh;
+    max-height: 5lh;
+    field-sizing: content;
+}
+/* form>div {
+    display: flex;
+    justify-content: center;
+} */
+
+.btn {
+    background-color: skyblue;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn:hover{
+    background-color: rgb(140, 222, 255);
+}
