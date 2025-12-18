@@ -15,10 +15,12 @@ function getProduct(e) {
     let image = document.querySelector(".image");
 
     let product = {
+        id: Date.now(),
         name: name.value,
         description: description.value,
         price: price.value,
         image: image.value,
+        wishlist: false,
     }
 
     let products = JSON.parse(localStorage.getItem("products")) || [];

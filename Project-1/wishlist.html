@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+</head>
+
+<body>
+    <header>
+        <nav class="other-nav">
+            <h2><a href="./">Shop Easy</a></h2>
+            <ul>
+                <li><a href="./">Home</a></li>
+                <li><a href="./addProduct.html">Add Product</a></li>
+                <li><a href="./wishlist.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                            color="#ffffff" fill="#ff2e2e" stroke="#ffffff" stroke-width="0" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
+                        </svg>
+                    </a></li>
+                <li><a href="./cart.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                            color="#ffffff" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+                            <path d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6" />
+                            <path d="M6 6H22" />
+                            <circle cx="6" cy="20" r="2" />
+                            <circle cx="17" cy="20" r="2" />
+                            <path d="M8 20L15 20" />
+                            <path
+                                d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18" />
+                        </svg>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Wishlist</h1>
+
+    <section class="">
+        <div class="cards">
+
+        </div>
+    </section>
+
+
+    <script>
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        let cards = document.querySelector(".cards");
+        products.map((card) => {
+            cards.innerHTML +=
+                `${card.wishlist && `<div class="card">
+                <div class="img-container">
+                    <img src=${card.image} alt="thumbnail">
+                    <svg data-id=${card?.id} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff"
+                        fill=${card?.wishlist ? "#ff2e2e" : "none"} stroke="#000000" stroke-width=${card?.wishlist ? "0" : "1.5"} stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
+                    </svg>
+                </div>
+                <h3 class="title">${card.name}</h3>
+                <p class="description">${card.description}</p>
+                <p class="price">₹${card.price}</p>
+                <div class="button">
+                    <button class="btn-cart">Add to Cart</button>
+                    <button class="btn-buy">Buy Now</button>
+                </div>
+            </div>` || ""}`
+        })
+        let cardWishlist = document.querySelectorAll(".card>.img-container>svg");
+
+
+        products.map((product) => {
+            cardWishlist.forEach((cw, index) => {
+                if (cw.dataset.id == product.id) {
+                    cw.addEventListener("click", function () {
+                        if (cw.getAttribute("fill") == "#ff2e2e") {
+                            cw.setAttribute("fill", "none");
+                            cw.setAttribute("stroke-width", "1.5");
+                            product.wishlist = false;
+                            localStorage.setItem("products", JSON.stringify(products));
+                        } else {
+                            cw.setAttribute("fill", "#ff2e2e");
+                            cw.setAttribute("stroke-width", "0");
+                            product.wishlist = true;
+                            localStorage.setItem("products", JSON.stringify(products));
+                        }
+                    })
+                }
+            })
+        })
+
+        // for(let i=0; i<products.length; i++){
+        //     console.log(cw.dataset.id, products[i].id);
+        //     if(cw.getAttribute("data-id") == products[i].id){
+        //         cw.addEventListener("click", function(){
+        //             if(cw.getAttribute("fill") == "#ff2e2e"){
+        //                 cw.setAttribute("fill", "none");
+        //                 cw.setAttribute("stroke-width", "1.5");
+        //                 products[i].wishlist = false;
+        //             } else{
+        //                 cw.setAttribute("fill", "#ff2e2e");
+        //                 cw.setAttribute("stroke-width", "0");
+        //                 products[i].wishlist = true;
+        //             }
+        //             localStorage.setItem("products", JSON.stringify(products))
+        //         })
+        //     }
+        // }
+
+
+
+
+
+
+
+        console.log(products);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // cardWishlist.forEach((cw, i) => {
+        // cw.addEventListener("click", function () {
+        //     if (cw.getAttribute("fill") == "none") {
+        //         cw.setAttribute("fill", "#ff2e2e");
+        //         cw.setAttribute("stroke-width", "0");
+        //         // products[index].wishlist = true;
+        //     } else {
+        //         cw.setAttribute("fill", "none");
+        //         cw.setAttribute("stroke-width", "1.5");
+        //         // products[index].wishlist = false;
+        //     }
+        //     localStorage.setItem("products", JSON.stringify(products));
+        // })
+        // })
+    </script>
+</body>
+
+</html>

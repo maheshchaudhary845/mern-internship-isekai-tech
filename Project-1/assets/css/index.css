@@ -30,7 +30,7 @@ html {
 .home-nav>ul {
     list-style-type: none;
     display: flex;
-    gap: 50px;
+    gap: 20px;
 }
 
 .home-nav>ul>li>a {
@@ -71,40 +71,113 @@ section {
     font-size: 4rem;
 }
 .hero-content>p{
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 100;
     color: rgb(219, 219, 219);
 }
+.hero-content>button{
+    width: 40%;
+}
 
-
-
-
-
-
+.feature-section{
+    margin-block: 50px;
+}
+.feature-container{
+    display: flex;
+    justify-content: space-around;
+}
+.feature{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.feature>.png{
+    background-color: rgb(187, 218, 187);
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feature>h5{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.feature>p{
+    color: rgb(30, 30, 30);
+}
 
 .cards {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 .cards>.card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 1px solid gray;
-    max-width: 300px;
-    min-width: 300px;
+    width: 300px;
+    gap: 10px;
+    padding: 10px
+}
+.cards>.card:hover{
+    background-color: rgb(245, 245, 245);
 }
 .card>.img-container{
     overflow: hidden;
-    width: 100%;
+    width: 280px;
+    height: 200px;
+    position: relative;;
 }
 .card>.img-container>img{
     width: 100%;
-    border-radius: 20px;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.card>.img-container>svg{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.card>h3{
+    font-weight: 500;
+}
+.card>.description{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.card>p{
+    color: rgb(69, 69, 69);
+}
+.card>.price{
+    font-weight: 500;
+    color: rgb(11, 11, 11);
+}
+.card button{
+    width: fit-content;
 }
 
 
+.btn-cart{
+    background-color: rgb(235, 175, 10);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+}
+.btn-cart:hover{
+    background-color: rgb(245, 183, 12);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 .btn-buy{
     background-color: rgb(62, 163, 49);
     border: none;
@@ -116,7 +189,7 @@ section {
 }
 .btn-buy:hover{
     background-color: rgb(71, 180, 56);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.116), 0px 2px 6px rgba(0, 0, 0, 0.193);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -144,7 +217,7 @@ section {
 .other-nav>ul {
     list-style-type: none;
     display: flex;
-    gap: 50px;
+    gap: 20px;
 }
 
 .other-nav>ul>li>a {
@@ -193,4 +266,90 @@ form textarea{
 
 .btn:hover{
     background-color: rgb(140, 222, 255);
+}
+
+
+
+
+
+
+
+/* cart.html */
+.cart-h1{
+    text-align: center;
+}
+.cart-container{
+    display: flex;
+    flex-direction: column;
+}
+.cart-item{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    border-bottom: 2px solid gray;
+}
+.img-and-content{
+    display: flex;
+    gap: 20px;
+}
+.img-and-content>.img-container{
+    width: 150px;
+    height: 150px;
+}
+.img-and-content>.img-container>img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+.img-and-content>.content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+    justify-content: center;
+}
+.price-item{
+    display: flex;
+    align-items: center;
+}
+.quantity{
+    display: flex;
+    align-items: center;
+}
+.quantity>input{
+    width: 50px;
+}
+.delete{
+    display: flex;
+    align-items: center;
+}
+
+.total{
+    display: flex;
+    justify-content: flex-end;
+}
+.total-box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: fit-content;
+    margin: 20px;
+}
+.total-box>button{
+    width: fit-content;
+    align-self: flex-end;
+}
+
+
+
+
+.title{
+    color: rgb(11, 11, 11);
+}
+.description{
+    color: rgb(39, 39, 39);
+}
+.price{
+    color: rgb(0, 97, 10);
 }
