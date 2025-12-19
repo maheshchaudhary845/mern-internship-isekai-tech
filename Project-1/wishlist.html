@@ -23,7 +23,7 @@
                                 d="M10.4107 19.9677C7.58942 17.858 2 13.0348 2 8.69444C2 5.82563 4.10526 3.5 7 3.5C8.5 3.5 10 4 12 6C14 4 15.5 3.5 17 3.5C19.8947 3.5 22 5.82563 22 8.69444C22 13.0348 16.4106 17.858 13.5893 19.9677C12.6399 20.6776 11.3601 20.6776 10.4107 19.9677Z" />
                         </svg>
                     </a></li>
-                <li><a href="./cart.html">
+                <li class="cart-list"><a href="./cart.html">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                             color="#ffffff" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round">
                             <path d="M8 16L16.7201 15.2733C19.4486 15.046 20.0611 14.45 20.3635 11.7289L21 6" />
@@ -34,6 +34,9 @@
                             <path
                                 d="M2 2H2.966C3.91068 2 4.73414 2.62459 4.96326 3.51493L7.93852 15.0765C8.08887 15.6608 7.9602 16.2797 7.58824 16.7616L6.63213 18" />
                         </svg>
+                        <div class="count">
+
+                        </div>
                     </a></li>
             </ul>
         </nav>
@@ -51,6 +54,15 @@
     <script>
         let products = JSON.parse(localStorage.getItem("products")) || [];
         let cards = document.querySelector(".cards");
+        function cartUpdate() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let count = document.querySelector(".count");
+            if (cart.length > 0) {
+                count.classList.add("add-count")
+                count.textContent = cart.length;
+            }
+        }
+        cartUpdate();
         products.map((card) => {
             cards.innerHTML +=
                 `${card.wishlist && `<div class="card">

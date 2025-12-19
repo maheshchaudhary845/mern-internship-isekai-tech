@@ -38,6 +38,23 @@ html {
     font-size: 1rem;
     color: white;
 }
+.cart-list{
+    position: relative;
+}
+.add-count{
+    background-color: rgb(255, 128, 0);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    top: -8px;
+    right: -10px;
+}
 
 section {
     max-width: 1440px;
@@ -323,6 +340,9 @@ form textarea{
 .delete{
     display: flex;
     align-items: center;
+}
+.delete>svg{
+    cursor: pointer;
 }
 
 .total{

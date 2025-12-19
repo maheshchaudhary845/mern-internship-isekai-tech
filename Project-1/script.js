@@ -1,12 +1,23 @@
 // homepage.html
-function homePage(){
+function homePage() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
-    
+
 
 }
 
 
 // addProduct.html
+
+function cartUpdate() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let count = document.querySelector(".count");
+    if (cart.length > 0) {
+        count.classList.add("add-count")
+        count.textContent = cart.length;
+    }
+}
+cartUpdate();
+
 function getProduct(e) {
     e.preventDefault();
     let name = document.querySelector(".name");
