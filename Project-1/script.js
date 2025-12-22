@@ -27,14 +27,15 @@ function getProduct(e) {
 
     let product = {
         id: Date.now(),
-        name: name.value,
+        title: name.value,
         description: description.value,
         price: price.value,
-        image: image.value,
+        thumbnail: image.value,
         wishlist: false,
     }
 
     let products = JSON.parse(localStorage.getItem("products")) || [];
+    
     products.push(product);
     localStorage.setItem("products", JSON.stringify(products));
 

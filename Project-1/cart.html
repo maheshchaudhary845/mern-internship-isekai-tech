@@ -65,7 +65,7 @@
         if (cart.length > 0) {
             count.classList.add("add-count")
             count.textContent = cart.length;
-        } else{
+        } else {
             count.classList.remove("add-count");
             count.textContent = "";
             cartContainer.innerHTML = "Your cart is Empty"
@@ -78,10 +78,10 @@
         cartContainer.innerHTML += `<div class="cart-item">
                 <div class="img-and-content">
                     <div class="img-container">
-                        <img src=${item.image} alt="macbook air">
+                        <img src=${item.thumbnail} alt="macbook air">
                     </div>
                     <div class="content">
-                        <h4 class="title">${item.name}</h4>
+                        <h4 class="title">${item.title}</h4>
                         <p class="description">${item.description}</p>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                     <p class="price">₹${item.price}</p>
                 </div>
                 <div class="quantity">
-                    <input onclick="inputChange()" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">
+                    <input onclick="inputChange(event)" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">
                 </div>
                 <div class="delete">
                     <svg onclick="deleteItem()" data-id=${item.id} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#E4080A"
@@ -124,26 +124,25 @@
 
     function dynamicChange() {
         let cart = JSON.parse(localStorage.getItem("cart"));
+        console.log("inside dynamicChange()")
         cart.map(item => {
             item.totalAmount = item.price * item.quantity;
+            localStorage.setItem("cart", JSON.stringify(cart));
             total.innerHTML = `<div class="total-box">
                 <h3>Total Price: <span class="price">₹ ${totalCount().toFixed(2)}</span></h3>
                 <button class="btn-buy">Order Now</button>
                 </div>`;
-            localStorage.setItem("cart", JSON.stringify(cart));
         })
     }
 
-    function inputChange() {
+    function inputChange(e) {
+        let value = e.target.value;
         let cart = JSON.parse(localStorage.getItem("cart"));
-        cart.map((item, index) => {
-            for (let i = 0; i < quantityInput.length; i++) {
-                if (quantityInput[i].value > 0) {
-                    console.log(quantityInput[i].value)
-                    item.quantity = Number(quantityInput[i].value);
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    dynamicChange();
-                }
+        cart.map((item) => {
+            if (value > 0 && e.target.dataset.id == item.id) {
+                item.quantity = Number(value);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                dynamicChange();
             }
         })
     }
@@ -169,10 +168,10 @@
             cartContainer.innerHTML += `<div class="cart-item">
                 <div class="img-and-content">
                     <div class="img-container">
-                        <img src=${item.image} alt="macbook air">
+                        <img src=${item.thumbnail} alt="macbook air">
                     </div>
                     <div class="content">
-                        <h4 class="title">${item.name}</h4>
+                        <h4 class="title">${item.title}</h4>
                         <p class="description">${item.description}</p>
                     </div>
                 </div>
@@ -180,7 +179,7 @@
                     <p class="price">₹${item.price}</p>
                 </div>
                 <div class="quantity">
-                    <input onclick="inputChange()" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">
+                    <input onclick="inputChange(event)" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">
                 </div>
                 <div class="delete">
                     <svg onclick="deleteItem()" data-id=${item.id} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#E4080A"
