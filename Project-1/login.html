@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="login-box">
+                <input id="username" name="username" type="text" placeholder="Enter your username">
+                <input id="password" name="password" type="password" placeholder="Enter your password">
+                <button type="submit">Log in</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $("button").click(function (e) {
+            e.preventDefault();
+            $("p").remove();
+            let username = $("#username").val();
+            let password = $("#password").val();
+
+            $.ajax({
+                url: "https://dummyjson.com/user/login",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    username,
+                    password
+                },
+                success: function (res) {
+                    console.log(res.username);
+
+                    // let user = JSON.parse(localStorage.getItem("user")) || [];
+                    // if(!user.includes(res.username)){
+                        // user.push(res.username);
+                        localStorage.setItem("user", JSON.stringify(res.username));
+                    // }
+
+                    window.location.href="./";
+
+
+
+
+
+                    // let users = res.users;
+                    // let userFound = false;
+                    // for (let i = 0; i < users.length; i++) {
+                    //     if (users[i].username == username && users[i].password == password) {
+                    //         userFound = true;
+
+
+
+                    //         window.location.href = "./";
+                    //     }
+                    // }
+                    // if (!userFound) {
+                    //     let p = $("<p></p>").text("User not found!");
+                    //     p.css("color", "#C72100");
+                    //     $(".login-box").append(p);
+                    // }
+                },
+                error: function (err) {
+                    console.log(err.responseJSON.message);
+                    let p = $("<p></p>").text(err.responseJSON.message);
+                    p.css({
+                        "color": "#C72100",
+                        "font-size": "14px",
+                        });
+                    $(".login-box").append(p);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

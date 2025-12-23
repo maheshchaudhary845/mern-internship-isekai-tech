@@ -58,9 +58,10 @@
 <script>
     let cartContainer = document.querySelector(".cart-container");
     let total = document.querySelector(".total");
+    let user = JSON.parse(localStorage.getItem("user"));
 
     function cartUpdate() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cart = JSON.parse(localStorage.getItem(user+"Cart")) || [];
         let count = document.querySelector(".count");
         if (cart.length > 0) {
             count.classList.add("add-count")
@@ -73,8 +74,9 @@
     }
     cartUpdate();
 
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem(user+"Cart"));
     cart.map((item) => {
+        
         cartContainer.innerHTML += `<div class="cart-item">
                 <div class="img-and-content">
                     <div class="img-container">
@@ -105,7 +107,7 @@
             </div>`;
 
         item.totalAmount = item.price * item.quantity;
-        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem(user+"Cart", JSON.stringify(cart));
 
         total.innerHTML = `<div class="total-box">
         <h3>Total Price: <span class="price">₹ ${totalCount().toFixed(2)}</span></h3>
@@ -115,7 +117,7 @@
 
     function totalCount() {
         let totalPrice = 0.00;
-        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cart = JSON.parse(localStorage.getItem(user+"Cart"));
         cart.map(item => {
             totalPrice += item.totalAmount;
         })
@@ -123,11 +125,11 @@
     }
 
     function dynamicChange() {
-        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cart = JSON.parse(localStorage.getItem(user+"Cart"));
         console.log("inside dynamicChange()")
         cart.map(item => {
             item.totalAmount = item.price * item.quantity;
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem(user+"Cart", JSON.stringify(cart));
             total.innerHTML = `<div class="total-box">
                 <h3>Total Price: <span class="price">₹ ${totalCount().toFixed(2)}</span></h3>
                 <button class="btn-buy">Order Now</button>
@@ -137,11 +139,11 @@
 
     function inputChange(e) {
         let value = e.target.value;
-        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cart = JSON.parse(localStorage.getItem(user+"Cart"));
         cart.map((item) => {
             if (value > 0 && e.target.dataset.id == item.id) {
                 item.quantity = Number(value);
-                localStorage.setItem("cart", JSON.stringify(cart));
+                localStorage.setItem(user+"Cart", JSON.stringify(cart));
                 dynamicChange();
             }
         })
@@ -149,11 +151,11 @@
 
     // delete svg
     function deleteItem() {
-        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cart = JSON.parse(localStorage.getItem(user+"Cart"));
         cart.map((item, index) => {
             let itemToDelete = cart[index];
             let updatedArray = cart.filter(itm => itm != itemToDelete);
-            localStorage.setItem("cart", JSON.stringify(updatedArray));
+            localStorage.setItem(user+"Cart", JSON.stringify(updatedArray));
             cartUpdate();
             reload();
         })
@@ -163,7 +165,7 @@
     function reload() {
         cartContainer.innerHTML = '';
         total.innerHTML = "";
-        let cart = JSON.parse(localStorage.getItem("cart"));
+        let cart = JSON.parse(localStorage.getItem(user+"Cart"));
         cart.map((item) => {
             cartContainer.innerHTML += `<div class="cart-item">
                 <div class="img-and-content">
@@ -195,7 +197,7 @@
             </div>`;
 
             item.totalAmount = item.price * item.quantity;
-            localStorage.setItem("cart", JSON.stringify(cart));
+            localStorage.setItem(user+"Cart", JSON.stringify(cart));
 
             if (totalCount() !== 0) {
                 dynamicChange();
