@@ -52,7 +52,8 @@
 
 
     <script>
-        let products = JSON.parse(localStorage.getItem("productsarray")) || [];
+        let user = JSON.parse(localStorage.getItem("user"));
+        let products = JSON.parse(localStorage.getItem(user + "Wishlist")) || [];
         let cards = document.querySelector(".cards");
         function cartUpdate() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -85,26 +86,47 @@
         })
         let cardWishlist = document.querySelectorAll(".card>.img-container>svg");
 
-
-        products.map((product) => {
-            cardWishlist.forEach((cw, index) => {
+        let productsArray = JSON.parse(localStorage.getItem("productsarray"));
+        products.forEach((product) => {
+            cardWishlist.forEach((cw, i) => {
                 if (cw.dataset.id == product.id) {
                     cw.addEventListener("click", function () {
                         if (cw.getAttribute("fill") == "#ff2e2e") {
                             cw.setAttribute("fill", "none");
                             cw.setAttribute("stroke-width", "1.5");
-                            product.wishlist = false;
-                            localStorage.setItem("productsarray", JSON.stringify(products));
+                            let userCart = JSON.parse(localStorage.getItem(user + "Wishlist"));
+                            let dataId = Number(this.dataset.id);
+                            productsArray.forEach(pa => {
+                                let filteredUserCart = userCart.filter(uc => {
+                                    if ((uc.id == pa.id) && (uc.id == dataId)) {
+                                        uc.wishlist = false;
+                                        pa.wishlist = false
+                                    }
+                                    return uc.id !== dataId;
+                                })
+                                localStorage.setItem(user + "Wishlist", JSON.stringify(filteredUserCart));
+                            })
                         } else {
                             cw.setAttribute("fill", "#ff2e2e");
                             cw.setAttribute("stroke-width", "0");
-                            product.wishlist = true;
-                            localStorage.setItem("productsarray", JSON.stringify(products));
+                            let userCart = JSON.parse(localStorage.getItem(user + "Wishlist")) || [];
+                            let dataId = Number(this.dataset.id);
+                            userCart.push(product);
+                            productsArray.forEach(pa => {
+                                userCart.forEach(uc => {
+                                    if ((uc.id == pa.id) && (uc.id == dataId)) {
+                                        uc.wishlist = true;
+                                    }
+                                })
+                                localStorage.setItem(user + "Wishlist", JSON.stringify(userCart));
+                            })
                         }
+                        localStorage.setItem("productsarray", JSON.stringify(productsArray));
                     })
                 }
             })
         })
+
 
         // for(let i=0; i<products.length; i++){
         //     console.log(cw.dataset.id, products[i].id);

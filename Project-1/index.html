@@ -123,15 +123,87 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        let product = JSON.parse(localStorage.getItem("productsarray")) || [];
+        let cards = document.querySelector(".cards");
+        cards.innerHTML = "";
+        localStorage.removeItem("productsarray");
+        let productsArray = JSON.parse(localStorage.getItem("productsarray")) || [];
         let user = JSON.parse(localStorage.getItem("user"));
+        let userWishlist = JSON.parse(localStorage.getItem(user + "Wishlist")) || [];
 
-        let ids = [];
-        for (let i = 0; i < product.length; i++) {
-            ids.push(product[i].id);
-        }
+        $.ajax({
+            url: "https://dummyjson.com/product",
+            method: "GET",
+            async: false,
+            success: function (res) {
+                res.products.forEach((product, index) => {
+                    if (userWishlist.length === 0) {
+                        product.wishlist = false;
+                        productsArray.push(product);
+                        localStorage.setItem("productsarray", JSON.stringify(productsArray));
+                    } else {
+                        // userWishlist.map(uw => {
+                            if ((userWishlist[index]?.id ?? -1) == product.id) {
+                                // console.log(index, userWishlist[index].id, product.id);
+                                product.wishlist = userWishlist[index].wishlist;
+                                productsArray.push(product);
+                            } else {
+                                console.log("else", index, product.id)
+                                product.wishlist = false;
+                                productsArray.push(product);
+                            }
+                            localStorage.setItem("productsarray", JSON.stringify(productsArray));
+                        // })
+                    }
+                })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // for (let i = 0; i < res.products.length; i++) {
+                //     console.log(product.length);
+                //     if (product.length <= 29) {
+                //         console.log(userWishlist.length)
+                //         if (i < userWishlist.length) {
+                //             if(res.products[i].id == userWishlist[i].id){
+                //                 res.products[i].wishlist = userWishlist[i].wishlist;
+                //                 product.push(res.products[i]);
+                //             } else{
+                //                 res.products[i].wishlist = false;
+                //                 product.push(res.products[i]);
+                //             }
+                //         }
+                //         else {
+                //             res.products[i].wishlist = false;
+                //             product.push(res.products[i]);
+                //         }
+                //         localStorage.setItem("productsarray", JSON.stringify(product));
+                //     } else {
+                //         res.products[i].wishlist = false;
+                //         product.push(res.products[i]);
+                //         localStorage.setItem("productsarray", JSON.stringify(product));
+                //     }
+                // }
+            }
+        })
+
+
         function cartUpdate() {
-            let cart = JSON.parse(localStorage.getItem(user+"Cart")) || [];
+            let cart = JSON.parse(localStorage.getItem(user + "Cart")) || [];
             let count = document.querySelector(".count");
             if (cart.length > 0) {
                 count.classList.add("add-count")
@@ -140,22 +212,25 @@
         }
         cartUpdate();
 
-        $.ajax({
-            url: "https://dummyjson.com/product",
-            method: "GET",
 
-            success: function (res) {
-                for (let i = 0; i < res.products.length; i++) {
-                    if (!ids.includes(res.products[i].id)) {
-                        product.push(res.products[i]);
-                        localStorage.setItem("productsarray", JSON.stringify(product));
+
+
+        let userCart = JSON.parse(localStorage.getItem(user + "Wishlist")) || [];
+        if (userCart.length > 0) {
+            productsArray.forEach(card => {
+                userCart.forEach(uc => {
+                    if (uc.id == card.id) {
+                        if (uc.wishlist === true) {
+                            card.wishlist = true;
+                        } else {
+                            card.wishlist = false;
+                        }
                     }
-                }
-            }
-        })
-
-        let cards = document.querySelector(".cards");
-        product.map((card) => {
+                })
+            })
+        }
+        let products = JSON.parse(localStorage.getItem("productsarray"));
+        products.map((card, index) => {
             cards.innerHTML +=
                 `<div class="card">
                 <div class="img-container">
@@ -182,26 +257,44 @@
                 if (cw.getAttribute("fill") == "none") {
                     cw.setAttribute("fill", "#ff2e2e");
                     cw.setAttribute("stroke-width", "0");
-                    product[i].wishlist = true;
+                    let userCart = JSON.parse(localStorage.getItem(user + "Wishlist")) || [];
+                    userCart.push(products[i]);
+                    let dataId = Number(this.dataset.id);
+                    userCart.forEach(uc => {
+                        if ((uc.id == products[i].id) && (uc.id == dataId)) {
+                            uc.wishlist = true;
+                            products[i].wishlist = true;
+                        }
+                    })
+                    localStorage.setItem(user + "Wishlist", JSON.stringify(userCart));
                 } else {
                     cw.setAttribute("fill", "none");
                     cw.setAttribute("stroke-width", "1.5");
-                    product[i].wishlist = false;
+                    let userCart = JSON.parse(localStorage.getItem(user + "Wishlist"));
+                    let dataId = Number(this.dataset.id);
+                    let filteredUserCart = userCart.filter(uc => {
+                        if ((uc.id == products[i].id) && (uc.id == this.dataset.id)) {
+                            uc.wishlist = false;
+                            products[i].wishlist = false;
+                        }
+                        return uc.id !== dataId;
+                    })
+                    localStorage.setItem(user + "Wishlist", JSON.stringify(filteredUserCart));
                 }
-                localStorage.setItem("productsarray", JSON.stringify(product));
+                localStorage.setItem("productsarray", JSON.stringify(products));
             })
         })
 
-        product.map((product) => {
+        products.map((product) => {
             let cartButton = document.querySelectorAll(".btn-cart");
 
             for (let i = 0; i < cartButton.length; i++) {
                 cartButton[i].addEventListener("click", function () {
                     if (this.dataset.id == product.id) {
-                        let cart = JSON.parse(localStorage.getItem(user+"Cart")) || [];
+                        let cart = JSON.parse(localStorage.getItem(user + "Cart")) || [];
                         product.quantity = 1;
                         cart.push(product);
-                        localStorage.setItem(user+"Cart", JSON.stringify(cart));
+                        localStorage.setItem(user + "Cart", JSON.stringify(cart));
                         cartUpdate();
                     }
                 })
