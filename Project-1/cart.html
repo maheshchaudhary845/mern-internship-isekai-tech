@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="price-item">
-                    <p class="price">₹${item.price}</p>
+                    <p class="price">$${item.price}</p>
                 </div>
                 <div class="quantity">
                     <input onclick="inputChange(event)" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">
@@ -110,7 +110,7 @@
         localStorage.setItem(user+"Cart", JSON.stringify(cart));
 
         total.innerHTML = `<div class="total-box">
-        <h3>Total Price: <span class="price">₹ ${totalCount().toFixed(2)}</span></h3>
+        <h3>Total Price: <span class="price">$ ${totalCount().toFixed(2)}</span></h3>
         <button class="btn-buy">Order Now</button>
         </div>`;
     })
@@ -131,7 +131,7 @@
             item.totalAmount = item.price * item.quantity;
             localStorage.setItem(user+"Cart", JSON.stringify(cart));
             total.innerHTML = `<div class="total-box">
-                <h3>Total Price: <span class="price">₹ ${totalCount().toFixed(2)}</span></h3>
+                <h3>Total Price: <span class="price">$ ${totalCount().toFixed(2)}</span></h3>
                 <button class="btn-buy">Order Now</button>
                 </div>`;
         })
@@ -178,7 +178,7 @@
                     </div>
                 </div>
                 <div class="price-item">
-                    <p class="price">₹${item.price}</p>
+                    <p class="price">$${item.price}</p>
                 </div>
                 <div class="quantity">
                     <input onclick="inputChange(event)" data-id=${item.id} type="number" value=${item.quantity} min="1" step="1">

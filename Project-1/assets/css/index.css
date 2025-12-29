@@ -209,6 +209,10 @@ section {
 }
 .card>h3{
     font-weight: 500;
+    overflow: hidden;
+    height: 1lh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .card>.description{
     display: -webkit-box;
@@ -216,6 +220,7 @@ section {
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    height: 3lh;
 }
 .card>p{
     color: rgb(69, 69, 69);
@@ -351,6 +356,7 @@ form textarea{
     gap: 20px;
     justify-content: space-between;
     border-bottom: 2px solid gray;
+    margin-inline: 20px;
 }
 .img-and-content{
     display: flex;
