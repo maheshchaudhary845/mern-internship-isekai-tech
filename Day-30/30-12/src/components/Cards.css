@@ -1,0 +1,44 @@
+.cards{
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    background-color: rgb(23, 5, 40);
+    color: white;
+}
+.cards::-webkit-scrollbar{
+    height: 10px;
+}
+.cards::-webkit-scrollbar-track{
+    background-color: rgb(5, 5, 54);
+    border-radius: 10px;
+}
+.cards::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 255, 255, 0.211);
+    border-radius: 10px;
+}
+.cards::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(0, 255, 255, 0.337);
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 200px
+}
+.card>.img-cont{
+    width: 200px;
+    height: 200px;
+}
+.img-cont>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+}
+.card>.title{
+    background-color: orange;
+}
+.card>p{
+    color: rgb(210, 210, 210);
+    font-size: 14px;
+}

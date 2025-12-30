@@ -5,6 +5,7 @@ function Navbar(){
     return(
         <>
             <nav>
+                <div className="logo">Logo</div>
                 <ul>
                     <li><a href="">Home</a></li>
                     <li><a href="">About</a></li>

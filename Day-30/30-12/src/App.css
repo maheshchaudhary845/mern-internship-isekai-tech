@@ -1,0 +1,44 @@
+.hero {
+    display: flex;
+    background-image: url("https://i.pinimg.com/1200x/6e/4d/d9/6e4dd90db26d58d5f0ca7c145943491e.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero h1 {
+    font-size: 60px;
+}
+
+.hero p {
+    max-width: 300px;
+    color: rgb(225, 225, 225);
+}
+
+.hero button {
+    padding: 10px 40px;
+    width: fit-content;
+}
+
+.hero>.left-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero>.right-hero {
+    background-image: url("https://i.pinimg.com/1200x/51/5e/fb/515efb8cbce671e69d6c2fb75d9c79e2.jpg");
+    height: 400px;
+    width: 400px;
+    background-size: 450px;
+    background-position: center;
+    corner-shape: round;
+    background-blend-mode: screen;
+    background-color: #000e28;
+    border-radius: 50%;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16), 0px 10px 20px rgba(0, 0, 0, 0.188);
+}

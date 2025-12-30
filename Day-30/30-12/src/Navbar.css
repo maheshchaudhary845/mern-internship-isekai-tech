@@ -1,7 +1,17 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    /* background-color: #A7EBF2; */
+    position: absolute;
+    color: white;
+}
 nav>ul{
     display: flex;
     gap: 40px;
-    justify-content: center;
+    /* justify-content: center; */
 }
 nav>ul>li{
     list-style-type: none;
