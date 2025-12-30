@@ -1,0 +1,15 @@
+nav>ul{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+nav>ul>li{
+    list-style-type: none;
+}
+nav a{
+    text-decoration: none;
+    color: inherit;
+}
+/* div{
+    text-align: center;
+} */
