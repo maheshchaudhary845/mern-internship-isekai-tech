@@ -1,0 +1,79 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.searchbar{
+  display: flex;
+  justify-content: center;
+}
+.searchbar>input{
+  max-width: 400px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* GRID CONTAINER */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  width: 300px;
+  background: #3a3a3a;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* IMAGE */
+.img-cont {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.img-cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DESCRIPTION CLAMP */
+.description {
+  height: 3lh;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgb(208, 208, 208);
+}
+
+.price{
+  font-weight: 500
+}
+
+.activated-page{
+  background-color: aqua;
+  color: black;
+}
+
+.pagination{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
