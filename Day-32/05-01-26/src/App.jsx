@@ -3,7 +3,7 @@ import './App.css'
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1);
   const [skip, setSkip] = useState(0);
