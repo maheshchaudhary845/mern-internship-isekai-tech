@@ -1,0 +1,187 @@
+nav{
+    display: flex;
+    gap: 20px;
+}
+nav>a{
+    color: white;
+    padding: 10px;
+}
+
+.red{
+    background-color: red;
+}
+/* or */
+a.active{
+    background-color: red;
+} /* it will work without even writing className={(e)=> e.isActive ? "red" : ""} */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.searchbar{
+  display: flex;
+  justify-content: center;
+}
+.searchbar>input{
+  max-width: 400px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* GRID CONTAINER */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  width: 300px;
+  background: #3a3a3a;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* IMAGE */
+.img-cont {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.img-cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* DESCRIPTION CLAMP */
+.description {
+  height: 3lh;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: rgb(208, 208, 208);
+}
+
+.price{
+  font-weight: 500
+}
+
+.activated-page{
+  background-color: aqua;
+  color: black;
+}
+
+.card:hover{
+    cursor: pointer;
+    background-color: #494949;
+    color: white;
+}
+
+.card{
+    text-decoration: none;
+    color: white;
+}
+
+
+/* Product.jsx */
+.product-hero{
+    display: flex;
+    gap: 40px;
+}
+/* .left-product-hero{
+    flex-basis: 50%;
+} */
+.product-img-cont{
+    display: flex;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+.product-img-cont>.images{
+    position: relative;
+    display: flex;
+}
+.left-arrow{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    cursor: pointer;
+}
+.right-arrow{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    cursor: pointer;
+}
+.product-img-cont img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.right-product-hero{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.product-price{
+    font-size: 20px;
+}
+
+
+.buttons{
+    display: flex;
+    gap: 10px;
+}
+.buy-btn{
+    background-color: green;
+}
+.cart-btn{
+    background-color: rgb(212, 163, 0);
+}
+
+.rating-wrapper{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.rating-bg{
+    position: relative;
+    font-size: 24px;
+}
+.rating-bg::before{
+    content: "⭐⭐⭐⭐⭐";
+    color: rgb(58, 58, 58);
+    filter: grayscale(1);
+}
+.rating-fg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.rating-fg::before{
+    content: "⭐⭐⭐⭐⭐";
+    color: gold;
+}
+.rating{
+    font-size: 24px;
+}
