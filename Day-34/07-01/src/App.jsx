@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Products from './pages/Products';
 import Navbar from './components/navbar';
 import Product from './pages/Product';
+import Cart from './pages/Cart';
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/products' element={<Products />} />
-          <Route path='/products/product/:id' element={<Product />} />
+          <Route path='/product/:id' element={<Product />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </Router>
     </>
