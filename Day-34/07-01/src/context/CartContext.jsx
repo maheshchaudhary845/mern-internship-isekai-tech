@@ -45,6 +45,16 @@ export default function CartContext({children}){
         }
     }
 
+    function deleteItem(cartId){
+        let itemFound = false;
+        cart.map((item)=>{
+            if(item.id === cartId){
+                itemFound = true;
+                // cart.filter((i)=> )
+            }
+        })
+    }
+
     return(
         <useCartContext.Provider value={{cart, setCart, addToCart, updateCart}}>
             {children}

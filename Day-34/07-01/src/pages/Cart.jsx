@@ -29,7 +29,7 @@ function Cart() {
                                     <span>{item.quantity}</span>
                                     <button onClick={(e)=>updateCart(item.id, "increment")}  >+</button>
                                 </div>
-                                <div className="delete">
+                                <div onClick={item.id} className="delete">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#E4080A"
                                         fill="none" stroke="#E4080A" strokeWidth="2" strokeLinecap="round">
                                         <path
