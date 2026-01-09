@@ -20,8 +20,6 @@ export default function CartContext({children}){
         else{
             setCart((prev)=>[...prev, cartItem]);
         }
-        console.log(itemFound);
-        console.log(cart);
     }
     function updateCart(cartId, operation){
         let itemFound = false;
@@ -39,24 +37,18 @@ export default function CartContext({children}){
                 return;
             }
         })
-        console.log(cart)
         if(itemFound){
             setCart([...cart]);
         }
     }
 
     function deleteItem(cartId){
-        let itemFound = false;
-        cart.map((item)=>{
-            if(item.id === cartId){
-                itemFound = true;
-                // cart.filter((i)=> )
-            }
-        })
+        const newCart = cart.filter((item)=>item.id != cartId);
+        setCart(newCart);
     }
 
     return(
-        <useCartContext.Provider value={{cart, setCart, addToCart, updateCart}}>
+        <useCartContext.Provider value={{cart, setCart, addToCart, updateCart, deleteItem}}>
             {children}
         </useCartContext.Provider>
     )

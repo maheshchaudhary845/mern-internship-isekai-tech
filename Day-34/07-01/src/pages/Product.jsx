@@ -6,7 +6,6 @@ export default function Product() {
     const [images, setImages] = useState([]);
 
     const params = useParams();
-    // console.log(params.id);
     useEffect(() => {
         async function fetchProduct() {
             let res = await fetch(`https://dummyjson.com/products/${params.id}`);
@@ -24,7 +23,6 @@ export default function Product() {
         if (imagesLength > 500 && left < 0) {
             element.style.left = (left + 500) + "px";
         }
-        console.log("left: ", left);
     }
     function rightArrow() {
         let imagesLength = images.length * 500;
@@ -34,8 +32,6 @@ export default function Product() {
         if (imagesLength > 500 && left > limit) {
             element.style.left = (left - 500) + "px";
         }
-        console.log("limit: ", limit);
-        console.log("left: ", left);
     }
 
     // function renderStars(rating) {
@@ -56,7 +52,6 @@ export default function Product() {
         return <p>Loading...</p>
     }
 
-    console.log(images)
     return (
         <>
             <section className="product-hero">
