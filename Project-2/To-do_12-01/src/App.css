@@ -1,0 +1,73 @@
+h1{
+  text-align: center;
+}
+
+.container{
+  max-width: 800px;
+  background-color: rgb(6, 2, 27);
+  margin: auto;
+  min-height: 500px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+
+.adding-section{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  height: fit-content;
+}
+input[type="text"]{
+  width: 500px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+}
+.add-btn{
+  background-color: green;
+}
+
+
+.filter{
+  margin-top: 10px;
+}
+select{
+  padding: 10px;
+}
+
+
+.lists{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+.list{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(57, 57, 57);
+  padding: 5px;
+  border-radius: 10px;
+}
+.left-side{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.right-side{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dlt-btn{
+  background-color: rgb(170, 0, 0);
+}
+.dlt-btn:hover{
+    background-color: rgb(191, 0, 0);
+}
+
+.desc{
+  color: #a2a2a2;
+  text-align: center;
+}
