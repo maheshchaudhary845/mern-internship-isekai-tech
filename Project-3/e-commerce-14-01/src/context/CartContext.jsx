@@ -5,8 +5,11 @@ import { useEffect } from "react";
 export const useCartContext = createContext();
 
 export default function CartContext({children}){
-    const [cart, setCart] = useState([]);
     const {auth} = useContext(AuthContext);
+    const [cart, setCart] = useState(()=>{
+        let userData = JSON.parse(localStorage.getItem(auth.username));
+        return userData?.cart || [];
+    });
     
     useEffect(()=>{
         let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
@@ -18,7 +21,7 @@ export default function CartContext({children}){
     useEffect(()=>{
         if(auth.username){
             let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
-            userData.cart = {...cart};
+            userData.cart = [...cart];
             localStorage.setItem(auth.username, JSON.stringify(userData));
         }
     }, [cart])

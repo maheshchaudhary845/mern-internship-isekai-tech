@@ -6,22 +6,13 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Products() {
     const [products, setProducts] = useState([]);
-    const { auth, setAuth } = useContext(AuthContext);
+    const { auth } = useContext(AuthContext);
     const { cart, setCart, addToCart, updateCart } = useContext(useCartContext);
 
-   const user = auth.username; 
-    useEffect(() => {
-        let session = JSON.parse(sessionStorage.getItem("auth"));
-        if(session.username){
-            setAuth(session);
-        }
+    useEffect(()=>{
         let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
-        console.log('fsgah', userData)
-        if (userData.cart) {
-            setCart([...userData.cart])
-        }
-    }, [])
-    console.log('authhhhhhh', auth)
+        
+    })
 
     useEffect(() => {
         let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
@@ -73,22 +64,27 @@ export default function Products() {
         localStorage.setItem(auth.username, JSON.stringify(userData))
     }
 
-    function updateProducts(product, operation) {
-        let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
+    function updateProducts(productId, operation) {
+        setProducts(prevProducts => {
+            const updatedProducts = prevProducts.map(product=>{
+                if(productId !== product.id) return product;
+                
+                if(operation === "increment"){
+                    return{...product, quantity: product.quantity + 1}
+                }
+                
+                if(operation === "decrement"){
+                    return {...product, quantity: product.quantity > 1 ? product.quantity - 1 : 1}
+                }
+                
+                return product;
+            })
+            let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
+            userData.products = updatedProducts;
+            localStorage.setItem(auth.username, JSON.stringify(userData));
 
-        if (operation === "increment") {
-            product.quantity += 1;
-            // setProducts([...products])
-            userData.products = products;
-            localStorage.setItem(auth.username, JSON.stringify(userData))
-        } else if (operation === "decrement") {
-            if (product.quantity > 1) {
-                product.quantity -= 1;
-                // setProducts([...products])
-                userData.products = products;
-                localStorage.setItem(auth.username, JSON.stringify(userData))
-            }
-        }
+            return updatedProducts;
+        })
     }
 
 
@@ -97,7 +93,7 @@ export default function Products() {
     //     window.location.href = `./products/product/${id}`
     // }
     return (
-        user && <div>
+        <>
             <h1>Products</h1>
             <div className="cards">
                 {products?.map(product => (
@@ -115,13 +111,13 @@ export default function Products() {
                                     <button onClick={(e) => {
                                         e.preventDefault();
                                         updateCart(product.id, "decrement")
-                                        updateProducts(product, "decrement")
+                                        updateProducts(product.id, "decrement")
                                     }}>-</button>
                                     <span>{product.quantity}</span>
                                     <button onClick={(e) => {
                                         e.preventDefault();
                                         updateCart(product.id, "increment")
-                                        updateProducts(product, "increment")
+                                        updateProducts(product.id, "increment")
                                     }}>+</button>
                                 </div>
                                 : <button className="cart-btn" onClick={(e) => {
@@ -136,6 +132,6 @@ export default function Products() {
                     </Link>
                 ))}
             </div>
-        </div>
+        </>
     )
 }
