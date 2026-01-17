@@ -7,10 +7,8 @@ export default function AuthProvider({children}){
     const [auth, setAuth] = useState(()=>{
         return JSON.parse(sessionStorage.getItem("auth")) || null
     })
-    console.log("auth in authcontext",auth)
     useEffect(()=>{
             let session = JSON.parse(sessionStorage.getItem("auth")) || {};
-            console.log("sessionnnnnnnnnnnn",session);
             setAuth(session)
     },[])
    

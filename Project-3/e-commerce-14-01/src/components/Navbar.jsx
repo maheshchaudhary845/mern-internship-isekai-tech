@@ -20,7 +20,7 @@ export default function Navbar() {
     const {auth, setAuth} = useContext(AuthContext);
 
 
-    if(!auth.username){
+    if(!auth?.username){
         return null;
     }
     return (

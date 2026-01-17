@@ -7,12 +7,12 @@ import { AuthContext } from "../context/AuthContext";
 export default function Products() {
     const [products, setProducts] = useState([]);
     const { auth } = useContext(AuthContext);
-    const { cart, setCart, addToCart, updateCart } = useContext(useCartContext);
+    const { cart, addToCart, updateCart } = useContext(useCartContext);
 
-    useEffect(()=>{
-        let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
-        
-    })
+    // useEffect(()=>{
+    //     let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
+
+    // })
 
     useEffect(() => {
         let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
@@ -20,7 +20,6 @@ export default function Products() {
         async function fetchProducts() {
             let res = await fetch("https://dummyjson.com/products");
             let data = await res.json();
-
             data.products.map(item => {
                 item.addedToCart = false;
                 item.quantity = 1;
@@ -42,15 +41,34 @@ export default function Products() {
         }
         if (userData.products) {
             setProducts(userData.products);
+
+            if(userData.cart){
+                setProducts(prevProducts =>{
+                    return prevProducts.map(product=>{
+                        const cartItem = userData.cart.find(c=> c.id === product.id);
+
+                        if(cartItem){
+                            return {
+                                ...product,
+                                quantity: cartItem.quantity,
+                                addedToCart: cartItem.addedToCart,
+                            }
+                        }
+                        console.log(product)
+                        return product;
+                    })
+                })
+            }
         } else {
             fetchProducts();
         }
     }, [])
+    console.log(products)
 
     // useEffect(()=>{
-    //     userData.products = products;
-    //     localStorage.setItem(auth.username, JSON.stringify(userData));
-    // },[products])
+    //     let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
+        
+    // },[])
 
     function cartAdded(cartId) {
         let userData = JSON.parse(localStorage.getItem(auth.username)) || {};

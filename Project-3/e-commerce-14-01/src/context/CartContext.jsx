@@ -7,26 +7,25 @@ export const useCartContext = createContext();
 export default function CartContext({children}){
     const {auth} = useContext(AuthContext);
     const [cart, setCart] = useState(()=>{
-        let userData = JSON.parse(localStorage.getItem(auth.username));
+        let userData = JSON.parse(localStorage.getItem(auth?.username)) || {};
         return userData?.cart || [];
     });
     
     useEffect(()=>{
-        let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
+        let userData = JSON.parse(localStorage.getItem(auth?.username)) || {};
         if(userData.cart){
             setCart(userData.cart)
         }
     }, [])
 
     useEffect(()=>{
-        if(auth.username){
+        if(auth?.username){
             let userData = JSON.parse(localStorage.getItem(auth.username)) || {};
             userData.cart = [...cart];
             localStorage.setItem(auth.username, JSON.stringify(userData));
         }
     }, [cart])
 
-    console.log("auth in CartContext:", auth)
     
     function addToCart(cartItem){
         cartItem.addedToCart = true;
@@ -54,7 +53,7 @@ export default function CartContext({children}){
             if(item.id === cartId){
                 if(operation == "increment"){
                     item.quantity += 1;
-                } 
+                }
                 else if(operation === "decrement"){
                     if(item.quantity > 1){
                         item.quantity -= 1;
