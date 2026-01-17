@@ -7,8 +7,7 @@ function Login(){
     const [login, setLogin] = useState({username: "", password: ""});
     const {auth, setAuth} = useContext(AuthContext);
     const navigate = useNavigate();
-    // useEffect(()=>{
-    // }, [])
+
     
     function handleLogin(e){
         setLogin({...login, [e.target.name]: e.target.value})
@@ -35,7 +34,6 @@ function Login(){
                 setAuth(data);
                 navigate("/");
             }
-            console.log(auth);
         }
         fetchUser()
     }

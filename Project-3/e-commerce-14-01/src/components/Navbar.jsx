@@ -23,6 +23,11 @@ export default function Navbar() {
     if(!auth?.username){
         return null;
     }
+
+    function handleLogout(){
+        setAuth({});
+        sessionStorage.removeItem("auth");
+    }
     return (
         
         <nav>
@@ -47,7 +52,7 @@ export default function Navbar() {
                     </span>
                 </Link>
                 <p>{auth.username}</p>
-                <Link to="/login"><button onClick={()=>setAuth({})} className="logout-btn">Logout</button></Link>
+                <Link to="/login"><button onClick={handleLogout} className="logout-btn">Logout</button></Link>
             </div>
         </nav>
     )

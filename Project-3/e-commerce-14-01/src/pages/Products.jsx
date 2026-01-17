@@ -54,7 +54,6 @@ export default function Products() {
                                 addedToCart: cartItem.addedToCart,
                             }
                         }
-                        console.log(product)
                         return product;
                     })
                 })
@@ -63,7 +62,6 @@ export default function Products() {
             fetchProducts();
         }
     }, [])
-    console.log(products)
 
     // useEffect(()=>{
     //     let userData = JSON.parse(localStorage.getItem(auth.username)) || {};

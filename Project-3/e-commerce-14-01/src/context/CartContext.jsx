@@ -8,15 +8,8 @@ export default function CartContext({children}){
     const {auth} = useContext(AuthContext);
     const [cart, setCart] = useState(()=>{
         let userData = JSON.parse(localStorage.getItem(auth?.username)) || {};
-        return userData?.cart || [];
+        return userData.cart ?? [];
     });
-    
-    useEffect(()=>{
-        let userData = JSON.parse(localStorage.getItem(auth?.username)) || {};
-        if(userData.cart){
-            setCart(userData.cart)
-        }
-    }, [])
 
     useEffect(()=>{
         if(auth?.username){
