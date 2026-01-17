@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { useCartContext } from "../context/CartContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Cart() {
     const { cart, updateCart, deleteItem } = useContext(useCartContext);
+    const {auth} = useContext(AuthContext);
 
     function totalPrice(){
         let total = 0;
@@ -11,6 +13,20 @@ function Cart() {
         })
         return total.toFixed(2);
     }
+
+    function updateProducts(){
+        let userData = JSON.parse(localStorage.getItem(auth.username));
+        userData.products.map(product=>{
+
+            const cartItem = cart.find(c => c.id === product.id);
+
+            if(cartItem){
+                return{...product, quantity: cartItem.quantity}
+            }
+            return product;
+        }) 
+    }
+
     return (
         <>
             <h1 className="cart-h1">Cart</h1>
@@ -33,9 +49,15 @@ function Cart() {
                                 <p className="price">${item.price}</p>
                             </div>
                             <div className="quantity">
-                                <button onClick={(e) => updateCart(item.id, "decrement")}>-</button>
+                                <button onClick={(e) => {
+                                    updateCart(item.id, "decrement");
+                                    updateProducts(item.id)
+                                    }}>-</button>
                                 <span>{item.quantity}</span>
-                                <button onClick={(e) => updateCart(item.id, "increment")}>+</button>
+                                <button onClick={(e) => {
+                                    updateCart(item.id, "increment");
+                                    updateProducts(item.id)
+                                    }}>+</button>
                             </div>
                             <div onClick={() => deleteItem(item.id)} className="delete">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#E4080A"
