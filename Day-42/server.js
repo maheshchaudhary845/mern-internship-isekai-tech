@@ -13,7 +13,9 @@ app.use(express.urlencoded({ extended: true })); // it gives body in the req
 // app.use(express.json())
 app.use(express.static('public'));
 
-async function getUsers(file) {
+async function getUsers() {
+    const file = path.join(__dirname, 'public/users.json')
+
     const data = await fsPromises.readFile(file)
     let users = JSON.parse(data);
     return users;
@@ -106,14 +108,53 @@ app.get('/admin', (req, res) => {
 })
 
 app.get('/edit/:id', async (req, res) => {
-    const file = path.join(__dirname, 'public/users.json')
     const { id } = req.params;
 
-    let users = await getUsers(file)
+    let users = await getUsers()
     let user = users.find(user => user.id == id)
     res.render('edit', { user })
 })
-// app.post('/edit')
+app.post('/edit/:id', async(req, res)=>{
+    const {name, email, password} = req.body;
+    const {id} = req.params;
+    const file = path.join(__dirname, 'public/users.json')
+
+    let users = await getUsers();
+
+    let newUsers = users.map(user =>{
+        if(user.id == id){
+           return{
+            ...user,
+            name,
+            email,
+            password
+           } 
+        }
+        return user;
+    })
+
+    fs.writeFile(file, JSON.stringify(newUsers, null, 2), (err)=>{
+        if(err) console.errro("Error in writing file");
+    })
+
+    res.redirect('/admin')
+
+})
+
+app.get('/delete/:id', async(req, res)=>{
+    let {id} = req.params;
+    const file = path.join(__dirname, 'public/users.json')
+
+    let users = await getUsers();
+
+    let newUsers = users.filter(user => user.id != id)
+
+    fs.writeFile(file, JSON.stringify(newUsers, null, 2), (err)=>{
+        if(err) console.error("Error in writing file");
+    })
+
+    res.redirect('/admin');
+})
 
 app.listen(3000, () => {
     console.log("server is running on http://localhost:3000")
