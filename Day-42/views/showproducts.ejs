@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Show Products - Admin</title>
     <style>
         table{
             border: 2px solid black;
@@ -16,6 +16,11 @@
         a{
             text-decoration: none;
         }
+        img{
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -27,29 +32,31 @@
         <a href="/addproduct">Add Product</a>
         <a href="/showproducts">Show Products</a>
     </nav>
-    <h1>Admin Panel</h1>
+
+    <h1>Show Products - Admin Panel</h1>
     <table>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
             <th>Action</th>
         </tr>
-        <% users.forEach(user=>{ %>
+        <% products.map(product=>{ %>
             <tr>
-                <td><%= user.id %></td>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td><%= user.password %></td>
+                <td><%= product.id %></td>
+                <td><%= product.title %></td>
+                <td><%= product.description %></td>
+                <td><%= product.price %></td>
+                <td><img src="<%= product.image %>" alt="<%= product.title %> image"></td>
                 <td>
-                    <a href="/edit/<%= user.id %>">Edit</a>
-                    <a href="/delete/<%= user.id %>">Delete</a>
+                    <a href="/editproduct/<%= product.id %>">Edit</a>
+                    <a href="/deleteproduct/<%= product.id %>">Delete</a>
                 </td>
             </tr>
         <% }) %>
         <tr>
-        
         </tr>
     </table>
 </body>

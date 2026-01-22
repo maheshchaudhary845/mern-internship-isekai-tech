@@ -23,7 +23,20 @@ async function getUsers() {
 
 app.get('/', (req, res) => {
     // res.send("Hello from express server");
-    res.render("index", { name: "" });
+    let file = path.join(__dirname, 'public/products.json')
+
+    fs.readFile(file, (err, data)=>{
+        
+        if(err){
+            console.error("Error reading file");
+            res.render('index', {name: "", products: ""})
+        } else{
+            let products = JSON.parse(data);
+
+            res.render("index", { name: "", products });
+        }
+    })
+
 })
 app.post('/', (req, res) => {
     console.log(req.body);
@@ -155,6 +168,122 @@ app.get('/delete/:id', async(req, res)=>{
 
     res.redirect('/admin');
 })
+
+
+
+app.get('/addproduct', (req, res)=>{
+    res.render('addproduct')
+})
+app.post('/addproduct', (req, res)=>{
+    const {title, description, price, image} = req.body;
+    const file = path.join(__dirname, 'public/products.json')
+
+    fs.readFile(file, (err, data)=>{
+        let products = [];
+        if(!err && data){
+            products = JSON.parse(data);
+        }
+        
+        let newProduct = {
+            id: Date.now(),
+            title,
+            description,
+            price,
+            image,
+        }
+
+        products.push(newProduct);
+        fs.writeFile(file, JSON.stringify(products, null, 2), (err)=>{
+            if(err) console.error("Error writing file");
+        })
+    })
+    res.render('addproduct');
+})
+
+app.get('/showproducts', (req, res)=>{
+    const file = path.join(__dirname, 'public/products.json')
+    fs.readFile(file, (err, data)=>{
+        if(err){
+            console.error("Error reading file")
+        } else{
+            let products = JSON.parse(data);
+            res.render('showproducts', {products})
+        }
+    })
+})
+
+app.get('/editproduct/:id', (req, res)=>{
+    const {id} = req.params;
+    const file = path.join(__dirname, 'public/products.json');
+
+    fs.readFile(file, (err, data)=>{
+        let products = [];
+        if(!err && data){
+            products = JSON.parse(data);
+            let product = products.find(product => product.id == id);
+
+            res.render('editproduct', {product});
+        }
+    })
+})
+app.post('/editproduct/:id', (req, res)=>{
+    const {title, description, price, image} = req.body;
+    const {id} = req.params;
+    const file = path.join(__dirname, 'public/products.json')
+
+    fs.readFile(file, (err, data)=>{
+        if(err){
+            console.error("Error reading file")
+        }
+        else{
+            let products = JSON.parse(data);
+            let newProducts = products.map(product=>{
+                if(product.id == id){
+                    return{
+                        ...product,
+                        title,
+                        description,
+                        price,
+                        image,
+                    }
+                }
+                return product;
+            })
+            fs.writeFile(file, JSON.stringify(newProducts, null, 2), (err)=>{
+                console.error("Error writing file")
+            })
+            res.redirect('/showproducts')
+        }
+    })
+
+})
+
+app.get('/deleteproduct/:id', (req, res)=>{
+    const {id} = req.params;
+    const file = path.join(__dirname, 'public/products.json')
+
+    fs.readFile(file, (err, data)=>{
+        if(err){
+            console.error("Error reading file")
+        }
+        else{
+            let products = JSON.parse(data);
+            let updatedProducts = products.filter(product => product.id != id);
+
+            fs.writeFile(file, JSON.stringify(updatedProducts, null, 2), (err)=>{
+                if(err){
+                    console.error("Error writing file");
+                }
+            })
+            res.redirect('/showproducts');
+        }
+    })
+})
+
+
+
+
+
 
 app.listen(3000, () => {
     console.log("server is running on http://localhost:3000")

@@ -3,6 +3,12 @@
     "id": 1769021065440,
     "name": "Mahesh Chaudhary",
     "email": "maheshchaudhary845@gmail.com",
-    "password": "minni"
+    "password": "mahesh"
+  },
+  {
+    "id": 1769071451903,
+    "name": "Test User",
+    "email": "testuser@user",
+    "password": "test"
   }
 ]

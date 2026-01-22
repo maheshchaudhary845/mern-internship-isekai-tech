@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Admin</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/signin">Signin</a>
+        <a href="/signup">Signup</a>
+        <a href="/admin">Admin</a>
+        <a href="/addproduct">Add Product</a>
+        <a href="/showproducts">Show Products</a>
+    </nav>
+    <h1>Add Product - Admin</h1>
+
+    <form action="" method="post">
+        <input type="text" name="title" placeholder="Enter title of the product">
+        <textarea name="description" rows="5" placeholder="Description"></textarea>
+        <input type="number" name="price" placeholder="Price">
+        <input type="text" name="image" placeholder="Enter image url">
+        <button>Submit</button>
+    </form>
+</body> 
+</html>

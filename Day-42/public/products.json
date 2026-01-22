@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1769058662093,
+    "title": "Iphone 17",
+    "description": "Description of Iphone 17 changed description",
+    "price": "79999",
+    "image": "https://www.pricerunner.se/product/3239000223/Apple-iPhone-17-256GB-Black.jpg"
+  },
+  {
+    "id": 1769058728700,
+    "title": "Macbook",
+    "description": "Macbook description",
+    "price": "99999",
+    "image": "https://www.pngarts.com/files/1/Macbook-PNG-Free-Download.png"
+  }
+]
