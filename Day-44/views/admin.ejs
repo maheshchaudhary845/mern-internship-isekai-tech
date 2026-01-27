@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        table{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        th, td{
+            border: 1px solid black;
+            padding: 10px;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <%- include("adminnav.ejs") %>
+    <h1>Admin Panel</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Action</th>
+        </tr>
+        <% locals.users && users.forEach(user=>{ %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.password %></td>
+                <td>
+                    <a href="/admin/edituser/<%= user.id %>">Edit</a>
+                    <a href="/admin/deleteuser/<%= user.id %>">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+        <tr>
+        
+        </tr>
+    </table>
+</body>
+</html>

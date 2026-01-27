@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>27-01</title>
+    <style>
+        .img-cont{
+            width: 200px;
+            height: 200px;
+        }
+        .img-cont>img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <%- include('nav.ejs') %>
+    <h1>Home Page</h1>
+
+    <h2>Products</h2>
+    <div class="products-container">
+        <% products && products.map(product => { %>
+            <div id="<%= product.id %>" class="product">
+                <div class="img-cont">
+                    <img src="<%= product.image %>" alt="product image">
+                </div>
+                <h3 class="title"><%= product.title %></h3>
+                <p class="description"><%= product.description %></p>
+                <p class="price"><%= product.price %></p>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
