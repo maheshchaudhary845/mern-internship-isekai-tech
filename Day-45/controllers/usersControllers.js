@@ -13,3 +13,17 @@ exports.createUser = async(req, res)=>{
         })
     }
 }
+
+exports.updateUser = async(req, res)=>{
+    let user = await usersModel.editUser(req.body, req.params);
+    if(user){
+        res.json({
+            user,
+            message: "User Edited Successfully!"
+        })
+    }else{
+        res.json({
+            message: "User not Edited!"
+        })
+    }
+}
