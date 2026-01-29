@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav{
+    background-color: rgb(192, 237, 237);
+    /* padding: 10px 20px;   */
+}
+nav ul{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+nav a{
+    color: rgb(45, 45, 45);
+    padding: 10px;
+    display: block;
+}
+a.active{
+    color: rgb(255, 255, 255);
+    background-color: red;
+}
