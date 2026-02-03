@@ -59,7 +59,7 @@ exports.addUser = async ({ name, email, password, role }) => {
     }
 }
 
-exports.editUser = async ({ name, email, password }, { id }) => {
+exports.editUser = async ({ name, email, password, role }, { id }) => {
     let users = await getUsers();
     let editedUser = null;
     if (users) {
@@ -69,7 +69,8 @@ exports.editUser = async ({ name, email, password }, { id }) => {
                     ...user,
                     name,
                     email,
-                    password
+                    password,
+                    role
                 }
                 return editedUser;
             }
