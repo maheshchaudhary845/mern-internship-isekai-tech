@@ -41,3 +41,8 @@ exports.updateUser = async(req, res)=>{
         })
     }
 }
+
+exports.deleteUser = async (req, res)=>{
+    let data = await usersModel.deleteUser(req.params);
+    res.json(data);
+}
