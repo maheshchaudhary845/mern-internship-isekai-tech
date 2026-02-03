@@ -1,5 +1,6 @@
 [
   {
+    "id": 1770061330725,
     "title": "Apple Iphone 17",
     "description": "Description of Iphone 17",
     "price": 79999,
@@ -7,10 +8,11 @@
     "category": "Electronics"
   },
   {
-    "title": "Apple Macbook",
+    "id": 1770061377070,
+    "title": "Apple Macbook Air",
     "description": "Description of Macbook",
     "price": 139999,
     "image": "https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Laptop/Images/316814_0_C-dYyx5pgq.png?updatedAt=1753862407603",
     "category": "Electronics"
   }
-]
+] 
