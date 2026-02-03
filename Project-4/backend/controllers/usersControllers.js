@@ -18,11 +18,13 @@ exports.createUser = async(req, res)=>{
     let data = await usersModel.addUser(req.body);
     if(data){
         res.json({
-            user: data.user,
+            success: true,
+            user: data,
             message: "User created successfully!"
         })
     }else{
         res.json({
+            success: false,
             message:"User already exists!"
         })
     }
@@ -32,11 +34,13 @@ exports.updateUser = async(req, res)=>{
     let data = await usersModel.editUser(req.body, req.params);
     if(data){
         res.json({
+            success: true,
             user: data,
             message: "User Edited Successfully!"
         })
     }else{
         res.json({
+            success: false,
             message: "User not Edited!"
         })
     }
