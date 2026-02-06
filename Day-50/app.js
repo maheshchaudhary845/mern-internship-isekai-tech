@@ -5,18 +5,49 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const port = 3000;
 
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+const jwt_secret = "aDzItZu8PsiwpfOF0WFyEgf7xY2HrYAjKnMCa20F8CU=";
+
+const auth = (req, res, next)=>{
+    const authHeader = req.header('Authorization');
+    const token = authHeader.split(" ")[1];
+
+    if(!token){
+        return res.status(401).json({message: "Token not found"});
+    }
+
+    try{
+        const data = jwt.verify(token, jwt_secret)
+        req.user = data;
+    } catch(err){
+        return res.status(403).json({
+            message: "Invalid Token!"
+        })
+    }
+
+
+    next();
+}
+
+const role = (role)=>{
+    return (req, res, next)=>{
+        if(req.user.role != role){
+            return res.status(401).json({message: "You are not authorized for this page!"})
+        }
+        next();
+    }
+}
+
 const user= {
     id: 1,
     name: "Mahesh Chaudhary",
     email: "maheshchaudhary@gmail.com",
     password: bcrypt.hashSync('mahesh123', 10),
-    role: "admin"
+    role: "user"
 }
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
 
-const jwt_secret = "aDzItZu8PsiwpfOF0WFyEgf7xY2HrYAjKnMCa20F8CU=";
 
 app.get('/', (req, res)=>{
     res.status(200).json({
@@ -48,7 +79,13 @@ app.post('/login', (req, res)=>{
         token
     })
 
+})
 
+app.get('/dashboard', auth, role("admin"), (req, res)=>{
+    res.json({
+        data: req.user,
+        message: "Successfully get Dashboard page"
+    })
 })
 
 app.listen(port, ()=>{
