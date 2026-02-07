@@ -22,3 +22,131 @@ a.active{
     color: rgb(255, 255, 255);
     background-color: red;
 }
+
+/* Signup.jsx */
+h1{
+    text-align: center;
+}
+.container{
+    position: absolute;
+    inset: 0;
+}
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 10px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 100%;
+}
+form input, form select{
+    padding: 10px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+#btn-signup{
+    background-color: green;
+}
+#btn-signup:hover{
+    background-color: rgb(0, 147, 0);
+}
+p#error{
+    color: red;
+    text-align: center;
+    font-size: small;
+    font-weight: 500;
+}
+
+
+/* Admin.jsx */
+h2{
+    text-align: center;
+}
+.admin-table{
+    margin-top: 20px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+thead{
+    background-color: rgb(74, 62, 74);
+}
+tbody{
+    background-color: rgb(51, 63, 69);
+    text-align: center;
+}
+th, td{
+    border: 2px solid white;
+    padding: 5px 10px;
+}
+.img-cont{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+}
+.img-cont img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.actions{
+    display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-container{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.166);
+    backdrop-filter: blur(1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal{
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+.modal-form{
+    background-color: rgba(255, 255, 255, 0.903);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 10px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 100%;
+}
+.modal-input{
+    padding: 10px;
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+.modal-form, .modal-input{
+    width: 100%;
+    max-width: 500px;
+}
+.btn-update{
+    background-color: green;
+}
+.btn-cancel{
+    background-color: rgb(160, 44, 44);
+}

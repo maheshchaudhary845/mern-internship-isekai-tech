@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 
 function Home() {
-    const [users, setUsers] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         async function fetchProducts() {
-            const res = await fetch("http://localhost:3000/users", {
+            const res = await fetch("http://localhost:3000/products", {
                 method: "GET"
             })
             const data = await res.json();
-            setUsers(data.users);
+            setProducts(data.products);
         }
         fetchProducts();
     }, [])
-    console.log(users);
+    console.log(products);
     return (
         <>
             <h1>Home Page</h1>
             <h2>Products</h2>
             <div>
-                {users.map(user => {
-                    return <p>{user.name}</p>;
+                {products.map(product => {
+                    return <p key={product.id}>{product.title}</p>;
                 })}
             </div>
 
