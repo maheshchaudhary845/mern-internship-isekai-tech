@@ -11,7 +11,7 @@ async function getUsers() {
         return users;
     } catch (err) {
         console.error("Error reading file!");
-        return false;
+        return [];
     }
 }
 async function writeUser(data) {
@@ -24,53 +24,48 @@ exports.getAllUsers = async () => {
     return await getUsers();
 }
 
-exports.addUser = async ({ name, email, password, role }) => {
-    let users = [];
-    let isUserExists = false;
-    try {
-        const data = await fs.readFile(filePath);
-        users = JSON.parse(data);
+exports.getUserByEmail = async(email)=>{
+    try{
+        const data = await fs.readFile(filePath, 'utf-8');
+        const users = JSON.parse(data);
 
-        let user = users.find(user => user.email == email);
-
-        if (user) {
-            isUserExists = true;
-            return false;
-        }
-
-    } catch (err) {
-        console.error("Error reading file!");
-    } finally {
-        if (!isUserExists) {
-            let newUser = {
-                id: Date.now(),
-                name,
-                email,
-                password,
-                role
-            }
-            users.push(newUser)
-            await fs.writeFile(filePath, JSON.stringify(users, null, 2), (err) => {
-                console.error("Error writing file!");
-            })
-            return users[users.length - 1];
-        }
-
+        const user = users.find(u => u.email == email);
+        return user;
+    } 
+    catch(err){
+        console.error("Error reading file!")
+        return null;
     }
 }
 
-exports.editUser = async ({ name, email, password, role }, { id }) => {
+exports.addUser = async (data) => {
+    const users = await getUsers();
+
+    const exists = users.find(u => u.email === data.email);
+
+    if (exists) return null;
+
+    const newUser = {
+        id: Date.now(),
+        ...data
+    };
+
+    users.push(newUser);
+
+    await writeUser(users);
+
+    return newUser;
+}
+
+exports.editUser = async (data, { id }) => {
     let users = await getUsers();
     let editedUser = null;
-    if (users) {
+    if (users.length>0) {
         users = users.map(user => {
             if (user.id == id) {
                 editedUser = {
                     ...user,
-                    name,
-                    email,
-                    password,
-                    role
+                    ...data
                 }
                 return editedUser;
             }
@@ -87,12 +82,10 @@ exports.editUser = async ({ name, email, password, role }, { id }) => {
 exports.deleteUser = async ({ id }) => {
     let users = await getUsers();
     let deletedUser = users.find(user => user.id == id);
-    if (users && deletedUser) {
+    if (users.length>0 && deletedUser) {
         users = users.filter(user => user.id != id);
 
-        fs.writeFile(filePath, JSON.stringify(users, null, 2), (err) => {
-            if (err) console.error("Error writing file")
-        })
+        await writeUser(users);
         return {
             success: true,
             data: deletedUser,

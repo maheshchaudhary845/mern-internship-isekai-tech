@@ -1,33 +1,74 @@
 const usersModel = require('../models/usersModel')
+const authServices = require('../services/authServices')
 
 exports.getUsers = async(req, res)=>{
     let data = await usersModel.getAllUsers();
-    if(data){
+    if(data.length>0){
         res.json({
+            success: true,
             users: data,
             message: "Data Successfully sent"
         })
     }else{
         res.json({
+            success: false,
             message: "Error in sending data"
         })
     }
 }
 
 exports.createUser = async(req, res)=>{
-    let data = await usersModel.addUser(req.body);
-    if(data){
+    try{
+
+        let user = await authServices.register(req.body);
         res.json({
             success: true,
-            user: data,
+            user,
             message: "User created successfully!"
         })
-    }else{
-        res.json({
-            success: false,
-            message:"User already exists!"
+    }
+    catch(err){
+        if(err.message === "USER_EXISTS"){
+            return res.status(400).json({
+                success: false,
+                message:"User already exists!"
+            })
+        }
+        res.status(500).json({
+            message: "Server error"
         })
     }
+    
+}
+
+exports.loginUser = async(req, res)=>{
+    const {email, password} = req.body;
+    try{
+        const result = await authServices.login(email, password);
+
+        res.json({
+            success: true,
+            message: "Login Successful",
+            token: result.token,
+            user: {
+                id: result.user.id,
+                name: result.user.name,
+                email: result.user.email,
+                role: result.user.role
+            }
+        })
+    }catch(err){
+        if(err.message === "INVALID_CREDENTIALS"){
+            return res.status(401).json({
+                message: "Invalid email or password"
+            })
+        }
+
+        res.status(500).json({
+            message: "Server error"
+        })
+    }
+
 }
 
 exports.updateUser = async(req, res)=>{

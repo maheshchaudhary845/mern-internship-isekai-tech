@@ -1,14 +1,16 @@
 [
   {
-    "id": 1769602933342,
-    "name": "Mahesh Chaudhary",
-    "email": "maheshchaudhary845@gmail.com",
-    "password": "mahesh"
-  },
-  {
-    "id": 1769602959414,
+    "id": 1770475771681,
     "name": "Mahesh Chaudhary",
     "email": "maheshchaudhary@gmail.com",
-    "password": "mahesh"
+    "password": "$2b$10$zYHxwTQOM14ggCnkl.nlJeuanq0y0hgC15K585OdHiGexyW.2xFkK",
+    "role": "admin"
+  },
+  {
+    "id": 1770481311090,
+    "name": "TEST USER",
+    "email": "test@gmail.com",
+    "password": "$2b$10$8JNVIiOZMzp1IBFGhXMWseCmdd7V7bL8erxeMtSyFxKkv8ASobaEq",
+    "role": "user"
   }
 ]
