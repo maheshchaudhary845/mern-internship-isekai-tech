@@ -16,3 +16,17 @@ exports.auth = (req, res, next)=>{
     }
     next();
 }
+
+exports.roleAuth = (role)=>{
+    return(req, res, next)=>{
+        const authHeader = req.header('Authorization');
+        const token = authHeader.split(' ').pop();
+
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+        if(decode.role != role){
+            return res.status(403).json({message: "Not Authorized "})
+        }
+        next();
+    }
+}
