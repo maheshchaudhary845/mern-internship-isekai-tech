@@ -25,7 +25,7 @@ exports.roleAuth = (role)=>{
         const decode = jwt.verify(token, process.env.JWT_SECRET);
 
         if(decode.role != role){
-            return res.status(403).json({message: "Not Authorized "})
+            return res.status(403).json({message: "Not Authorized"})
         }
         next();
     }

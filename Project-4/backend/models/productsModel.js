@@ -10,11 +10,11 @@ async function fetchProducts() {
         if (products.length > 0) {
             return products;
         }
-        return false;
+        return null;
     }
     catch (err) {
         console.error("Error reading file!");
-        return false;
+        return null;
     }
 }
 
@@ -39,7 +39,7 @@ exports.getAllProducts = async () => {
     }
 }
 
-exports.addProduct = async ({ title, description, price, category, image }) => {
+exports.addProduct = async (data, user) => {
     let products = [];
     try {
         const data = await fs.readFile(filePath, 'utf-8');
@@ -51,11 +51,8 @@ exports.addProduct = async ({ title, description, price, category, image }) => {
     finally {
         let newProduct = {
             id: Date.now(),
-            title,
-            description,
-            price,
-            image,
-            category
+            ...data,
+            createdBy: user.id
         }
         products.push(newProduct);
 
@@ -149,4 +146,14 @@ exports.deleteProduct = async({id})=>{
             message: "Failed to delete the product!"
         }
     }
+}
+
+exports.getSellerProducts = async(user)=>{
+    let products = await fetchProducts();
+    products = products.filter(product=> product.createdBy == user.id);
+    console.log(products);
+
+    if(!products.length>0) return null;
+
+    return products;
 }

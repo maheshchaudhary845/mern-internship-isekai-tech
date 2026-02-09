@@ -2,10 +2,11 @@
   {
     "id": 1770061330725,
     "title": "Apple Iphone 17",
-    "description": "Description of Iphone 17 updated",
+    "description": "Description of Iphone 17",
     "price": 79999,
     "image": "https://static.iphoned.nl/orca/products/27188/apple-iphone-17.png",
-    "category": "Electronics"
+    "category": "Electronics",
+    "createdBy": 1770636017465
   },
   {
     "id": 1770061377070,
@@ -13,6 +14,16 @@
     "description": "Description of Macbook",
     "price": 139999,
     "image": "https://media.tatacroma.com/Croma%20Assets/Computers%20Peripherals/Laptop/Images/316814_0_C-dYyx5pgq.png?updatedAt=1753862407603",
-    "category": "Electronics"
+    "category": "Electronics",
+    "createdBy": 1770636017465
+  },
+  {
+    "id": 1770061377070,
+    "title": "Apple iPad",
+    "description": "Description of iPad",
+    "price": 89999,
+    "image": "https://tse4.mm.bing.net/th/id/OIP.ODnJW7AF6wLYxpXtj_fUswHaGq?rs=1&pid=ImgDetMain&o=7&rm=3",
+    "category": "Electronics",
+    "createdBy": 1770637171983
   }
 ]

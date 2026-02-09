@@ -12,5 +12,19 @@
     "email": "test@gmail.com",
     "password": "$2b$10$8JNVIiOZMzp1IBFGhXMWseCmdd7V7bL8erxeMtSyFxKkv8ASobaEq",
     "role": "user"
+  },
+  {
+    "id": 1770636017465,
+    "name": "Test Seller",
+    "email": "testseller@gmail.com",
+    "password": "$2b$10$3NaNhHaIIawJCZykmTLJY.8nh3ndtUUpzXzsiZIx76a7Q8laLHPpe",
+    "role": "seller"
+  },
+  {
+    "id": 1770637171983,
+    "name": "Test Seller B",
+    "email": "testsellerb@gmail.com",
+    "password": "$2b$10$lt3HkjZeZ4dPXX3V.wHIkOrZZJ3xCQdaWwII6Wv3l3urz//2fqa9q",
+    "role": "seller"
   }
 ]
