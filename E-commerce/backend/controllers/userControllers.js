@@ -34,5 +34,27 @@ module.exports = {
                 message: err.message
             })
         }
+    },
+
+    async loginUser(req, res){
+        try{
+            const result = await authServices.login(req.body)
+
+            res.json({
+                success: true,
+                token: result.token,
+                data: {
+                    name: result.user.name,
+                    username: result.user.username,
+                    email: result.user.email,
+                    role: result.user.role
+                }
+            })
+        } catch(err){
+            res.status(400).json({
+                success: false,
+                message: err.message
+            })
+        }
     }
 }
