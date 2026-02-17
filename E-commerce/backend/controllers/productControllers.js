@@ -41,6 +41,17 @@ module.exports = {
         }
     },
 
+    async getProductsBySeller(req, res){
+        try{
+            const products = await Product.find();
+        } catch(err){
+            res.status(500).json({
+                success: false,
+                message: err.message
+            })
+        }
+    },
+
     async createProduct(req, res) {
         try {
             const product = await Product.create(req.body)
