@@ -4,12 +4,14 @@ const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 connectDB();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
