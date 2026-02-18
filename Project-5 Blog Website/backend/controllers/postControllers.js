@@ -21,9 +21,13 @@ module.exports = {
 
     async createPost(req, res){
         try{
-            const post = await Post.create(req.body)
+            const imagePath = req.file ? `/uploads/posts/${req.file.filename}` : null;
+            const post = await Post.create({
+                ...req.body,
+                image: imagePath
+            });
 
-            res.json({
+            res.status(201).json({
                 success: true,
                 message: "Post uploaded"
             })
