@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar.jsx */
+.navbar{
+  margin-bottom: 20px;
+}
+nav{
+  display: flex;
+}
+.left-nav{
+  display: flex;
+}
+ul{
+  list-style-type: none;
+  display: flex;
+}
+li a{
+  text-decoration: none;
+  border: 1px solid gray;
+  border-bottom: none;
+  border-top: none;
+  color: inherit;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo, li a{
+  padding: 20px;
+}
+.logo{
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+}
+ul li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.green::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: -4px;
+  border-bottom: 4px solid green;
+}
+.orange::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: -4px;
+  border-bottom: 4px solid orangered;
+}
+.purple::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: -4px;
+  border-bottom: 4px solid rgb(170, 0, 227);
+}
+.blue::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: -4px;
+  border-bottom: 4px solid rgb(0, 110, 255);
+}
+
+.hr{
+  position: absolute;
+  width: 100dvw;
+  height: 1px;
+  background-color: gray;
+  left: 0;
+  z-index: -1;
+}
