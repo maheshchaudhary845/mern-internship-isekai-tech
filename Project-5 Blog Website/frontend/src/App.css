@@ -159,3 +159,104 @@ ul li {
   display: flex;
   flex-direction: column;
 }
+
+
+
+/* Login.jsx */
+.bg{
+  position: fixed;
+  inset: 0;
+  background-image: url('bg.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth-box{
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  background-color: rgba(255, 255, 255, 0.142);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 40px 80px;
+}
+.auth{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  position: relative;
+}
+.auth input{
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(216, 216, 216);
+  font-size: 16px;
+  padding-left: 10px;
+  padding-block: 5px;
+}
+.auth input::placeholder{
+  color: rgb(198, 198, 198);
+}
+.forgot{
+  position: absolute;
+  color: inherit;
+  font-size: 12px;
+  text-decoration: none;
+  bottom: -20px;
+  right: 0;
+}
+.button{
+  width: 100%;
+}
+.btn-login{
+  width: 100%;
+  background-color: rgb(27, 104, 116);
+  border: none;
+  padding: 10px 40px;
+}
+.btn-login:hover{
+  background-color: rgb(42, 135, 149);
+  cursor: pointer;
+}
+.register-cont{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.register{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Register.jsx */
+.btn-register{
+  width: 100%;
+  background-color: rgb(27, 116, 58);
+  border: none;
+  padding: 10px 40px;
+}
+.btn-register:hover{
+  background-color: rgb(36, 142, 73);
+  cursor: pointer;
+}
+.login-cont{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.login{
+  color: inherit;
+  text-decoration: none;
+}
+.name{
+  display: flex;
+  gap: 5px;
+}
+#firstname, #lastname{
+  width: 100%;
+}
