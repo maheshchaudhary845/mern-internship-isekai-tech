@@ -28,6 +28,11 @@ const postSchema = new mongoose.Schema({
     toObject: {virtuals: true}
 })
 
-
+postSchema.virtual("comments", {
+    ref: "Comment",
+    localField: "_id",
+    foreignField: "post",
+    justOne: false
+})
 
 module.exports = mongoose.model("Post", postSchema);
