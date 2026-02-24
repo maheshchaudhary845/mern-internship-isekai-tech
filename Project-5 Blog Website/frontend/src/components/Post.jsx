@@ -1,9 +1,8 @@
 function Post({post}) {
-    console.log(post)
     return (
         <div className="post">
             <div className="img-cont">
-                <img src={`http://localhost:3000${post.image}`} alt="" />
+                <img src={`http://localhost:3000${post.image}`} alt="post image" />
             </div>
             <div className="meta-cont">
                 <p className="category">{post.category.name}</p>
