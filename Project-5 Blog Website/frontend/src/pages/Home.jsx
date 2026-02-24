@@ -18,6 +18,7 @@ function Home() {
     }, [])
     return (
         <>
+            
             <h2>Recent Posts</h2>
             <div className="posts">
                 {posts.map(post => (
