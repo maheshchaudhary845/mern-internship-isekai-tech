@@ -18,9 +18,16 @@ const postSchema = new mongoose.Schema({
         ref: "Category",
         required: true
     },
+    tags: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Tag"
+        }
+    ],
     author:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     }
 }, {
     timestamps: true,
