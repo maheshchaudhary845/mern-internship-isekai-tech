@@ -1,4 +1,5 @@
-const Post = require("../models/Post")
+const Post = require("../models/Post");
+const Tag = require("../models/Tag");
 
 
 module.exports = {
@@ -22,15 +23,41 @@ module.exports = {
     async createPost(req, res){
         try{
             const imagePath = req.file ? `/uploads/posts/${req.file.filename}` : null;
+
+            let {title, content, author, category, tags} = req.body;
+
+            if(typeof(tags) === "string"){
+                tags = JSON.parse(tags);
+            }
+
+            let tagIds = [];
+            if(tags && tags.length>0){
+                for(let name of tags){
+                    name = name.trim().toLowerCase();
+
+                    const slug = name.replace(/\s+/g, "-");
+
+                    let tag = await Tag.findOne({slug});
+                    if(!tag){
+                        tag = await Tag.create({name, slug});
+                    }
+                    tagIds.push(tag._id);
+                }
+            }
+
             const post = await Post.create({
-                ...req.body,
+                title,
+                content,
+                author,
+                category,
+                tags: tagIds,
                 image: imagePath
             });
 
             res.status(201).json({
                 success: true,
                 message: "Post uploaded"
-            })
+            });
         }catch(err){
             res.status(500).json({
                 success: false,
