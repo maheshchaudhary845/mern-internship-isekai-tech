@@ -1,11 +1,10 @@
 const Post = require("../models/Post");
 const Tag = require("../models/Tag");
 
-
 module.exports = {
     async getPosts(req, res){
         try{
-            const posts = await Post.find().populate('author').populate('category');
+            const posts = await Post.find().populate('author').populate('category').populate("tags");
 
             res.json({
                 success: true,
