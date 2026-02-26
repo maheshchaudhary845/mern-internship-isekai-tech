@@ -8,13 +8,15 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const tagRoutes = require('./routes/tagRoutes');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = 3000;
 
 connectDB();
 
-app.use(cors());
+app.use(cookieParser())
+app.use(cors({credentials: true}));
 app.use('/uploads', express.static("uploads"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
