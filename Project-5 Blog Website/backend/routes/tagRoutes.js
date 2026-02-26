@@ -7,6 +7,6 @@ router.get('/', getAllTags);
 router.get('/:slug/posts', getPostsByTag);
 // admin routes
 router.post('/', createTag);
-router.delete('/:id', deleteTag);
+// router.delete('/:id', deleteTag);
 
 module.exports = router;
