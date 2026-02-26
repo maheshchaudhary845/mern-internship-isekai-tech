@@ -311,3 +311,51 @@ ul li {
 #firstname, #lastname{
   width: 100%;
 }
+
+
+/* Dashboard.jsx */
+.dash-cont{
+  display: flex;
+}
+.dash-cont .left{
+  flex: 1;
+}
+.dash-cont .right{
+  flex: 1;
+}
+
+
+.dash-posts{
+  display: flex;
+  flex-direction: column;
+
+}
+.dash-post{
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgb(48, 48, 48);
+}
+.dash-post .dash-left{
+  flex: 0.5;
+}
+.dash-post .dash-img-cont{
+  aspect-ratio: 3/2;
+  width: 100%;
+}
+.dash-img-cont img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dash-post .dash-title-right{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dash-title-right .dash-post-comment{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
