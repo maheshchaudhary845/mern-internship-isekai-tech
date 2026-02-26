@@ -39,9 +39,11 @@ const postSchema = new mongoose.Schema({
     toObject: { virtuals: true }
 })
 
-postSchema.index({ slug: 1 });
-postSchema.index({ category: 1 });
-postSchema.index({ tags: 1 });
+postSchema.index({ 
+    slug: 1,
+    category: 1,
+    tags: 1
+});
 
 postSchema.virtual("comments", {
     ref: "Comment",
