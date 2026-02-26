@@ -29,13 +29,11 @@ module.exports = {
             let { title, content, category, tags } = req.body;
             const author = req.user.id;
 
-            // ✅ Proper slug using slugify
             let slug = slugify(title, {
                 lower: true,
                 strict: true
             });
 
-            // ✅ Make slug unique
             let existingPost = await Post.findOne({ slug });
             let counter = 1;
 
@@ -45,7 +43,6 @@ module.exports = {
                 counter++;
             }
 
-            // ✅ Parse tags if string
             if (typeof tags === "string") {
                 tags = JSON.parse(tags);
             }
