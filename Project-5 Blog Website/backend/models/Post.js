@@ -5,8 +5,12 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    content: {
+    slug: {
         type: String,
+        unique: true
+    },
+    content: {
+        type: mongoose.Schema.Types.Mixed,
         required: true
     },
     image: {
@@ -24,16 +28,20 @@ const postSchema = new mongoose.Schema({
             ref: "Tag"
         }
     ],
-    author:{
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     }
 }, {
     timestamps: true,
-    toJSON: {virtuals: true},
-    toObject: {virtuals: true}
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
+
+postSchema.index({ slug: 1 });
+postSchema.index({ category: 1 });
+postSchema.index({ tags: 1 });
 
 postSchema.virtual("comments", {
     ref: "Comment",
