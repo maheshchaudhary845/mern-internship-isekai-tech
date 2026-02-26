@@ -96,7 +96,7 @@ module.exports = {
         }
     },
 
-    async getPostById(req, res) {
+    async getPostBySlug(req, res) {
         try {
             const post = await Post.findById(req.params.id).populate("author").populate('category');
 
