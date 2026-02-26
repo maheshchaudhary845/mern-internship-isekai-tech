@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const Tag = require('../models/Tag');
+const slugify = require('slugify');
 
 exports.getAllTags = async(req, res)=>{
     try{
@@ -47,69 +48,49 @@ exports.getPostsByTag = async(req, res)=>{
     }
 }
 
-exports.createTag = async(req, res)=>{
-    try{
-        let {name} = req.body;
-        if(!name){
+exports.createTag = async (req, res) => {
+    try {
+        let { name } = req.body;
+
+        if (!name) {
             return res.status(400).json({
                 success: false,
                 message: "Tag name required"
-            })
+            });
         }
-        name = name.trim().toLowerCase();
 
-        const slug = name.replace(/\s+/g, "-");
+        name = name.trim();
 
-        const exists = await Tag.findOne({slug});
+        const slug = slugify(name, {
+            lower: true,
+            strict: true,
+            trim: true
+        });
 
-        if(exists){
-            return res.status(404).json({
+        const exists = await Tag.findOne({ slug });
+
+        if (exists) {
+            return res.status(400).json({
                 success: false,
                 message: "Tag already exists"
             });
         }
+
         const tag = await Tag.create({
-            name, slug
+            name,
+            slug
         });
 
         res.status(201).json({
             success: true,
             data: tag,
             message: "Tag created successfully"
-        })
-    }catch(err){
+        });
+
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: err.message
-        })
+        });
     }
-}
-
-exports.deleteTag = async(req, res)=>{
-    try{
-        const tag = await Tag.findById(req.params.id);
-        if(!tag){
-            return res.status(404).json({
-                success: false,
-                message: "Tag not found"
-            })
-        }
-
-        await Post.updateMany(
-            {tags: tag._id},
-            {$pull: {tags: tag._id}}
-        );
-
-        await tag.deleteOne();
-        
-        res.json({
-            success: true,
-            message: "Tag deleted successfully"
-        })
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: err.message
-        })
-    }
-}
+};
