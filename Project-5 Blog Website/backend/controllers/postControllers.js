@@ -26,8 +26,8 @@ module.exports = {
                 ? `/uploads/posts/${req.file.filename}`
                 : null;
 
-            let { title, content, category, tags } = req.body;
-            const author = req.user.id;
+            let { title, content, author, category, tags } = req.body;
+            // const author = req.user.id;
 
             let slug = slugify(title, {
                 lower: true,
@@ -45,6 +45,10 @@ module.exports = {
 
             if (typeof tags === "string") {
                 tags = JSON.parse(tags);
+            }
+
+            if (typeof content === "string") {
+                content = JSON.parse(content);
             }
 
             let tagIds = [];
