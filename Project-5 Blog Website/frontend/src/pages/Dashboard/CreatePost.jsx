@@ -30,7 +30,7 @@ function CreatePost() {
 
         const formData = new FormData()
         formData.append("title", title)
-        formData.append("content", JSON.stringify(content))
+        formData.append("content", content)
         formData.append("category", category)
         formData.append("tags", JSON.stringify(tags.split(",").map(t => t.trim())))
         formData.append('author', "699b48b113a538135956058c")

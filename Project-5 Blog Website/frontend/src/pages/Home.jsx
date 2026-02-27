@@ -16,6 +16,7 @@ function Home() {
         }
         fetchPosts();
     }, [])
+    console.log(posts);
     return (
         <>
             

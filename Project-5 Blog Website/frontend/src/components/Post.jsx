@@ -10,8 +10,10 @@ function Post({post}) {
             </div>
             <div className="content">
                 <h3>{post.title}</h3>
-                <p className="description">
-                    {post.content}
+                <p className="description"
+                dangerouslySetInnerHTML={{__html: post.content}}
+                >
+                    {/* {post.content} */}
                 </p>
             </div>
         </div>

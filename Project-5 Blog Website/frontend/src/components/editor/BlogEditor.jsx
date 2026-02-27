@@ -25,9 +25,10 @@ export default function BlogEditor({ content, onChange }) {
     ],
     content: content || "",
     onUpdate({ editor }) {
-      onChange(editor.getJSON())
+      onChange(editor.getHTML())
     }
   })
+  console.log(editor);
 
   if (!editor) return null
 
