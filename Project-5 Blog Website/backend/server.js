@@ -7,6 +7,7 @@ const postRoutes = require('./routes/postRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const tagRoutes = require('./routes/tagRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -30,6 +31,7 @@ app.use('/api/posts', postRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/tags', tagRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
