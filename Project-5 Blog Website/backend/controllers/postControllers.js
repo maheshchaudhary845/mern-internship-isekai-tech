@@ -1,6 +1,7 @@
 const Post = require("../models/Post");
 const Tag = require("../models/Tag");
 const slugify = require("slugify");
+const sanitizeHtml = require("sanitize-html")
 
 module.exports = {
     async getPosts(req, res) {
@@ -28,6 +29,22 @@ module.exports = {
 
             let { title, content, author, category, tags } = req.body;
             // const author = req.user.id;
+            // Sanitize HTML content
+            content = sanitizeHtml(content, {
+                allowedTags: [
+                    "p", "b", "i", "em", "strong", "a",
+                    "h1", "h2", "h3",
+                    "ul", "ol", "li",
+                    "blockquote",
+                    "code",
+                    "img"
+                ],
+                allowedAttributes: {
+                    a: ["href", "target", "rel"],
+                    img: ["src", "alt"]
+                },
+                allowedSchemes: ["http", "https", "mailto"],
+            })
 
             let slug = slugify(title, {
                 lower: true,
@@ -47,9 +64,9 @@ module.exports = {
                 tags = JSON.parse(tags);
             }
 
-            if (typeof content === "string") {
-                content = JSON.parse(content);
-            }
+            // if (typeof content === "string") {
+            //     content = JSON.parse(content);
+            // }
 
             let tagIds = [];
             if (tags && tags.length > 0) {

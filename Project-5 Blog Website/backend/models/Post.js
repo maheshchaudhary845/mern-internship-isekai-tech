@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
         unique: true
     },
     content: {
-        type: mongoose.Schema.Types.Mixed,
+        type: String,
         required: true
     },
     image: {
