@@ -19,9 +19,11 @@ module.exports = {
 
     async getCurrentUser(req, res){
         try{
+            const user = await User.findById(req.user.id)
+
             res.json({
                 success: true,
-                data: req.user,
+                data: user,
                 message: "Current user fetched!"
             })
         }catch(err){
