@@ -137,7 +137,7 @@ ul li {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 200px;
+  /* width: 200px; */
   border-radius: 5px;
   overflow: hidden;
 }
