@@ -16,5 +16,20 @@ module.exports = {
             })
         }
     },
+
+    async getCurrentUser(req, res){
+        try{
+            res.json({
+                success: true,
+                data: req.user,
+                message: "Current user fetched!"
+            })
+        }catch(err){
+            res.status(500).json({
+                success: false,
+                message: err.message
+            })
+        }
+    }
     
 }
