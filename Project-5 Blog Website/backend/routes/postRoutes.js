@@ -6,7 +6,7 @@ const upload = require('../middlewares/upload');
 const router = express.Router();
 
 router.get('/', getPosts);
-router.get('/:id', getPostBySlug);
+router.get('/:slug', getPostBySlug);
 router.post('/add', auth, upload.single('image'), createPost);
 router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
