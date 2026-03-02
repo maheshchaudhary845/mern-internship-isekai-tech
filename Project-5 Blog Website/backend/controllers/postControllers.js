@@ -119,7 +119,53 @@ module.exports = {
 
     async getPostBySlug(req, res) {
         try {
-            const post = await Post.findById(req.params.id).populate("author").populate('category');
+            const post = await Post.findOne({slug: req.params.slug}).populate("author").populate('category').populate('tags');
+            // const post = await Post.aggregate(
+            //    [ {
+            //         $match:{
+            //             slug: req.params.slug
+            //         } 
+            //     },
+            
+            //     {
+            //          $lookup:{
+            //             from:'users',
+            //             localField:'author',
+            //             foreignField:'_id',
+            //             as:'author'
+            //         }
+            //     },
+
+
+            //     {
+            //          $lookup:{
+            //             from:'categories',
+            //             localField:'category',
+            //             foreignField:'_id',
+            //             as:'category'
+            //         }
+            //     },
+            //     {
+            //          $lookup:{
+            //             from:'tags',
+            //             localField:'tags',
+            //             foreignField:'_id',
+            //             as:'tags'
+            //         }
+            //     },
+            //     {
+            //         $limit:1
+            //     },
+            // {
+            //          $project:{
+            //            author:{
+            //             password:0
+            //            }
+            //         }
+            //     }
+            // ]
+            // )
+
 
             if (!post) {
                 return res.status(404).json({

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Post from "../components/Post";
+import { Link } from "react-router";
 
 function Home() {
     const [posts, setPosts] = useState([]);
@@ -22,7 +23,9 @@ function Home() {
             <h2>Recent Posts</h2>
             <div className="posts">
                 {posts.map(post => (
-                    <Post key={post.id} post={post} />
+                <Link to={`/post/${post.slug}`} key={post.id}>
+                    <Post  post={post} />
+                </Link>
                 ))}
             </div>
         </>
