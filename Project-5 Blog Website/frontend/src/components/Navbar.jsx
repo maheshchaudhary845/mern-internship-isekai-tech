@@ -60,10 +60,10 @@
                         <ul>
                             <li><Link to="/news">News</Link></li>
                             <li><Link to="/popular">Popular</Link></li>
-                            <li className="green"><Link to="/webdesign">Web Design</Link></li>
-                            <li className="orange"><Link to="/javascript">JavaScript</Link></li>
-                            <li className="purple"><Link to="/css">CSS</Link></li>
-                            <li className="blue"><Link to="/typescript">TypeScript</Link></li>
+                            <li className="green"><Link to="/category/webdesign">Web Design</Link></li>
+                            <li className="orange"><Link to="/category/javascript">JavaScript</Link></li>
+                            <li className="purple"><Link to="/category/css">CSS</Link></li>
+                            <li className="blue"><Link to="/category/typescript">TypeScript</Link></li>
                         </ul>
                     </div>
                     <div className="middle-nav">
