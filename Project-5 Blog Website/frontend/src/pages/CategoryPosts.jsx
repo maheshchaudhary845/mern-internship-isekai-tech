@@ -29,7 +29,7 @@ function CategoryPosts(){
         <>
             <div className="posts">
                 {posts?.map(post=>(
-                    <Post post={post} />
+                    <Post key={post._id} post={post} />
                 ))}
             </div>
         </>
