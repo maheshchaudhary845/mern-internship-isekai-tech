@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import CreatePost from './pages/Dashboard/CreatePost';
 import SinglePost from './pages/SinglePost';
+import CategoryPosts from './pages/CategoryPosts';
 
 
 function AppContent() {
@@ -26,6 +27,7 @@ function AppContent() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/createpost' element={<CreatePost />} />
         <Route path='/post/:slug' element={<SinglePost />}/>
+        <Route path='/category/:slug' element={<CategoryPosts />}/>
       </Routes>
     </>
   )
