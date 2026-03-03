@@ -11,9 +11,8 @@ module.exports = {
 
             const filter = {};
 
-            // filter by category slug
             if(category){
-                const foundedCategory = await Category.findOne({name: category});
+                const foundedCategory = await Category.findOne({slug: category});
                 if(!foundedCategory){
                     return res.status(404).json({
                         success: false,
@@ -33,7 +32,6 @@ module.exports = {
                 }
                 filter.tags = foundedTag._id; 
             }
-            console.log(filter);
 
             const posts = await Post.find(filter)
             .sort({createdAt: -1})
@@ -42,6 +40,13 @@ module.exports = {
             .populate('author', "firstName, lastName, fullName")
             .populate('category', "name")
             .populate("tags", "name, slug");
+
+            if(posts.length == 0){
+                return res.status(404).json({
+                    success: false,
+                    message: "No post found"
+                })
+            }
 
             res.json({
                 success: true,
