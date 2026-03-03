@@ -5,6 +5,7 @@
         const [showMenu, setShowMenu] = useState(false);
         const menuRef = useRef(null);
         const [user, setUser] = useState({});
+        const [search, setSearch] = useState('');
         const navigate = useNavigate();
 
         useEffect(()=>{
@@ -52,6 +53,13 @@
                 console.error(err);
             }
         }
+
+        async function handleSearch(){
+            if(!search.trim()) return;
+
+            navigate(`/search?query=${search}`);
+            setSearch('')
+        }
         return (
             <div className="navbar">
                 <nav>
@@ -67,8 +75,8 @@
                         </ul>
                     </div>
                     <div className="middle-nav">
-                        <input type="search" className="bg-[#303030]" name="search" id="search" placeholder="Search" />
-                        <button>Search</button>
+                        <input type="search" className="bg-[#303030]" name="search" value={search} onChange={(e)=>setSearch(e.target.value)} id="search" placeholder="Search" />
+                        <button onClick={handleSearch}>Search</button>
                     </div>
                     <div ref={menuRef} className="right-nav">
                         <div onClick={() => setShowMenu(!showMenu)} className="svg">
