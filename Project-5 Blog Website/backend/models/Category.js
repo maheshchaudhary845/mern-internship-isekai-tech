@@ -4,7 +4,13 @@ const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
-        trim: true
+        trim: true,
+    },
+    slug:{
+        type: String,
+        unique: true,
+        trim: true,
+        lowercase: true
     }
 }, {timestamps: true});
 

@@ -1,5 +1,5 @@
 const Category = require("../models/Category")
-
+const slugify = require('slugify');
 
 exports.getCategories = async(req, res)=>{
     try{
@@ -25,7 +25,21 @@ exports.getCategories = async(req, res)=>{
 
 exports.createCategory = async (req, res)=>{
     try{
-        const category = await Category.create(req.body);
+        let {name} = req.body
+        if(!name){
+            return res.status(400).json({
+                success: false,
+                message: "Category name is required"
+            })
+        }
+        name = name.trim().toLowerCase();
+
+        const slug = slugify(name, {
+            lower: true,
+            strict: true,
+            trim: true
+        })
+        const category = await Category.create({name, slug});
 
         res.json({
             success: true,
