@@ -1,12 +1,47 @@
 const Post = require("../models/Post");
 const Tag = require("../models/Tag");
+const Category = require('../models/Category');
 const slugify = require("slugify");
-const sanitizeHtml = require("sanitize-html")
+const sanitizeHtml = require("sanitize-html");
 
 module.exports = {
     async getPosts(req, res) {
         try {
-            const posts = await Post.find().populate('author').populate('category').populate("tags");
+            const {category, tag, page=1, limit=10} = req.query;
+
+            const filter = {};
+
+            // filter by category slug
+            if(category){
+                const foundedCategory = await Category.findOne({name: category});
+                if(!foundedCategory){
+                    return res.status(404).json({
+                        success: false,
+                        message: "Category not found"
+                    })
+                }
+                filter.category = foundedCategory._id;
+            }
+
+            if(tag){
+                const foundedTag = await Tag.findOne({slug: tag});
+                if(!foundedTag){
+                    return res.status(404).json({
+                        success: false,
+                        message: "Tag not found"
+                    })
+                }
+                filter.tags = foundedTag._id; 
+            }
+            console.log(filter);
+
+            const posts = await Post.find(filter)
+            .sort({createdAt: -1})
+            .skip((page - 1) * limit)
+            .limit(Number(limit))
+            .populate('author', "firstName, lastName, fullName")
+            .populate('category', "name")
+            .populate("tags", "name, slug");
 
             res.json({
                 success: true,
