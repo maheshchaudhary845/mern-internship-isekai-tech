@@ -1,5 +1,12 @@
 $kind: http-request
 name: Create Category
-url: http:localhost:3000/api/categories/
+url: http://localhost:3000/api/categories/
 method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"typeScript\"\r
+
+    }"
 order: 3920966714538386
