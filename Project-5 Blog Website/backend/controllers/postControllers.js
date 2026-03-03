@@ -7,7 +7,7 @@ const sanitizeHtml = require("sanitize-html");
 module.exports = {
     async getPosts(req, res) {
         try {
-            const {category, tag, page=1, limit=10} = req.query;
+            const {category, tag, search, page=1, limit=10} = req.query;
 
             const filter = {};
 
@@ -31,6 +31,13 @@ module.exports = {
                     })
                 }
                 filter.tags = foundedTag._id; 
+            }
+
+            if(search){
+                filter.$or = [
+                    {title: {$regex: search, $options: "i"}},
+                    {content: {$regex: search, $options: "i"}}
+                ]
             }
 
             const posts = await Post.find(filter)
