@@ -7,11 +7,12 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 
 function CreatePost() {
     const [title, setTitle] = useState("")
-    const [content, setContent] = useState(null)
+    const [content, setContent] = useState("")
     const [category, setCategory] = useState("")
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState("")
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -38,21 +39,32 @@ function CreatePost() {
         if (image) {
             formData.append("image", image)
         }
-
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/add`, {
-            method: "POST",
-            body: formData,
-            credentials: "include"
-        })
-
-        const data = await res.json()
-
-        if (!res.ok) {
-            alert(data.message)
-            return
+        try{
+            setIsLoading(true)
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/add`, {
+                method: "POST",
+                body: formData,
+                credentials: "include"
+            })
+            
+            const data = await res.json()
+            
+            if (!res.ok) {
+                alert(data.message)
+                return
+            }
+            setTitle("");
+            setContent("");
+            setCategory("");
+            setTags("");
+            setImage("");
+            console.log("Post created:", data)
+        }catch(err){
+            console.error(err);
+        }finally{
+            
+            setIsLoading(false);
         }
-
-        console.log("Post created:", data)
     }
 
     return (
@@ -124,8 +136,8 @@ function CreatePost() {
                 </FieldGroup>
 
                 <div className="pt-4 flex justify-end">
-                    <Button size="lg" className="px-8" onClick={handleSubmit}>
-                        Publish
+                    <Button size="lg" className={`px-8 ${isLoading ? "cursor-not-allowed bg-gray-500" : ""}`} onClick={handleSubmit}>
+                        {isLoading ? "Publishing..." : "Publish"}
                     </Button>
                 </div>
 
