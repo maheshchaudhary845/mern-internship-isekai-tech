@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get Posts By User
+url: ""
+method: GET
+order: 4270586509215582
