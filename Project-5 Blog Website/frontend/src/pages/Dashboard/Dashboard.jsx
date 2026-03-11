@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DashPost from "../../components/DashPost";
+import { Link } from "react-router";
 
 function Dashboard() {
     const [activePosts, setActivePosts] = useState([]);
@@ -18,18 +19,21 @@ function Dashboard() {
     }, [])
     return (
         <>
-            <h1>Dashboard</h1>
+            <div className="head flex justify-between">
+                <h1>Dashboard</h1>
+                <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
+            </div>
 
             <div className="dash-cont">
                 <div className="left">
                     <div className="title-bar">
-                        <h3>Popular Posts</h3>
+                        <h3>All Posts</h3>
                     </div>
                     <div className="dash-posts">
                         {activePosts.map(post => (
                             <DashPost key={post.id} post={post} />
                         ))}
-                        
+
                     </div>
                 </div>
                 <div className="right"></div>
