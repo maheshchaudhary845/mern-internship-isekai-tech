@@ -7,13 +7,13 @@ const sanitizeHtml = require("sanitize-html");
 module.exports = {
     async getPosts(req, res) {
         try {
-            const {category, tag, search, page=1, limit=10} = req.query;
+            const { category, tag, search, page = 1, limit = 10 } = req.query;
 
             const filter = {};
 
-            if(category){
-                const foundedCategory = await Category.findOne({slug: category});
-                if(!foundedCategory){
+            if (category) {
+                const foundedCategory = await Category.findOne({ slug: category });
+                if (!foundedCategory) {
                     return res.status(404).json({
                         success: false,
                         message: "Category not found"
@@ -22,33 +22,33 @@ module.exports = {
                 filter.category = foundedCategory._id;
             }
 
-            if(tag){
-                const foundedTag = await Tag.findOne({slug: tag});
-                if(!foundedTag){
+            if (tag) {
+                const foundedTag = await Tag.findOne({ slug: tag });
+                if (!foundedTag) {
                     return res.status(404).json({
                         success: false,
                         message: "Tag not found"
                     })
                 }
-                filter.tags = foundedTag._id; 
+                filter.tags = foundedTag._id;
             }
 
-            if(search){
+            if (search) {
                 filter.$or = [
-                    {title: {$regex: search, $options: "i"}},
-                    {content: {$regex: search, $options: "i"}}
+                    { title: { $regex: search, $options: "i" } },
+                    { content: { $regex: search, $options: "i" } }
                 ]
             }
 
             const posts = await Post.find(filter)
-            .sort({createdAt: -1})
-            .skip((page - 1) * limit)
-            .limit(Number(limit))
-            .populate('author', "firstName, lastName, fullName")
-            .populate('category', "name")
-            .populate("tags", "name, slug");
+                .sort({ createdAt: -1 })
+                .skip((page - 1) * limit)
+                .limit(Number(limit))
+                .populate('author', "firstName, lastName, fullName")
+                .populate('category', "name")
+                .populate("tags", "name, slug");
 
-            if(posts.length == 0){
+            if (posts.length == 0) {
                 return res.status(404).json({
                     success: false,
                     message: "No post found"
@@ -164,16 +164,43 @@ module.exports = {
         }
     },
 
+    async getPostsByUser(req, res) {
+        try {
+            const posts = await Post.find({author: req.params.id})
+            .populate('author', "firstName, lastName, fullName")
+            .populate('category', "name")
+            .populate("tags", "name, slug");
+
+            if(!posts){
+                return res.status(404).json({
+                    success: false,
+                    message: "No post found"
+                })
+            }
+            res.json({
+                success: true,
+                data: posts,
+                total: posts.length,
+                message: "Posts fetched successfully"
+            })
+        } catch (err) {
+            res.status(500).json({
+                success: false,
+                message: err.message
+            })
+        }
+    },
+
     async getPostBySlug(req, res) {
         try {
-            const post = await Post.findOne({slug: req.params.slug}).populate("author").populate('category').populate('tags');
+            const post = await Post.findOne({ slug: req.params.slug }).populate("author").populate('category').populate('tags');
             // const post = await Post.aggregate(
             //    [ {
             //         $match:{
             //             slug: req.params.slug
             //         } 
             //     },
-            
+
             //     {
             //          $lookup:{
             //             from:'users',
