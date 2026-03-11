@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 
-function Login(){
-    const [form, setForm] = useState({email: "", password: ""});
+function Login() {
+    const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
 
-    const handleForm = (e)=>{
+    const { setAuth } = useContext(AuthContext);
+
+    const handleForm = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
         })
     }
 
-    const handleSubmit = async()=>{
-        try{
+    const handleSubmit = async () => {
+        try {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 method: "POST",
                 headers: {
@@ -23,15 +26,22 @@ function Login(){
                 credentials: "include"
             })
 
-            const {success} = await res.json();
-            if(success){
-                navigate('/')
+            const { success } = await res.json();
+            if (success) {
+                const userRes = await fetch(`${import.meta.env.VITE_API_URL}/api/users/me`, {
+                    credentials: "include"
+                });
+
+                const { data } = await userRes.json();
+                setAuth(data);
+
+                navigate('/');
             }
-        }catch(err){
+        } catch (err) {
             console.error(err.message);
         }
     }
-    return(
+    return (
         <div className="bg">
             <div className="auth-box">
                 <h1>LOGIN</h1>
