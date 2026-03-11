@@ -1,16 +1,23 @@
-function DashPost() {
+function DashPost({post}) {
     return (
         <div className="dash-post hover:scale-[102%] transition-all cursor-pointer">
             <div className="dash-left">
                 <div className="dash-img-cont">
-                    <img src="bg.jpg" alt="post image" />
+                    <img src={`${import.meta.env.VITE_API_URL}${post.image}`} alt="post image" />
                 </div>
             </div>
             <div className="dash-title-right">
                 <div className="dash-title-right-upper">
 
-                    <h4 className="dash-post-title text-lg font-semibold">Title goes here</h4>
-                    <p className="dash-post-date text-gray-400 text-xs font-medium">26/11/2026</p>
+                    <h4 className="dash-post-title text-lg font-semibold">{post.title}</h4>
+                    <p className="dash-post-date text-gray-400 text-xs font-medium">{new Date(post.createdAt).toLocaleString("en-US",{
+                        timeZone: "asia/kolkata",
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    })}</p>
                 </div>
                 <div className="dash-title-right-bottom">
                     <div className="dash-post-interactions">
