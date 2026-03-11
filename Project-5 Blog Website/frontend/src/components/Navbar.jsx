@@ -1,27 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useEffect, useState, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 
 function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef(null);
-    const [user, setUser] = useState({});
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        async function fetchUser() {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/me`, {
-                method: "GET",
-                credentials: "include"
-            });
-
-            if (!res.ok) return;
-
-            const { data } = await res.json();
-            setUser(data);
-        }
-        fetchUser();
-    }, [])
+    const {auth, setAuth} = useContext(AuthContext);
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -46,7 +33,7 @@ function Navbar() {
             const { success, message } = await res.json();
             if (success) {
                 console.log(message);
-                setUser({});
+                setAuth(false);
                 navigate('/login');
             }
 
@@ -93,9 +80,9 @@ function Navbar() {
                         }
                     </div>
                     {showMenu && <div className="menu z-10 min-w-2xs w-full">
-                        {user.fullName &&
+                        {auth &&
                             <>
-                                <p className="p-2">{user.email}</p>
+                                <p className="p-2">{auth.email}</p>
                                 <Link to={'/profile'} onClick={() => setShowMenu(false)}>Profile</Link>
                                 <Link to={'/dashboard'} onClick={() => setShowMenu(false)}>Dashboard</Link>
                             </>
@@ -103,7 +90,7 @@ function Navbar() {
                         <Link to={'/'} onClick={() => setShowMenu(false)}>Home</Link>
                         <Link to={'/about'} onClick={() => setShowMenu(false)}>About</Link>
                         <Link to={'/contact'} onClick={() => setShowMenu(false)}>Contact</Link>
-                        {!user.id ?
+                        {!auth ?
                             <>
                                 <Link to={'/register'} onClick={() => setShowMenu(false)}>Join Us</Link>
                                 <Link to={'/login'} onClick={() => setShowMenu(false)}>Login</Link>
