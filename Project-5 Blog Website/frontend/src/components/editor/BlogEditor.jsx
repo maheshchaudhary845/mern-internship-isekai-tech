@@ -28,7 +28,6 @@ export default function BlogEditor({ content, onChange }) {
       onChange(editor.getHTML())
     }
   })
-  console.log(editor);
 
   if (!editor) return null
 
