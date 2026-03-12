@@ -9,6 +9,7 @@ import CreatePost from './pages/Dashboard/CreatePost';
 import SinglePost from './pages/SinglePost';
 import CategoryPosts from './pages/CategoryPosts';
 import Search from './pages/Search';
+import EditPost from './pages/Dashboard/EditPost';
 
 
 function AppContent() {
@@ -30,6 +31,7 @@ function AppContent() {
         <Route path='/post/:slug' element={<SinglePost />}/>
         <Route path='/category/:slug' element={<CategoryPosts />}/>
         <Route path='/search' element={<Search />}/>
+        <Route path='/dashboard/editpost/:slug' element={<EditPost />}/>
       </Routes>
     </>
   )
