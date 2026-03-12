@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DashPost from "../../components/DashPost";
 import { Link } from "react-router";
+import { AuthContext } from "@/context/AuthContext";
 
 function Dashboard() {
     const [activePosts, setActivePosts] = useState([]);
-
+    const {auth} = useContext(AuthContext);
+    
     useEffect(() => {
         async function fetchPosts() {
-            const res = await fetch("http://localhost:3000/api/posts");
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth?.id}`);
             const { success, data, message } = await res.json();
             if (success) {
                 setActivePosts(data);
@@ -15,12 +17,15 @@ function Dashboard() {
                 console.error(message);
             }
         }
-        fetchPosts();
-    }, [])
+        if(auth){
+            fetchPosts();
+        }
+        }, [auth])
     return (
         <>
-            <div className="head flex justify-between">
+            <div className="head flex justify-between items-center">
                 <h1>Dashboard</h1>
+                <input className="bg-neutral-800 p-2 rounded-full max-w-sm w-full" type="search" name="search" id="" placeholder="Search Post" />
                 <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
             </div>
 
