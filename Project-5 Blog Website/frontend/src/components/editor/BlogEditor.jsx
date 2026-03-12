@@ -1,4 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react"
+import { useEffect } from "react"
 import StarterKit from "@tiptap/starter-kit"
 import Link from "@tiptap/extension-link"
 import Image from "@tiptap/extension-image"
@@ -9,6 +10,7 @@ import Heading from "@tiptap/extension-heading"
 import EditorToolbar from "./EditorToolbar"
 
 export default function BlogEditor({ content, onChange }) {
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -23,11 +25,19 @@ export default function BlogEditor({ content, onChange }) {
         types: ["heading", "paragraph"]
       })
     ],
-    content: content || "",
+    content: "",
     onUpdate({ editor }) {
       onChange(editor.getHTML())
     }
   })
+
+  useEffect(() => {
+    if (!editor) return
+
+    if (content && editor.getHTML() !== content) {
+      editor.commands.setContent(content)
+    }
+  }, [editor, content])
 
   if (!editor) return null
 
@@ -42,4 +52,4 @@ export default function BlogEditor({ content, onChange }) {
       </div>
     </div>
   )
-} 
+}
