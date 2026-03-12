@@ -74,8 +74,9 @@ module.exports = {
                 ? `/uploads/posts/${req.file.filename}`
                 : null;
 
-            let { title, content, author, category, tags } = req.body;
-            // const author = req.user.id;
+            let { title, content, category, tags } = req.body;
+            const author = req.user.id;
+            
             // Sanitize HTML content
             content = sanitizeHtml(content, {
                 allowedTags: [
@@ -110,10 +111,6 @@ module.exports = {
             if (typeof tags === "string") {
                 tags = JSON.parse(tags);
             }
-
-            // if (typeof content === "string") {
-            //     content = JSON.parse(content);
-            // }
 
             let tagIds = [];
             if (tags && tags.length > 0) {
@@ -166,12 +163,12 @@ module.exports = {
 
     async getPostsByUser(req, res) {
         try {
-            const posts = await Post.find({author: req.params.id})
-            .populate('author', "firstName, lastName, fullName")
-            .populate('category', "name")
-            .populate("tags", "name, slug");
+            const posts = await Post.find({ author: req.params.id })
+                .populate('author', "firstName, lastName, fullName")
+                .populate('category', "name")
+                .populate("tags", "name, slug");
 
-            if(!posts){
+            if (!posts) {
                 return res.status(404).json({
                     success: false,
                     message: "No post found"
@@ -263,7 +260,97 @@ module.exports = {
 
     async updatePost(req, res) {
         try {
-            const post = await Post.findById(req.params.id);
+            let { title, content, category, tags } = req.body;
+
+            const imagePath = req.file ? `/uploads/posts/${req.file.filename}` : null;
+
+            if (!title || !content || !category) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Title, content and category are required"
+                });
+            }
+
+            content = sanitizeHtml(content, {
+                allowedTags: [
+                    "p", "b", "i", "em", "strong", "a",
+                    "h1", "h2", "h3",
+                    "ul", "ol", "li",
+                    "blockquote",
+                    "code",
+                    "img"
+                ],
+                allowedAttributes: {
+                    a: ["href", "target", "rel"],
+                    img: ["src", "alt"]
+                },
+                allowedSchemes: ["http", "https", "mailto"],
+            });
+
+            let slug = slugify(title, {
+                lower: true,
+                strict: true
+            })
+
+            let existingPost = await Post.findOne({
+                slug,
+                _id: { $ne: req.params.id }
+            })
+            let counter = 1;
+            while (existingPost) {
+                slug = `${slug}-${counter}`;
+                existingPost = await Post.findOne({
+                    slug,
+                    _id: { $ne: req.params.id }
+                });
+                counter++;
+            }
+
+            if (typeof tags == "string") {
+                tags = JSON.parse(tags);
+            }
+
+            let tagIds = [];
+            if (tags && tags.length > 0) {
+                tagIds = await Promise.all(
+                    tags.map(async (name) => {
+                        name = name.trim().toLowerCase();
+                        const tagSlug = slugify(name, {
+                            lower: true,
+                            strict: true
+                        })
+
+                        let tag = await Tag.findOne({ slug: tagSlug });
+
+                        if (!tag) {
+                            tag = await Tag.create({ name, slug: tagSlug });
+                        }
+
+                        return tag._id;
+                    })
+                )
+            }
+
+            const updateData = {
+                title,
+                slug,
+                content,
+                category,
+                tags: tagIds,
+                author: req.user.id
+            }
+            if(imagePath){
+                updateData.image = imagePath;
+            }
+
+            const post = await Post.findByIdAndUpdate(
+                req.params.id,
+                updateData,
+                {
+                    new: true
+                }
+            );
+
             if (!post) {
                 return res.status(404).json({
                     success: false,
@@ -271,18 +358,10 @@ module.exports = {
                 })
             }
 
-            const allowedFields = ["title", "content"];
-            allowedFields.forEach(field => {
-                if (req.body[field] !== undefined) {
-                    post[field] = req.body[field];
-                }
-            })
-            await post.save();
-
             res.json({
                 success: true,
                 data: post,
-                message: "Post updated!"
+                message: "Post updated successfully"
             })
         } catch (err) {
             res.status(500).json({
