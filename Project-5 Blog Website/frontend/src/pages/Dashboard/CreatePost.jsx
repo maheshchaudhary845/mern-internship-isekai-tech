@@ -34,7 +34,6 @@ function CreatePost() {
         formData.append("content", content)
         formData.append("category", category)
         formData.append("tags", JSON.stringify(tags.split(",").map(t => t.trim())))
-        formData.append('author', "699b48b113a538135956058c")
 
         if (image) {
             formData.append("image", image)
