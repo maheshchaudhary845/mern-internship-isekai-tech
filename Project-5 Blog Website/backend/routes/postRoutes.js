@@ -9,7 +9,7 @@ router.get('/', getPosts);
 router.get('/:slug', getPostBySlug);
 router.get('/user/:id', getPostsByUser);
 router.post('/add', auth, upload.single('image'), createPost);
-router.put('/:id', auth, updatePost);
+router.put('/:id', auth, upload.single('image'), updatePost);
 router.delete('/:id', auth, deletePost);
 
 module.exports = router;
