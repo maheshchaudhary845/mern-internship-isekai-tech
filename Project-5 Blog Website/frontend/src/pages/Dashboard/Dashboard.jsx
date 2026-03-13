@@ -20,6 +20,7 @@ function Dashboard() {
                     setPosts(data);
                 }
                 else {
+                    setPosts("");
                     console.error(message);
                 }
 
@@ -40,19 +41,19 @@ function Dashboard() {
                 <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
             </div>
 
-            <div className="dash-cont">
+            <div className="dash-cont max-w-6xl w-full m-auto">
                 <div className="left">
                     <div className="title-bar">
-                        <h3>All Posts</h3>
+                        <h3 className="text-center my-2">All Posts</h3>
                     </div>
                     <div className="dash-posts">
-                        {posts.map(post => (
+                        {posts ? posts.map(post => (
                             <DashPost key={post.id} post={post} setPosts={setPosts} />
-                        ))}
+                        )) : <p className="text-gray-400 text-center">No post found</p>}
 
                     </div>
                 </div>
-                <div className="right"></div>
+                {/* <div className="right"></div> */}
             </div>
         </>
     )
