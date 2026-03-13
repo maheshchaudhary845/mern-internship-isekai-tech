@@ -76,7 +76,7 @@ module.exports = {
 
             let { title, content, category, tags } = req.body;
             const author = req.user.id;
-            
+
             // Sanitize HTML content
             content = sanitizeHtml(content, {
                 allowedTags: [
@@ -163,12 +163,24 @@ module.exports = {
 
     async getPostsByUser(req, res) {
         try {
-            const posts = await Post.find({ author: req.params.id })
-                .populate('author', "firstName, lastName, fullName")
+            let { search } = req.query;
+            let filter = {};
+            if (search) {
+                filter.$or = [
+                    {
+                        title: { $regex: search, $options: "i" },
+                    },
+                {
+                        content: { $regex: search, $options: "i" }
+                    }
+                ]
+            }
+            const posts = await Post.find({ author: req.params.id, ...filter })
+                .populate('author', "firstName lastName fullName")
                 .populate('category', "name")
-                .populate("tags", "name, slug");
+                .populate("tags", "name slug");
 
-            if (!posts) {
+            if (posts.length === 0) {
                 return res.status(404).json({
                     success: false,
                     message: "No post found"
@@ -339,7 +351,7 @@ module.exports = {
                 tags: tagIds,
                 author: req.user.id
             }
-            if(imagePath){
+            if (imagePath) {
                 updateData.image = imagePath;
             }
 
