@@ -10,6 +10,7 @@ import SinglePost from './pages/SinglePost';
 import CategoryPosts from './pages/CategoryPosts';
 import Search from './pages/Search';
 import EditPost from './pages/Dashboard/EditPost';
+import Profile from './pages/Profile';
 
 
 function AppContent() {
@@ -32,6 +33,7 @@ function AppContent() {
         <Route path='/category/:slug' element={<CategoryPosts />}/>
         <Route path='/search' element={<Search />}/>
         <Route path='/dashboard/editpost/:slug' element={<EditPost />}/>
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   )
