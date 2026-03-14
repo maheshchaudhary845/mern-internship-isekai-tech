@@ -13,7 +13,9 @@ function Dashboard() {
 
         const timer = setTimeout(async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth?.id}?search=${search}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth?.id}?search=${search}`, {
+                    credentials: "include"
+                });
                 const { data, success, message } = await res.json();
 
                 if (success) {
