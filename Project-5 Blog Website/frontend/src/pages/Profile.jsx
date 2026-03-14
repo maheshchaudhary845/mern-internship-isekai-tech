@@ -13,7 +13,9 @@ function Profile() {
             if (!auth) return;
 
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth.id}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth.id}`, {
+                    credentials: "include"
+                });
                 const { data, success, message, total } = await res.json();
 
                 if (success) {
@@ -43,8 +45,8 @@ function Profile() {
 
             <div className="posts mt-10!">
                 {posts.map(post => (
-                    <Link to={`/post/${post.slug}`}>
-                        <Post key={post.id} post={post} />
+                    <Link key={post.id} to={`/post/${post.slug}`}>
+                        <Post post={post} />
                     </Link>
                 ))}
             </div>
