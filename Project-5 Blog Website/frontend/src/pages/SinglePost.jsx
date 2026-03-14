@@ -31,7 +31,7 @@ function SinglePost() {
                     />
                 </div>
                 <div className="mt-3 flex items-center gap-2">
-                    <p className="bg-orange-600 w-fit p-1 rounded-full text-sm">{post.category?.name}</p>
+                    <p className="bg-orange-600 w-fit py-1 px-4 rounded-full text-sm">{post.category?.name}</p>
                     •
                     <p className="text-sm">{new Date(post?.createdAt).toLocaleDateString("en-US",{
                         month: "short",
