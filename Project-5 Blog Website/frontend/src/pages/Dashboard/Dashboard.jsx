@@ -31,7 +31,7 @@ function Dashboard() {
             }
         }, 500)
 
-        return ()=> clearTimeout(timer);
+        return () => clearTimeout(timer);
 
     }, [auth, search])
 
@@ -39,7 +39,7 @@ function Dashboard() {
         <>
             <div className="head flex justify-between items-center">
                 <h1>Dashboard</h1>
-                <input className="bg-neutral-800 p-2 rounded-full max-w-sm w-full" value={search} onChange={(e)=>setSearch(e.target.value)} type="search" name="search" placeholder="Search Post" />
+                <input className="bg-neutral-800 p-2 rounded-full max-w-sm w-full" value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="search" placeholder="Search Post" />
                 <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
             </div>
 
@@ -50,7 +50,9 @@ function Dashboard() {
                     </div>
                     <div className="dash-posts">
                         {posts ? posts.map(post => (
-                            <DashPost key={post.id} post={post} setPosts={setPosts} />
+                            <Link key={post.id} to={`/post/${post.slug}`}>
+                                <DashPost post={post} setPosts={setPosts} />
+                            </Link>
                         )) : <p className="text-gray-400 text-center">No post found</p>}
 
                     </div>

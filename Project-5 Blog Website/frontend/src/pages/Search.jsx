@@ -1,6 +1,6 @@
 import Post from "@/components/Post";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 
 function Search(){
     const [searchParams, setSearchParams] = useSearchParams();
@@ -32,7 +32,9 @@ function Search(){
         <>
             <div className="posts">
                 {posts?.map(post=>(
-                    <Post key={post._id} post={post} />
+                    <Link key={post._id} to={`/post/${post.slug}`}>
+                    <Post post={post} />
+                    </Link>
                 ))}
             </div>
         </>
