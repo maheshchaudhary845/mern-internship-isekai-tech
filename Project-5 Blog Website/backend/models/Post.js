@@ -45,11 +45,11 @@ postSchema.index({
     tags: 1
 });
 
-postSchema.virtual("comments", {
-    ref: "Comment",
-    localField: "_id",
-    foreignField: "post",
-    justOne: false
-})
+// postSchema.virtual("comments", {
+//     ref: "Comment",
+//     localField: "_id",
+//     foreignField: "post",
+//     justOne: false
+// })
 
 module.exports = mongoose.model("Post", postSchema);
