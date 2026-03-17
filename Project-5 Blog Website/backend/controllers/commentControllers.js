@@ -10,7 +10,6 @@ exports.addComment = async(req, res)=>{
 
         res.status(201).json({
             success: true,
-            comment,
             message: "Comment Posted"
         })
 
