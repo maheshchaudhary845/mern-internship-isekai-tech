@@ -12,6 +12,7 @@ import Search from './pages/Search';
 import EditPost from './pages/Dashboard/EditPost';
 import Profile from './pages/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import PageNotFound from './pages/PageNotFound';
 
 
 function AppContent() {
@@ -35,6 +36,7 @@ function AppContent() {
         <Route path='/search' element={<Search />}/>
         <Route path='/dashboard/editpost/:slug' element={<ProtectedRoutes><EditPost /></ProtectedRoutes>}/>
         <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>
   )
