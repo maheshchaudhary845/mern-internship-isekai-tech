@@ -11,6 +11,7 @@ import CategoryPosts from './pages/CategoryPosts';
 import Search from './pages/Search';
 import EditPost from './pages/Dashboard/EditPost';
 import Profile from './pages/Profile';
+import ProtectedRoutes from './components/ProtectedRoutes';
 
 
 function AppContent() {
@@ -27,13 +28,13 @@ function AppContent() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/createpost' element={<CreatePost />} />
+        <Route path='/dashboard' element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
+        <Route path='/createpost' element={<ProtectedRoutes><CreatePost /></ProtectedRoutes>} />
         <Route path='/post/:slug' element={<SinglePost />}/>
         <Route path='/category/:slug' element={<CategoryPosts />}/>
         <Route path='/search' element={<Search />}/>
-        <Route path='/dashboard/editpost/:slug' element={<EditPost />}/>
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/dashboard/editpost/:slug' element={<ProtectedRoutes><EditPost /></ProtectedRoutes>}/>
+        <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
       </Routes>
     </>
   )
