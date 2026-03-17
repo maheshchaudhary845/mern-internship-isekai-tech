@@ -64,6 +64,7 @@ exports.getCommentsByPost = async (req, res) => {
         res.json({
             success: true,
             data: comments,
+            total: comments.length,
             message: "Comments by post fetched successfully"
         })
     } catch (err) {
