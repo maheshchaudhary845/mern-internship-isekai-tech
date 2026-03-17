@@ -1,6 +1,6 @@
 function PageNotFound(){
     return(
-        <div className="flex flex-col items-center justify-center absolute inset-0">
+        <div className="flex flex-col items-center justify-center absolute inset-0 -z-1">
             <h1 className="text-9xl">404</h1>
             <p className="text-2xl">Page Not Found</p>
         </div>
