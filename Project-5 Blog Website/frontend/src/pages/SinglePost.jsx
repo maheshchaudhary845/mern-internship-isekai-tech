@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 function SinglePost() {
@@ -6,15 +7,19 @@ function SinglePost() {
     const [post, setPost] = useState(null);
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
+    const [error, setError] = useState("");
+    const {auth} = useContext(AuthContext);
 
     useEffect(() => {
         async function fetchPost() {
             try {
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`);
-                const { data, success } = await res.json();
+                const { data, success, message } = await res.json();
 
                 if (success) {
                     setPost(data);
+                }else{
+                    setError(message)
                 }
             } catch (err) {
                 console.error(err);
@@ -64,19 +69,22 @@ function SinglePost() {
             console.error(err);
         }
     }
-    if (!post) return <p className="text-center">Loading...</p>
+    if (error) return <p className="text-center">{error}</p>
+    else if(!post) return <p className="text-center">Loading...</p>
+    
     return (
         <>
+            {post &&
             <div className="max-w-5xl mx-auto">
                 <div className="w-full">
                     <img
                         className="w-full h-auto max-h-125 object-cover rounded-lg"
-                        src={`${import.meta.env.VITE_API_URL}${post.image}`}
+                        src={`${import.meta.env.VITE_API_URL}${post?.image}`}
                         alt="thumbnail image of blog"
                     />
                 </div>
                 <div className="mt-3 flex items-center gap-2">
-                    <p className="bg-orange-600 w-fit py-1 px-4 rounded-full text-sm">{post.category?.name}</p>
+                    <p className="bg-orange-600 w-fit py-1 px-4 rounded-full text-sm">{post?.category?.name}</p>
                     •
                     <p className="text-sm">{new Date(post?.createdAt).toLocaleDateString("en-US", {
                         month: "short",
@@ -86,10 +94,10 @@ function SinglePost() {
                     })}</p>
                 </div>
                 <div className="mt-6">
-                    <h1 className="text-3xl font-bold">{post.title}</h1>
+                    <h1 className="text-3xl font-bold">{post?.title}</h1>
                 </div>
                 <div className="mt-2">
-                    <p className="text-gray-300">By {post.author?.fullName}</p>
+                    <p className="text-gray-300">By {post?.author?.fullName}</p>
                 </div>
                 <div className="mt-6">
                     <div dangerouslySetInnerHTML={{ __html: post?.content }} className=""></div>
@@ -129,10 +137,11 @@ function SinglePost() {
                 </div>
 
                 <div className="comment-section flex gap-2 my-2 mt-4">
-                    <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Leave your comment..." className="p-2 max-w-full w-full min-h-30 border-2"></textarea>
-                    <button onClick={handleComment} className={` p-2 px-4 rounded-sm h-fit ${comment ? "cursor-pointer bg-green-500 hover:bg-green-600" : "cursor-not-allowed bg-gray-500"}`} disabled={!comment && true}>Comment</button>
+                    <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder={`${auth ? "Leave your comment..." : "You must be login to comment"}`} className="p-2 max-w-full w-full min-h-30 border-2"></textarea>
+                    <button onClick={handleComment} className={` p-2 px-4 rounded-sm h-fit ${(comment && auth) ? "cursor-pointer bg-green-500 hover:bg-green-600" : "cursor-not-allowed bg-gray-500"}`} disabled={(!comment || !auth) && true}>Comment</button>
                 </div>
             </div>
+            }
         </>
     )
 }
