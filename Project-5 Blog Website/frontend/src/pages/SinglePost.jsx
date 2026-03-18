@@ -1,6 +1,6 @@
 import { AuthContext } from "@/context/AuthContext";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 
 function SinglePost() {
     const { slug } = useParams();
@@ -9,11 +9,14 @@ function SinglePost() {
     const [comments, setComments] = useState([]);
     const [error, setError] = useState("");
     const {auth} = useContext(AuthContext);
+    const location = useLocation();
 
     useEffect(() => {
         async function fetchPost() {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`, {
+                    credentials: "include"
+                });
                 const { data, success, message } = await res.json();
 
                 if (success) {
@@ -135,11 +138,13 @@ function SinglePost() {
                         <p className="text-gray-400">Be the first to comment</p>
                     }
                 </div>
+                    {!auth && <p className="my-4"><Link to={`/login?next=${location.pathname}`} className="text-blue-500">Login</Link> to comment</p>}
 
-                <div className="comment-section flex gap-2 my-2 mt-4">
+                {auth && <div className="comment-section flex gap-2 my-2 mt-4">
                     <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder={`${auth ? "Leave your comment..." : "You must be login to comment"}`} className="p-2 max-w-full w-full min-h-30 border-2"></textarea>
                     <button onClick={handleComment} className={` p-2 px-4 rounded-sm h-fit ${(comment && auth) ? "cursor-pointer bg-green-500 hover:bg-green-600" : "cursor-not-allowed bg-gray-500"}`} disabled={(!comment || !auth) && true}>Comment</button>
-                </div>
+
+                </div>}
             </div>
             }
         </>

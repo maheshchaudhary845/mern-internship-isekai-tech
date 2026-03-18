@@ -1,12 +1,16 @@
 import { AuthContext } from "@/context/AuthContext";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
 
     const { setAuth } = useContext(AuthContext);
+
+    const location = useLocation()
+
+    const next = new URLSearchParams(location.search)
 
     const handleForm = (e) => {
         setForm({
@@ -34,8 +38,14 @@ function Login() {
 
                 const { data } = await userRes.json();
                 setAuth(data);
+                if (next.get('next')) {
+                    navigate(next.get('next'))
+                }
+                else {
+                    navigate('/');
 
-                navigate('/');
+                }
+
             }
         } catch (err) {
             console.error(err.message);
