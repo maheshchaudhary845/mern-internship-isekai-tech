@@ -176,6 +176,7 @@ module.exports = {
                 ]
             }
             const posts = await Post.find({ author: req.params.id, ...filter })
+                .sort({createdAt: -1})
                 .populate('author', "firstName lastName fullName")
                 .populate('category', "name")
                 .populate("tags", "name slug");
@@ -202,7 +203,28 @@ module.exports = {
 
     async getPostBySlug(req, res) {
         try {
-            const post = await Post.findOne({ slug: req.params.slug }).populate("author").populate('category').populate('tags');
+            const viewedPosts = req.cookies.viewedPosts || [];
+            let post;
+            if(!viewedPosts.includes(req.params.slug)){
+
+                post = await Post.findOneAndUpdate(
+                    {slug: req.params.slug}, 
+                    {$inc: {views: 1}},
+                    {new: true}
+                )
+                .populate("author")
+                .populate("category")
+                .populate("tags")
+
+                viewedPosts.push(req.params.slug);
+
+                res.cookie("viewedPosts", viewedPosts, {
+                    httpOnly: true,
+                    maxAge: 1000 * 60 * 60 * 24
+                })
+            }else{
+                post = await Post.findOne({ slug: req.params.slug }).populate("author").populate('category').populate('tags');
+            }
             // const post = await Post.aggregate(
             //    [ {
             //         $match:{
