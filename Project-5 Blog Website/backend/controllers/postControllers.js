@@ -7,9 +7,13 @@ const sanitizeHtml = require("sanitize-html");
 module.exports = {
     async getPosts(req, res) {
         try {
-            const { category, tag, search, page = 1, limit = 10 } = req.query;
+            const { category, tag, search, page = 1, limit = 10, sort } = req.query;
 
             const filter = {};
+            let sortOption = { createdAt: -1 };
+            if (sort === "popular") {
+                sortOption = { views: -1 };
+            }
 
             if (category) {
                 const foundedCategory = await Category.findOne({ slug: category });
@@ -41,7 +45,7 @@ module.exports = {
             }
 
             const posts = await Post.find(filter)
-                .sort({ createdAt: -1 })
+                .sort(sortOption)
                 .skip((page - 1) * limit)
                 .limit(Number(limit))
                 .populate('author', "firstName, lastName, fullName")
@@ -170,13 +174,13 @@ module.exports = {
                     {
                         title: { $regex: search, $options: "i" },
                     },
-                {
+                    {
                         content: { $regex: search, $options: "i" }
                     }
                 ]
             }
             const posts = await Post.find({ author: req.params.id, ...filter })
-                .sort({createdAt: -1})
+                .sort({ createdAt: -1 })
                 .populate('author', "firstName lastName fullName")
                 .populate('category', "name")
                 .populate("tags", "name slug");
@@ -205,16 +209,16 @@ module.exports = {
         try {
             const viewedPosts = req.cookies.viewedPosts || [];
             let post;
-            if(!viewedPosts.includes(req.params.slug)){
+            if (!viewedPosts.includes(req.params.slug)) {
 
                 post = await Post.findOneAndUpdate(
-                    {slug: req.params.slug}, 
-                    {$inc: {views: 1}},
-                    {new: true}
+                    { slug: req.params.slug },
+                    { $inc: { views: 1 } },
+                    { new: true }
                 )
-                .populate("author")
-                .populate("category")
-                .populate("tags")
+                    .populate("author")
+                    .populate("category")
+                    .populate("tags")
 
                 viewedPosts.push(req.params.slug);
 
@@ -222,7 +226,7 @@ module.exports = {
                     httpOnly: true,
                     maxAge: 1000 * 60 * 60 * 24
                 })
-            }else{
+            } else {
                 post = await Post.findOne({ slug: req.params.slug }).populate("author").populate('category').populate('tags');
             }
             // const post = await Post.aggregate(
