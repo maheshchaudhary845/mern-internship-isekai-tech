@@ -42,7 +42,7 @@ function DashPost({ post, setPosts }) {
         }
     }
     return (
-        <div className="dash-post hover:scale-[102%] transition-all cursor-pointer">
+        <div className="dash-post sm:flex-row flex-col hover:scale-[102%] transition-all cursor-pointer">
             <div className="dash-left">
                 <div className="dash-img-cont">
                     <img src={`${import.meta.env.VITE_API_URL}${post.image}`} alt="post image" />
@@ -50,7 +50,7 @@ function DashPost({ post, setPosts }) {
             </div>
             <div className="dash-title-right">
                 <div className="dash-title-right-upper flex justify-between">
-                    <div>
+                    <div className="flex flex-col">
                         <h4 className="dash-post-title text-lg font-semibold">{post.title}</h4>
                         <p className="dash-post-date text-gray-400 text-xs font-medium">{new Date(post.createdAt).toLocaleString("en-US", {
                             timeZone: "asia/kolkata",
@@ -74,7 +74,7 @@ function DashPost({ post, setPosts }) {
                         </svg>
                     </div>
                 </div>
-                <div className="dash-title-right-bottom">
+                <div className="dash-title-right-bottom mt-3">
                     <div className="dash-post-interactions">
                         <div className="dash-post-comment">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#ffffff" fill="none" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

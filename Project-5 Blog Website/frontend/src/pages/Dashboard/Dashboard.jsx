@@ -36,11 +36,13 @@ function Dashboard() {
     }, [auth, search])
 
     return (
-        <>
+        <div className="mx-2">
             <div className="head flex justify-between items-center">
-                <h1>Dashboard</h1>
+                    <h1>Dashboard</h1>
+                    <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
+            </div>
+            <div className="flex justify-center mt-4">
                 <input className="bg-neutral-800 p-2 rounded-full max-w-sm w-full" value={search} onChange={(e) => setSearch(e.target.value)} type="search" name="search" placeholder="Search Post" />
-                <Link to={'/createpost'}><button className="bg-green-500 px-2 py-1 rounded-sm cursor-pointer hover:bg-green-600">Create Post +</button></Link>
             </div>
 
             <div className="dash-cont max-w-6xl w-full m-auto">
@@ -48,7 +50,7 @@ function Dashboard() {
                     <div className="title-bar">
                         <h3 className="text-center my-2">All Posts</h3>
                     </div>
-                    <div className="dash-posts">
+                    <div className="dash-posts gap-2">
                         {posts ? posts.map(post => (
                             <Link key={post.id} to={`/post/${post.slug}`}>
                                 <DashPost post={post} setPosts={setPosts} />
@@ -59,7 +61,7 @@ function Dashboard() {
                 </div>
                 {/* <div className="right"></div> */}
             </div>
-        </>
+        </div>
     )
 }
 
