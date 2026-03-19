@@ -155,7 +155,7 @@ ul li {
 .posts {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 420px));
-  gap: 24px;
+  gap: 30px;
   padding: 20px 0;
   justify-content: center;
   margin: auto;
