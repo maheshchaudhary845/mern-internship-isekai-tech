@@ -11,8 +11,12 @@ module.exports = {
 
             const filter = {};
             let sortOption = { createdAt: -1 };
-            if (sort === "popular") {
+            if (sort === "latest") {
+                sortOption = { createdAt: -1 }
+            } else if (sort === "popular") {
                 sortOption = { views: -1 };
+            } else if (sort === "category") {
+                sortOption = { category: 1, createdAt: -1 }
             }
 
             if (category) {
