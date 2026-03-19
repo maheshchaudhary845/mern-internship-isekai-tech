@@ -14,6 +14,8 @@ import Profile from './pages/Profile';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import PageNotFound from './pages/PageNotFound';
 import Popular from './pages/Popular';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 
 function AppContent() {
@@ -38,6 +40,8 @@ function AppContent() {
         <Route path='/dashboard/editpost/:slug' element={<ProtectedRoutes><EditPost /></ProtectedRoutes>}/>
         <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
         <Route path='/popular' element={<Popular />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>
