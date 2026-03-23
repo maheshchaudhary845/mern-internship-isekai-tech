@@ -27,7 +27,7 @@ function CategoryPosts() {
     }
     return (
         <>
-            <div className="posts">
+            <div className="posts mx-2!">
                 {posts?.map(post => (
                     <Link key={post._id} to={`/post/${post.slug}`}>
                         <Post post={post} />

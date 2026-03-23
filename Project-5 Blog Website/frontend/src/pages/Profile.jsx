@@ -217,7 +217,7 @@ function Profile() {
                 <p className="text-lg">{totalPosts}<span className="text-gray-400"> posts</span></p>
             </div>
 
-            <div className="posts mt-10!">
+            <div className="posts mx-2! mt-10!">
                 {posts.map(post => (
                     <Link key={post.id} to={`/post/${post.slug}`}>
                         <Post post={post} />
