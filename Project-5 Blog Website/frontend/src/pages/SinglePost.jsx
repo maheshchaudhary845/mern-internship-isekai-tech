@@ -78,7 +78,7 @@ function SinglePost() {
     return (
         <>
             {post &&
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-5xl mx-auto px-2">
                 <div className="w-full">
                     <img
                         className="w-full h-auto max-h-125 object-cover rounded-lg"
