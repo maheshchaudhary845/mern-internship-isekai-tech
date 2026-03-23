@@ -59,7 +59,7 @@ function Profile() {
         setNameError("");
         setNameSuccess("");
         if(auth.fullName == nameForm.firstName + " " + nameForm.lastName) {
-            return setNameError("Name already exists")
+            return setNameError("New name must be different from your current name")
         };
         
         try {
@@ -88,15 +88,18 @@ function Profile() {
         setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
     }
     async function handleUpdatePassword() {
-        setError("");
-        setPasswordSuccess("");
-        setUpdatingPassword(true);
-        if (!passwordForm.currentPassword.trim() || !passwordForm.newPassword.trim() || !renewPassword.trim()) return;
-        if (passwordForm.newPassword != renewPassword) {
-            return setError("Passwords are not matched");
-        }
-
+        
         try {
+            setError("");
+            setPasswordSuccess("");
+            setUpdatingPassword(true);
+            if (!passwordForm.currentPassword.trim() || !passwordForm.newPassword.trim() || !renewPassword.trim()) return;
+            if (passwordForm.newPassword != renewPassword) {
+                return setError("Passwords are not matched");
+            }
+            if(passwordForm.currentPassword === passwordForm.newPassword){
+                return setError("New password must be different from current password");
+            }
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
                 method: "PUT",
                 credentials: "include",
@@ -109,6 +112,8 @@ function Profile() {
 
             if (success) {
                 setPasswordSuccess(message);
+                setPasswordForm({currentPassword: "", newPassword: ""});
+                setRenewPassword("");
             }
             else {
                 setError(message)
