@@ -149,3 +149,7 @@
 .spin{
   animation: spin 1s linear infinite;
 }
+
+.my-scroll-container::-webkit-scrollbar{
+  display: none;
+}
