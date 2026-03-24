@@ -7,7 +7,7 @@ const sanitizeHtml = require("sanitize-html");
 module.exports = {
     async getPosts(req, res) {
         try {
-            const { category, tag, search, page = 1, limit = 10, sort } = req.query;
+            const { category, tags, search, page = 1, limit = 10, sort, from, to } = req.query;
 
             const filter = {};
             let sortOption = { createdAt: -1 };
@@ -30,15 +30,26 @@ module.exports = {
                 filter.category = foundedCategory._id;
             }
 
-            if (tag) {
-                const foundedTag = await Tag.findOne({ slug: tag });
-                if (!foundedTag) {
+            if (tags) {
+                const tagSlugs = tags.split(",");
+                const foundedTags = await Tag.find({ slug: {$in: tagSlugs} });
+                if (!foundedTags) {
                     return res.status(404).json({
                         success: false,
                         message: "Tag not found"
                     })
                 }
-                filter.tags = foundedTag._id;
+                filter.tags = {$in: foundedTags.map(t=> t._id)};
+            }
+
+            if(from || to){
+                filter.createdAt = {};
+                if(from){
+                    filter.createdAt.$gte = new Date(from);
+                }
+                if(to){
+                    filter.createdAt.$lte = new Date(to);
+                }
             }
 
             if (search) {
