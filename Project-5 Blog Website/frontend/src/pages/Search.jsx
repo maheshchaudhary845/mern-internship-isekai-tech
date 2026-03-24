@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import Post from "@/components/Post";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
@@ -6,6 +7,7 @@ function Search(){
     const [searchParams, setSearchParams] = useSearchParams();
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const query = searchParams.get('query');
 
@@ -13,6 +15,7 @@ function Search(){
     useEffect(()=>{
         async function fetchPostsBySearchQuery(){
             try{
+                setLoading(true);
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts?search=${query}`);
                 const {data, success, message} = await res.json();
                 if(!success){
@@ -21,10 +24,15 @@ function Search(){
                 setPosts(data);
             }catch(err){
                 console.error(err)
+            }finally{
+                setLoading(false);
             }
         }
         fetchPostsBySearchQuery();
     }, [query])
+
+    if(loading) return <Loading />
+    
     if(error){
         return <p className="text-center text-gray-400">{error}</p>
     }

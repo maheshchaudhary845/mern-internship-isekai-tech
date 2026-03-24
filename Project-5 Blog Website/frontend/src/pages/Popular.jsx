@@ -1,12 +1,15 @@
+import Loading from "@/components/Loading";
 import Post from "@/components/Post";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 function Popular() {
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         async function fetchPosts() {
             try {
+                setLoading(true);
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts?sort=popular`);
                 const { success, data } = await res.json();
                 if (success) {
@@ -14,10 +17,15 @@ function Popular() {
                 }
             } catch (err) {
                 console.error(err);
+            } finally{
+                setLoading(false);
             }
         }
         fetchPosts();
     }, [])
+
+    if(loading) return <Loading />
+    
     return (
         <>
             <div className="posts mx-2! ">

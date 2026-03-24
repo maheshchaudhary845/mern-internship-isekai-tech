@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import DashPost from "../../components/DashPost";
 import { Link } from "react-router";
 import { AuthContext } from "@/context/AuthContext";
+import Loading from "@/components/Loading";
 
 function Dashboard() {
     const [posts, setPosts] = useState([]);
     const [search, setSearch] = useState("");
     const { auth } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!auth) return;
@@ -28,12 +30,16 @@ function Dashboard() {
 
             } catch (err) {
                 console.error(err);
+            } finally{
+                setLoading(false);
             }
         }, 500)
 
         return () => clearTimeout(timer);
 
     }, [auth, search])
+
+    if(loading) return <Loading />
 
     return (
         <div className="mx-2">

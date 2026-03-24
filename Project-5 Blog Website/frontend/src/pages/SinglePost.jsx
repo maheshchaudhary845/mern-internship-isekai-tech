@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import { AuthContext } from "@/context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
@@ -8,12 +9,14 @@ function SinglePost() {
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
     const {auth} = useContext(AuthContext);
     const location = useLocation();
 
     useEffect(() => {
         async function fetchPost() {
             try {
+                setLoading(true);
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`, {
                     credentials: "include"
                 });
@@ -26,6 +29,8 @@ function SinglePost() {
                 }
             } catch (err) {
                 console.error(err);
+            } finally{
+                setLoading(false);
             }
         }
         fetchPost();
@@ -35,6 +40,7 @@ function SinglePost() {
         async function fetchComments() {
             if (!post) return;
             try {
+                setLoading(true);
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/comments/post/${post._id}`);
                 const { success, data } = await res.json();
                 if (success) {
@@ -42,6 +48,8 @@ function SinglePost() {
                 }
             } catch (err) {
                 console.error(err)
+            } finally{
+                setLoading(false);
             }
         }
         fetchComments();
@@ -73,7 +81,7 @@ function SinglePost() {
         }
     }
     if (error) return <p className="text-center">{error}</p>
-    else if(!post) return <p className="text-center">Loading...</p>
+    else if(loading) return <Loading />
     
     return (
         <>

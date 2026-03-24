@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import Post from "@/components/Post";
 import { Link } from "react-router";
+import Loading from "@/components/Loading";
 
 function Profile() {
     const { auth, setAuth } = useContext(AuthContext);
@@ -18,12 +19,14 @@ function Profile() {
     const [nameError, setNameError] = useState("");
     const [error, setError] = useState("");
     const [passwordSuccess, setPasswordSuccess] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchPosts() {
             if (!auth) return;
 
             try {
+                setLoading(true);
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth.id}`, {
                     credentials: "include"
                 });
@@ -35,14 +38,12 @@ function Profile() {
                 }
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false);
             }
         }
         fetchPosts();
     }, [auth])
-
-    if (!auth) {
-        return <p className="text-center">Loading...</p>
-    }
 
     useEffect(() => {
         if (renewPassword !== passwordForm.newPassword) {
@@ -58,10 +59,10 @@ function Profile() {
     async function handleUpdateName() {
         setNameError("");
         setNameSuccess("");
-        if(auth.fullName == nameForm.firstName + " " + nameForm.lastName) {
+        if (auth.fullName == nameForm.firstName + " " + nameForm.lastName) {
             return setNameError("New name must be different from your current name")
         };
-        
+
         try {
             setUpdatingName(true);
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
@@ -79,7 +80,7 @@ function Profile() {
             }
         } catch (err) {
             console.error(err)
-        }finally{
+        } finally {
             setUpdatingName(false);
         }
     }
@@ -88,7 +89,7 @@ function Profile() {
         setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
     }
     async function handleUpdatePassword() {
-        
+
         try {
             setError("");
             setPasswordSuccess("");
@@ -97,7 +98,7 @@ function Profile() {
             if (passwordForm.newPassword != renewPassword) {
                 return setError("Passwords are not matched");
             }
-            if(passwordForm.currentPassword === passwordForm.newPassword){
+            if (passwordForm.currentPassword === passwordForm.newPassword) {
                 return setError("New password must be different from current password");
             }
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
@@ -112,7 +113,7 @@ function Profile() {
 
             if (success) {
                 setPasswordSuccess(message);
-                setPasswordForm({currentPassword: "", newPassword: ""});
+                setPasswordForm({ currentPassword: "", newPassword: "" });
                 setRenewPassword("");
             }
             else {
@@ -120,10 +121,15 @@ function Profile() {
             }
         } catch (err) {
             console.error(err)
-        } finally{
+        } finally {
             setUpdatingPassword(false);
         }
     }
+
+    if (loading) {
+        return <Loading />
+    }
+
 
     return (
         <>
