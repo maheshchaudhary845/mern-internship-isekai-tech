@@ -7,7 +7,7 @@ import Loading from "@/components/Loading";
 function Profile() {
     const { auth, setAuth } = useContext(AuthContext);
     const [posts, setPosts] = useState([]);
-    const [totalPosts, setTotalPosts] = useState("");
+    const [totalPosts, setTotalPosts] = useState(0);
     const [showModal, setShowModal] = useState(false);
     const [nameForm, setNameForm] = useState({ firstName: auth ? auth.firstName : "", lastName: auth ? auth.lastName : "" });
     const [passwordForm, setPasswordForm] = useState({ currentPassword: "", newPassword: "" });
