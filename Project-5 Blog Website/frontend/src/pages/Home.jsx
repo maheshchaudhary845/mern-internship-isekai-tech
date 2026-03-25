@@ -21,16 +21,20 @@ function Home() {
         async function fetchPosts() {
             setLoading(true);
             const query = buildQuery();
-
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts?${query}`);
-            const { success, data, message } = await res.json();
-            if (success) {
-                setPosts(data);
-                setError("");
-            } else {
-                setError(message)
+            try{
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts?${query}`);
+                const { success, data, message } = await res.json();
+                if (success) {
+                    setPosts(data);
+                    setError("");
+                } else {
+                    setError(message)
+                }
+            } catch(err){
+                console.error(err)
+            } finally{
+                setLoading(false);
             }
-            setLoading(false);
         }
         fetchPosts();
     }, [filters])
