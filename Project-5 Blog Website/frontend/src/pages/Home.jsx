@@ -95,7 +95,7 @@ function Home() {
                                         tags: prev.tags.includes(tag.slug) ? prev.tags.filter(t => t !== tag.slug) : [...prev.tags, tag.slug]
                                     }))
                                 }}
-                                className={`px-3 py-2 rounded-full text-nowrap text-sm border cursor-pointer ${filters.tags.includes(tag.slug) ? "bg-gray-600 border-gray-600" : "bg-sky-600 border-sky-600"}`}>#{tag.name}</button>
+                                className={`px-3 py-2 rounded-full text-nowrap text-sm border cursor-pointer ${filters.tags.includes(tag.slug) ? "bg-sky-600 border-sky-600" : "bg-gray-600 border-gray-600"}`}>#{tag.name}</button>
                         ))}
                     </div>
                 </div>
