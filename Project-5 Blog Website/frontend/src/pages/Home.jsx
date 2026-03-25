@@ -48,9 +48,12 @@ function Home() {
                 ])
                 const catData = await catRes.json();
                 const tagData = await tagRes.json();
-
-                setCategories(catData.data);
-                setTags(tagData.data);
+                if(catData.success){
+                    setCategories(catData.data);
+                }
+                if(tagData.success){
+                    setTags(tagData.data);
+                }
             } catch (err) {
                 console.error(err);
             }
