@@ -21,7 +21,7 @@ function Home() {
         async function fetchPosts() {
             setLoading(true);
             const query = buildQuery();
-            console.log(query)
+
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts?${query}`);
             const { success, data, message } = await res.json();
             if (success) {
@@ -66,11 +66,6 @@ function Home() {
         return params.toString();
     }
 
-    // if (loading) {
-    //     return (
-    //         <Loading />
-    //     )
-    // }
     return (
         <>
             {loading && <Loading />}
