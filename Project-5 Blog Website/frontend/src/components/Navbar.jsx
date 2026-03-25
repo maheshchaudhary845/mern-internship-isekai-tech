@@ -139,6 +139,8 @@ function Navbar() {
                             <Link to="/category/javascript" onClick={() => setMobileMenu(false)}>JavaScript</Link>
                             <Link to="/category/css" onClick={() => setMobileMenu(false)}>CSS</Link>
                             <Link to="/category/typescript" onClick={() => setMobileMenu(false)}>TypeScript</Link>
+                            <Link to="/about" onClick={() => setMobileMenu(false)}>About</Link>
+                            <Link to="/contact" onClick={() => setMobileMenu(false)}>Contact</Link>
 
                             {auth ? (
                                 <>
