@@ -314,16 +314,6 @@ ul li {
 
 
 /* Dashboard.jsx */
-.dash-cont{
-  display: flex;
-}
-.dash-cont .left{
-  flex: 1;
-}
-.dash-cont .right{
-  flex: 1;
-}
-
 
 .dash-posts{
   display: flex;
