@@ -182,8 +182,18 @@ module.exports = {
 
     async getPostsByUser(req, res) {
         try {
-            let { search } = req.query;
+            let { sort, search, category, tags, from, to } = req.query;
             let filter = {};
+
+            let sortOption = {};
+            if(sort){
+                if(sort == "latest"){
+                    sortOption.createdAt = -1;
+                }else if(sort == "popular"){
+                    sortOption.views = -1;
+                }
+            }
+
             if (search) {
                 filter.$or = [
                     {
@@ -194,8 +204,38 @@ module.exports = {
                     }
                 ]
             }
+            if(category){
+                const foundedCategory = await Category.findOne({slug: category});
+                if (!foundedCategory) {
+                    return res.status(404).json({
+                        success: false,
+                        message: "Category not found"
+                    })
+                }
+                filter.category = foundedCategory._id;
+            }
+            if(tags){
+                const tagSlugs = tags.split(",");
+                const foundedTags = await Tag.find({slug: {$in: tagSlugs}});
+                if(!foundedTags.length){
+                    return res.status(404).json({
+                        success: false,
+                        message: "Tag not found"
+                    })
+                }
+                filter.tags = {$in: foundedTags.map(t=> t._id)}
+            }
+            if(from || to){
+                if(from){
+                    filter.createdAt = {$gte: new Date(from)};
+                }
+                if(to){
+                    filter.createdAt = {$lte: new Date(to)};
+                }
+            }
+
             const posts = await Post.find({ author: req.params.id, ...filter })
-                .sort({ createdAt: -1 })
+                .sort(sortOption)
                 .populate('author', "firstName lastName fullName")
                 .populate('category', "name")
                 .populate("tags", "name slug");
