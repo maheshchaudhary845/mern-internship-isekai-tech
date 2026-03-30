@@ -9,20 +9,17 @@ const commentRoutes = require('./routes/commentRoutes');
 const tagRoutes = require('./routes/tagRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 connectDB();
 
-app.use(cookieParser())
 app.use(cors({
     origin: [
         "http://localhost:5173",
         "https://mern-internship-isekai-tech.vercel.app"
-    ],
-    credentials: true
+    ]
 }));
 app.use('/uploads', express.static("uploads"));
 app.use(express.json());
@@ -36,6 +33,10 @@ app.use('/api/comments', commentRoutes);
 app.use('/api/tags', tagRoutes);
 app.use('/api/uploads', uploadRoutes);
 
+app.use('/', (req, res)=>{
+    res.json("API is running");
+})
+
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on port: ${port}`);
 })
