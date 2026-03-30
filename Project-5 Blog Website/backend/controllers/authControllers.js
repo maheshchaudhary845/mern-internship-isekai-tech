@@ -1,8 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-const isProduction = process.env.NODE_ENV === "production";
-
 exports.register = async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -44,6 +42,8 @@ exports.login = async (req, res) => {
             { expiresIn: "7d" }
         )
 
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.cookie("token", token, {
             httpOnly: true,
             secure: isProduction,
@@ -71,9 +71,11 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
     try {
+        const isProduction = process.env.NODE_ENV === "production";
+
         res.clearCookie("token", {
             httpOnly: true,
-            secure: isProduction    ,
+            secure: isProduction,
             sameSite: "none"
         })
 
