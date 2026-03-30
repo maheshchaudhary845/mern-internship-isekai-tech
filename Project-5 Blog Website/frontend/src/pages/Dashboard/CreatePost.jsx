@@ -96,7 +96,7 @@ function CreatePost() {
                                         <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
                                     ))
                                         :
-                                        <SelectItem value="">No Categories found</SelectItem>
+                                        <SelectItem>No Categories found</SelectItem>
                                     }
                                 </SelectGroup>
                             </SelectContent>
