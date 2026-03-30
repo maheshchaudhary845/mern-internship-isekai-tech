@@ -93,7 +93,7 @@ function CreatePost() {
                                 <SelectGroup>
                                     <SelectLabel>Categories</SelectLabel>
                                     {categories.map(cat => (
-                                        <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
+                                        <SelectItem key={cat?._id} value={cat?._id}>{cat?.name}</SelectItem>
                                     ))}
                                 </SelectGroup>
                             </SelectContent>
