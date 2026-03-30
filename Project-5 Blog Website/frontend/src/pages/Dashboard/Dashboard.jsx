@@ -136,7 +136,7 @@ function Dashboard() {
                             </div>
                         </div>
                         <div className="dash-posts gap-2">
-                            {posts ? posts.map(post => (
+                            {posts.length ? posts.map(post => (
                                 <Link key={post.id} to={`/post/${post.slug}`}>
                                     <DashPost post={post} setPosts={setPosts} />
                                 </Link>
