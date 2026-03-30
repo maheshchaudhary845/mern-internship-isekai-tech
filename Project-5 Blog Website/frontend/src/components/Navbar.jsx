@@ -27,17 +27,10 @@ function Navbar() {
     async function handleLogout() {
         try {
             setShowMenu(false)
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
-                method: "POST",
-                credentials: "include"
-            })
-            const { success, message } = await res.json();
-            if (success) {
-                console.log(message);
-                setAuth(false);
-                navigate('/login');
-            }
-
+            localStorage.removeItem('token');
+            setAuth(false);
+            navigate('/login');
+            
         } catch (err) {
             console.error(err);
         }
@@ -121,7 +114,7 @@ function Navbar() {
 
                         <div className="flex mt-6 gap-2">
                             <input type="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search..." className="w-full bg-gray-800 px-3 py-2 rounded-md" />
-                            <button onClick={(e)=>{
+                            <button onClick={(e) => {
                                 handleSearch(e)
                                 setMobileMenu(false);
                             }} className="px-4 py-2 bg-green-600 rounded-md cursor-pointer">Go</button>

@@ -6,6 +6,7 @@ import BlogEditor from "@/components/editor/BlogEditor"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@/components/ui/select"
 import { useParams } from "react-router"
 import { useNavigate } from "react-router";
+import authFetch from "@/utils/authFetch";
 
 function EditPost() {
     const [title, setTitle] = useState("")
@@ -64,10 +65,9 @@ function EditPost() {
         }
         try {
             setIsLoading(true)
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
+            const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, {
                 method: "PUT",
-                body: formData,
-                credentials: "include"
+                body: formData
             })
 
             const data = await res.json()
@@ -82,7 +82,7 @@ function EditPost() {
             setTags("");
             setImage("");
             setPreviewImage("");
-            
+
             navigate('/dashboard');
 
             console.log("Post created:", data)

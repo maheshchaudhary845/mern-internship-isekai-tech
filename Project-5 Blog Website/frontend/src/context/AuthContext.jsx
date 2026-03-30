@@ -8,13 +8,22 @@ function AuthContextProvider({children}){
     useEffect(()=>{
         async function fetchUser(){
             try{
+                const token = localStorage.getItem('token');
+                if(!token){
+                    setAuth(false);
+                    return;
+                }
+                
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/me`, {
-                    credentials: "include"
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 });
                 const {data, success} = await res.json();
                 if(success){
                     setAuth(data);
                 }else{
+                    localStorage.removeItem('token')
                     setAuth(false);
                 }
             }catch(err){

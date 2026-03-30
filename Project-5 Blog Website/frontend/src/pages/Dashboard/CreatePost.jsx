@@ -4,6 +4,7 @@ import { Field, FieldDescription, FieldLabel, FieldGroup } from "@/components/ui
 import { Button } from "@/components/ui/button"
 import BlogEditor from "@/components/editor/BlogEditor"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@/components/ui/select"
+import authFetch from "@/utils/authFetch";
 
 function CreatePost() {
     const [title, setTitle] = useState("")
@@ -40,10 +41,9 @@ function CreatePost() {
         }
         try{
             setIsLoading(true)
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/add`, {
+            const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/add`, {
                 method: "POST",
-                body: formData,
-                credentials: "include"
+                body: formData
             })
             
             const data = await res.json()

@@ -27,17 +27,13 @@ function Login() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(form),
-                credentials: "include"
             })
 
-            const { success } = await res.json();
+            const { success, token, data } = await res.json();
             if (success) {
-                const userRes = await fetch(`${import.meta.env.VITE_API_URL}/api/users/me`, {
-                    credentials: "include"
-                });
-
-                const { data } = await userRes.json();
+                localStorage.setItem('token', token);
                 setAuth(data);
+                
                 if (next.get('next')) {
                     navigate(next.get('next'))
                 }

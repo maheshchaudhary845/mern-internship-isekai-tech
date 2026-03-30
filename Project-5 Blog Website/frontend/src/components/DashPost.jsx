@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import authFetch from "@/utils/authFetch";
 
 function DashPost({ post, setPosts }) {
     const [commentCount, setCommentCount] = useState(0);
@@ -26,9 +27,8 @@ function DashPost({ post, setPosts }) {
             const isDelete = confirm("Do you really want to delete this post?");
             if (!isDelete) return;
 
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${post.id}`, {
+            const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/${post.id}`, {
                 method: "DELETE",
-                credentials: "include"
             })
             const { data, success, message } = await res.json();
             if (success) {

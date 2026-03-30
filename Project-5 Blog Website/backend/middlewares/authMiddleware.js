@@ -1,18 +1,21 @@
 const jwt = require('jsonwebtoken');
 
 exports.auth = (req, res, next) => {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
-        return res.status(404).json({
+    if (!authHeader || !authHeader.startsWith('Bearer')) {
+        return res.status(401).json({
             success: false,
-            message: "Token not found"
-        })
+            message: "Not authorized"
+        });
     }
-    try {
-        const decode = jwt.verify(token, process.env.JWT_SECRET);
 
-        req.user = decode;
+    const token = authHeader.split(" ").pop();
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        req.user = decoded;
         next();
 
     } catch (err) {
@@ -26,14 +29,17 @@ exports.auth = (req, res, next) => {
 
 exports.roleAuth = (role) => {
     return (req, res, next) => {
-        const token = req.cookies.token;
+        const authHeader = req.headers.authorization;
 
-        if (!token) {
-            return res.status(404).json({
+        if (!authHeader || !authHeader.startsWith('Bearer')) {
+            return res.status(401).json({
                 success: false,
-                message: "token not found"
-            })
+                message: "Not authorized"
+            });
         }
+
+        const token = authHeader.split(" ").pop();
+
         try {
             const decode = jwt.verify(token, process.env.JWT_SECRET);
             if (decode.role != role) {

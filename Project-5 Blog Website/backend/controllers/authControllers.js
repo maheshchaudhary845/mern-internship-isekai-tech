@@ -42,15 +42,6 @@ exports.login = async (req, res) => {
             { expiresIn: "7d" }
         )
 
-        const isProduction = process.env.NODE_ENV === "production";
-
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: isProduction,
-            sameSite: "none",
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        })
-
         res.json({
             success: true,
             token,
@@ -71,14 +62,6 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
     try {
-        const isProduction = process.env.NODE_ENV === "production";
-
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: isProduction,
-            sameSite: "none"
-        })
-
         res.json({
             success: true,
             message: "Logged out successfully"

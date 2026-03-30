@@ -3,6 +3,7 @@ import DashPost from "../../components/DashPost";
 import { Link } from "react-router";
 import { AuthContext } from "@/context/AuthContext";
 import Loading from "@/components/Loading";
+import authFetch from "@/utils/authFetch";
 
 function Dashboard() {
     const [posts, setPosts] = useState([]);
@@ -21,9 +22,7 @@ function Dashboard() {
             try {
                 setLoading(true);
                 const query = buildQuery();
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth?.id}?${query}`, {
-                    credentials: "include"
-                });
+                const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth?.id}?${query}`);
                 const { data, success, message } = await res.json();
 
                 if (success) {

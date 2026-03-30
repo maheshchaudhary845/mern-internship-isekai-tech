@@ -3,6 +3,7 @@ import { AuthContext } from "@/context/AuthContext";
 import Post from "@/components/Post";
 import { Link } from "react-router";
 import Loading from "@/components/Loading";
+import authFetch from "@/utils/authFetch";
 
 function Profile() {
     const { auth, setAuth } = useContext(AuthContext);
@@ -27,9 +28,7 @@ function Profile() {
 
             try {
                 setLoading(true);
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth.id}`, {
-                    credentials: "include"
-                });
+                const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/user/${auth.id}`);
                 const { data, success, message, total } = await res.json();
 
                 if (success) {
@@ -65,9 +64,8 @@ function Profile() {
 
         try {
             setUpdatingName(true);
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
+            const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
                 method: "PUT",
-                credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -101,9 +99,8 @@ function Profile() {
             if (passwordForm.currentPassword === passwordForm.newPassword) {
                 return setError("New password must be different from current password");
             }
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
+            const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/users/update`, {
                 method: "PUT",
-                credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },
