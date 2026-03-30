@@ -30,7 +30,7 @@ function Navbar() {
             localStorage.removeItem('token');
             setAuth(false);
             navigate('/login');
-            
+
         } catch (err) {
             console.error(err);
         }
@@ -142,7 +142,7 @@ function Navbar() {
                             ) : (
                                 <>
                                     <Link to="/login" onClick={() => setMobileMenu(false)}>Login</Link>
-                                    <Link to="/register" onClick={() => setMobileMenu(false)}>Register</Link>
+                                    <Link to="/register" onClick={() => setMobileMenu(false)}>Join Us</Link>
                                 </>
                             )}
                         </div>
