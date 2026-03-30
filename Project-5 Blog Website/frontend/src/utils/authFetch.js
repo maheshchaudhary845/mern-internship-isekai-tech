@@ -9,4 +9,4 @@ function authFetch(url, options={}){
     });
 }
 
-export default authFetch();
+export default authFetch;
