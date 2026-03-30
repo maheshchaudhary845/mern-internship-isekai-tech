@@ -18,7 +18,7 @@ function CreatePost() {
     useEffect(() => {
         const fetchCategories = async () => {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`)
-            const {data} = await res.json()
+            const { data } = await res.json()
             setCategories(data)
         }
         fetchCategories()
@@ -39,15 +39,15 @@ function CreatePost() {
         if (image) {
             formData.append("image", image)
         }
-        try{
+        try {
             setIsLoading(true)
             const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/add`, {
                 method: "POST",
                 body: formData
             })
-            
+
             const data = await res.json()
-            
+
             if (!res.ok) {
                 alert(data.message)
                 return
@@ -58,10 +58,10 @@ function CreatePost() {
             setTags("");
             setImage("");
             console.log("Post created:", data)
-        }catch(err){
+        } catch (err) {
             console.error(err);
-        }finally{
-            
+        } finally {
+
             setIsLoading(false);
         }
     }
@@ -92,9 +92,12 @@ function CreatePost() {
                             <SelectContent>
                                 <SelectGroup>
                                     <SelectLabel>Categories</SelectLabel>
-                                    {categories.map(cat => (
-                                        <SelectItem key={cat?._id} value={cat?._id}>{cat?.name}</SelectItem>
-                                    ))}
+                                    {categories ? categories.map(cat => (
+                                        <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
+                                    ))
+                                        :
+                                        <SelectItem value="">No Categories found</SelectItem>
+                                    }
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
