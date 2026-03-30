@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+const isProduction = process.env.NODE_ENV === "production";
+
 exports.register = async (req, res) => {
     try {
         const user = await User.create(req.body);
@@ -37,12 +39,10 @@ exports.login = async (req, res) => {
             })
         }
         const token = jwt.sign(
-            {id: user.id},
+            { id: user.id },
             process.env.JWT_SECRET,
-            {expiresIn: "7d"}
+            { expiresIn: "7d" }
         )
-
-        const isProduction = process.env.NODE_ENV === "production";
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -69,19 +69,19 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.logout = async(req, res)=>{
-    try{
+exports.logout = async (req, res) => {
+    try {
         res.clearCookie("token", {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: isProduction    ,
+            sameSite: "none"
         })
 
         res.json({
             success: true,
             message: "Logged out successfully"
         })
-    }catch (err) {
+    } catch (err) {
         res.status(500).json({
             success: false,
             message: err.message
