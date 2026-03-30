@@ -6,7 +6,7 @@ A full-stack blogging platform built with **React (Vite), Node.js, Express, and 
 
 ## 🚀 Features
 
-- 🔐 Authentication (JWT + Cookies)
+- 🔐 Authentication (JWT + localStorage)
 - ✍️ Create, Edit, Delete Posts
 - 🖼️ Image Upload (Multer)
 - 🏷️ Categories & Tags
@@ -91,6 +91,27 @@ npm run dev
 
 ---
 
+## 🔐 Authentication Note (Important)
+
+Originally authentication was implemented using **cookies**, but due to **cross-origin issues (Vercel frontend + Render backend)** and limitations on some devices (especially iOS Safari), the project now uses:
+
+👉 **JWT stored in localStorage**
+
+### How it works:
+- On login → JWT is stored in `localStorage`
+- Token is sent via `Authorization` header:
+```
+Authorization: Bearer <token>
+```
+- Backend verifies token using middleware
+
+### Why this change?
+- Cookies require same-origin or complex CORS setup
+- iOS browsers block third-party cookies
+- localStorage works reliably across deployments
+
+---
+
 ## 📌 API Features
 
 - `GET /api/posts`
@@ -113,7 +134,7 @@ npm run dev
 - Debounced Search
 - Dynamic Filtering
 - Optimistic UI Updates
-- Cookie-based View Tracking
+- localStorage-based Authentication
 
 ---
 
