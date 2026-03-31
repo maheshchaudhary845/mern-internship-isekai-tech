@@ -1,5 +1,6 @@
 import Loading from "@/components/Loading";
 import { AuthContext } from "@/context/AuthContext";
+import authFetch from "@/utils/authFetch";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
 
@@ -17,9 +18,7 @@ function SinglePost() {
         async function fetchPost() {
             try {
                 setLoading(true);
-                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`, {
-                    credentials: "include"
-                });
+                const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`);
                 const { data, success, message } = await res.json();
 
                 if (success) {
