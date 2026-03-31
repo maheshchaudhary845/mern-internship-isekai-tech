@@ -89,9 +89,7 @@ module.exports = {
 
     async createPost(req, res) {
         try {
-            const imagePath = req.file
-                ? `/uploads/posts/${req.file.filename}`
-                : null;
+            const imagePath = req.file ? req.file.path : null;
 
             let { title, content, category, tags } = req.body;
             const author = req.user.id;

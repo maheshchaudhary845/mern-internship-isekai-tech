@@ -6,7 +6,7 @@ exports.uploadEditorImage = async(req, res)=>{
                 message: "No file uploaded"
             })
         }
-        const url = `${process.env.BASE_URL}/uploads/posts/${req.file.filename}`;
+        const url = req.file.path;
         res.json({
             success: true,
             url,
