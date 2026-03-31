@@ -98,7 +98,7 @@ function SinglePost() {
                 <div className="w-full">
                     <img
                         className="w-full h-auto max-h-125 object-cover rounded-lg"
-                        src={`${import.meta.env.VITE_API_URL}${post?.image}`}
+                        src={`${post?.image}`}
                         alt="thumbnail image of blog"
                     />
                 </div>

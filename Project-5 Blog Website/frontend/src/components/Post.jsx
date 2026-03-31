@@ -2,7 +2,7 @@ function Post({post}) {
     return (
         <div className="post">
             <div className="img-cont">
-                <img src={`${import.meta.env.VITE_API_URL}${post?.image}`} alt="post image" />
+                <img src={`${post?.image}`} alt="post image" />
             </div>
             <div className="meta-cont">
                 <p className="category">{post.category?.name}</p>

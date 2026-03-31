@@ -46,7 +46,7 @@ function DashPost({ post, setPosts }) {
         <div className="dash-post sm:flex-row flex-col hover:scale-[102%] transition-all cursor-pointer">
             <div className="dash-left">
                 <div className="dash-img-cont">
-                    <img src={`${import.meta.env.VITE_API_URL}${post.image}`} alt="post image" />
+                    <img src={`${post.image}`} alt="post image" />
                 </div>
             </div>
             <div className="dash-title-right">
