@@ -8,7 +8,7 @@ A full-stack blogging platform built with **React (Vite), Node.js, Express, and 
 
 - 🔐 Authentication (JWT + localStorage)
 - ✍️ Create, Edit, Delete Posts
-- 🖼️ Image Upload (Multer)
+- 🖼️ Image Upload (Cloudinary)
 - 🏷️ Categories & Tags
 - 🔍 Search & Advanced Filters
 - 📊 Popular Posts (View Count)
@@ -32,7 +32,7 @@ A full-stack blogging platform built with **React (Vite), Node.js, Express, and 
 - MongoDB + Mongoose
 - JWT (Authentication)
 - Bcrypt (Password Hashing)
-- Multer (File Uploads)
+- Multer + Cloudinary (File Uploads)
 
 ---
 
@@ -53,7 +53,7 @@ models/
 controllers/
 routes/
 middlewares/
-uploads/
+config/
 ```
 
 ---
@@ -67,6 +67,9 @@ Create `.env` file in backend:
 PORT=5000
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_secret_key
+CLOUD_NAME=your_cloudinary_name
+CLOUD_API_KEY=your_api_key
+CLOUD_API_SECRET=your_api_secret
 ```
 ### Frontend
 Create `.env` file in frontend:
@@ -112,6 +115,33 @@ Authorization: Bearer <token>
 
 ---
 
+## 🖼️ Image Upload (Cloudinary)
+
+Images are uploaded using **Cloudinary instead of local storage**.
+
+### Why Cloudinary?
+
+- No file loss on server restart (Render safe)
+- Fast CDN delivery
+- Scalable and production-ready
+- Works across different origins (Vercel + Render)
+
+### Flow:
+
+```
+Frontend → Backend → Cloudinary → URL → MongoDB
+```
+
+### Stored in DB:
+
+```
+{
+  "image": "https://res.cloudinary.com/.../image.jpg"
+}
+```
+
+---
+
 ## 📌 API Features
 
 - `GET /api/posts`
@@ -135,6 +165,7 @@ Authorization: Bearer <token>
 - Dynamic Filtering
 - Optimistic UI Updates
 - localStorage-based Authentication
+- Cloud-based Image Storage
 
 ---
 
