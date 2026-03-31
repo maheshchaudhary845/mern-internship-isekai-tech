@@ -32,22 +32,22 @@ module.exports = {
 
             if (tags) {
                 const tagSlugs = tags.split(",");
-                const foundedTags = await Tag.find({ slug: {$in: tagSlugs} });
+                const foundedTags = await Tag.find({ slug: { $in: tagSlugs } });
                 if (!foundedTags) {
                     return res.status(404).json({
                         success: false,
                         message: "Tag not found"
                     })
                 }
-                filter.tags = {$in: foundedTags.map(t=> t._id)};
+                filter.tags = { $in: foundedTags.map(t => t._id) };
             }
 
-            if(from || to){
+            if (from || to) {
                 filter.createdAt = {};
-                if(from){
+                if (from) {
                     filter.createdAt.$gte = new Date(from);
                 }
-                if(to){
+                if (to) {
                     filter.createdAt.$lte = new Date(to);
                 }
             }
@@ -186,10 +186,10 @@ module.exports = {
             let filter = {};
 
             let sortOption = {};
-            if(sort){
-                if(sort == "latest"){
+            if (sort) {
+                if (sort == "latest") {
                     sortOption.createdAt = -1;
-                }else if(sort == "popular"){
+                } else if (sort == "popular") {
                     sortOption.views = -1;
                 }
             }
@@ -204,8 +204,8 @@ module.exports = {
                     }
                 ]
             }
-            if(category){
-                const foundedCategory = await Category.findOne({slug: category});
+            if (category) {
+                const foundedCategory = await Category.findOne({ slug: category });
                 if (!foundedCategory) {
                     return res.status(404).json({
                         success: false,
@@ -214,23 +214,23 @@ module.exports = {
                 }
                 filter.category = foundedCategory._id;
             }
-            if(tags){
+            if (tags) {
                 const tagSlugs = tags.split(",");
-                const foundedTags = await Tag.find({slug: {$in: tagSlugs}});
-                if(!foundedTags.length){
+                const foundedTags = await Tag.find({ slug: { $in: tagSlugs } });
+                if (!foundedTags.length) {
                     return res.status(404).json({
                         success: false,
                         message: "Tag not found"
                     })
                 }
-                filter.tags = {$in: foundedTags.map(t=> t._id)}
+                filter.tags = { $in: foundedTags.map(t => t._id) }
             }
-            if(from || to){
-                if(from){
-                    filter.createdAt = {$gte: new Date(from)};
+            if (from || to) {
+                if (from) {
+                    filter.createdAt = { $gte: new Date(from) };
                 }
-                if(to){
-                    filter.createdAt = {$lte: new Date(to)};
+                if (to) {
+                    filter.createdAt = { $lte: new Date(to) };
                 }
             }
 
@@ -262,9 +262,9 @@ module.exports = {
 
     async getPostBySlug(req, res) {
         try {
-            const viewedPosts = req.cookies.viewedPosts || [];
+            const skipView = req.query.skipView === 'true';
             let post;
-            if (!viewedPosts.includes(req.params.slug)) {
+            if (!skipView) {
 
                 post = await Post.findOneAndUpdate(
                     { slug: req.params.slug },
@@ -275,12 +275,6 @@ module.exports = {
                     .populate("category")
                     .populate("tags")
 
-                viewedPosts.push(req.params.slug);
-
-                res.cookie("viewedPosts", viewedPosts, {
-                    httpOnly: true,
-                    maxAge: 1000 * 60 * 60 * 24
-                })
             } else {
                 post = await Post.findOne({ slug: req.params.slug }).populate("author").populate('category').populate('tags');
             }

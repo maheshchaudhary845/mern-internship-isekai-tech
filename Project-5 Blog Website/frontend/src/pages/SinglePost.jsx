@@ -18,11 +18,20 @@ function SinglePost() {
         async function fetchPost() {
             try {
                 setLoading(true);
-                const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}`);
+
+                const viewedPosts = JSON.parse(localStorage.getItem('viewedPosts')) || [];
+                const alreadyViewed = viewedPosts.includes(slug);
+
+                const res = await authFetch(`${import.meta.env.VITE_API_URL}/api/posts/${slug}?skipView=${alreadyViewed}`);
                 const { data, success, message } = await res.json();
 
                 if (success) {
                     setPost(data);
+
+                    if(!alreadyViewed){
+                        viewedPosts.push(slug)
+                        localStorage.setItem('viewedPosts', JSON.stringify(viewedPosts));
+                    }
                 }else{
                     setError(message)
                 }
