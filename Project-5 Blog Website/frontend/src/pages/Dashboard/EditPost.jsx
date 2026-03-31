@@ -32,7 +32,7 @@ function EditPost() {
                 setCategory(data.category._id);
                 setTags(data.tags.map(t => t.name).join(", "));
                 setImage(data.image);
-                setPreviewImage(`${import.meta.env.VITE_API_URL}${data.image}`);
+                setPreviewImage(`${data.image}`);
                 setPostId(data._id);
             }
         }
