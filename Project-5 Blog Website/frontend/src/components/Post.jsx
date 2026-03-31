@@ -6,7 +6,10 @@ function Post({post}) {
             </div>
             <div className="meta-cont">
                 <p className="category">{post.category?.name}</p>
-                <p className="date-time">{new Date(post.createdAt).toLocaleString()}</p>
+                <p className="date-time">{new Date(post.createdAt).toLocaleString("en-In", {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                })}</p>
             </div>
             <div className="content">
                 <h3>{post.title}</h3>
