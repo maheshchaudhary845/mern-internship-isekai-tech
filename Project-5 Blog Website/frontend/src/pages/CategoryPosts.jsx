@@ -19,6 +19,7 @@ function CategoryPosts() {
                     return setError(message);
                 }
                 setPosts(data);
+                setError("");
             } catch (err) {
                 console.error(err)
             } finally{
