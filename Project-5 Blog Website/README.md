@@ -120,20 +120,17 @@ Authorization: Bearer <token>
 Images are uploaded using **Cloudinary instead of local storage**.
 
 ### Why Cloudinary?
-
 - No file loss on server restart (Render safe)
 - Fast CDN delivery
 - Scalable and production-ready
 - Works across different origins (Vercel + Render)
 
 ### Flow:
-
 ```
 Frontend → Backend → Cloudinary → URL → MongoDB
 ```
 
 ### Stored in DB:
-
 ```
 {
   "image": "https://res.cloudinary.com/.../image.jpg"
